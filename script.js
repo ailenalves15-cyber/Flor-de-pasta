@@ -173,49 +173,91 @@ async function actualizarPreciosDesdeGoogle() {
 
     try {
 
-        const respuesta =
-            await fetch(URL_PRECIOS);
+        const respuesta = await fetch(URL_PRECIOS);
 
         if (!respuesta.ok) {
             throw new Error("No se pudo conectar con Google Sheets.");
         }
 
-        const datos =
-            await respuesta.json();
+        const datos = await respuesta.json();
 
         datos.forEach(item => {
 
-            if (!productos[item.codigo]) {
-                return;
-            }
+            const codigo = String(item.codigo).trim();
 
-            if (item.precioUnidad !== null) {
-                productos[item.codigo].precioUnidad =
-                    Number(item.precioUnidad);
-            }
+            // Si el producto no existe, lo creamos desde Google Sheets
+            if (!productos[codigo]) {
 
-            if (item.precioDocena !== null) {
-                productos[item.codigo].precioDocena =
-                    Number(item.precioDocena);
-            }
+                productos[codigo] = {
 
-            if (item.precioKg !== null) {
-                productos[item.codigo].precioKg =
-                    Number(item.precioKg);
+                    nombre: item.nombre || "Producto",
+
+                    sabor: item.sabor || "",
+
+                    precioUnidad:
+                        item.precioUnidad !== null
+                            ? Number(item.precioUnidad)
+                            : null,
+
+                    precioDocena:
+                        item.precioDocena !== null
+                            ? Number(item.precioDocena)
+                            : null,
+
+                    precioKg:
+                        item.precioKg !== null
+                            ? Number(item.precioKg)
+                            : null,
+
+                    tipoVenta:
+                        item.tipoVenta || "unidad"
+                };
+
+            } else {
+
+                // Si ya existe, actualizamos sus datos
+
+                productos[codigo].nombre =
+                    item.nombre || productos[codigo].nombre;
+
+                productos[codigo].sabor =
+                    item.sabor || productos[codigo].sabor;
+
+                if (item.precioUnidad !== null) {
+                    productos[codigo].precioUnidad =
+                        Number(item.precioUnidad);
+                }
+
+                if (item.precioDocena !== null) {
+                    productos[codigo].precioDocena =
+                        Number(item.precioDocena);
+                }
+
+                if (item.precioKg !== null) {
+                    productos[codigo].precioKg =
+                        Number(item.precioKg);
+                }
+
+                if (item.tipoVenta) {
+                    productos[codigo].tipoVenta =
+                        item.tipoVenta;
+                }
             }
 
         });
 
         document.getElementById("mensaje").innerHTML =
-    "✅ Precios actualizados correctamente";
+            "✅ Productos y precios actualizados correctamente";
 
     } catch (error) {
 
         console.error(
-            "Error actualizando precios:",
+            "Error actualizando productos:",
             error
         );
 
+        document.getElementById("mensaje").innerHTML =
+            "❌ No se pudieron actualizar los productos.";
     }
 }
 
