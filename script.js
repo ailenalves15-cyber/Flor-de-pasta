@@ -3,7 +3,7 @@ const URL_PRECIOS =
 
 const productos = {
 
-    "01": {
+    "FLOR01": {
         nombre: "Ravioles",
         sabor: "Jamón y queso",
         precioUnidad: 500,
@@ -11,7 +11,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "02": {
+    "FLOR02": {
         nombre: "Ravioles",
         sabor: "Pollo",
         precioUnidad: 500,
@@ -19,7 +19,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "03": {
+    "FLOR03": {
         nombre: "Ravioles",
         sabor: "Verdura",
         precioUnidad: 500,
@@ -27,7 +27,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "04": {
+    "FLOR04": {
         nombre: "Raviolones",
         sabor: "Jamón y queso",
         precioUnidad: 700,
@@ -35,7 +35,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "05": {
+    "FLOR05": {
         nombre: "Raviolones",
         sabor: "Jamón, queso y roquefort",
         precioUnidad: 700,
@@ -43,7 +43,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "06": {
+    "FLOR06": {
         nombre: "Raviolones",
         sabor: "Verdura",
         precioUnidad: 700,
@@ -51,7 +51,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "07": {
+    "FLOR07": {
         nombre: "Raviolones",
         sabor: "Pollo al verdeo",
         precioUnidad: 700,
@@ -59,7 +59,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "08": {
+    "FLOR08": {
         nombre: "Raviolones",
         sabor: "Osobuco con provoleta",
         precioUnidad: 700,
@@ -67,7 +67,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "09": {
+    "FLOR09": {
         nombre: "Raviolones",
         sabor: "Camarones",
         precioUnidad: 700,
@@ -75,7 +75,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "10": {
+    "FLOR10": {
         nombre: "Raviolones",
         sabor: "Salmón",
         precioUnidad: 700,
@@ -83,7 +83,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "11": {
+    "FLOR11": {
         nombre: "Raviolones",
         sabor: "Frutos de mar",
         precioUnidad: 700,
@@ -91,7 +91,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "12": {
+    "FLOR12": {
         nombre: "Raviolones",
         sabor: "Bondiola a la mostaza",
         precioUnidad: 700,
@@ -99,7 +99,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "13": {
+    "FLOR13": {
         nombre: "Raviolones",
         sabor: "Veganos",
         precioUnidad: 700,
@@ -107,7 +107,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "14": {
+    "FLOR14": {
         nombre: "Raviolones",
         sabor: "Ricota, espinaca y nuez",
         precioUnidad: 700,
@@ -115,7 +115,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "15": {
+    "FLOR15": {
         nombre: "Raviolones",
         sabor: "Berenjena, cherry y queso",
         precioUnidad: 700,
@@ -123,7 +123,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "16": {
+    "FLOR16": {
         nombre: "Sorrentinos",
         sabor: "Jamón y queso",
         precioUnidad: 600,
@@ -131,7 +131,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "17": {
+    "FLOR17": {
         nombre: "Sorrentinos",
         sabor: "Zapallo, queso y almendras tostadas",
         precioUnidad: 600,
@@ -139,28 +139,28 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "18": {
+    "FLOR18": {
         nombre: "Ñoquis",
         sabor: "Papa",
         precioKg: 4000,
         tipoVenta: "kg"
     },
 
-    "19": {
+    "FLOR19": {
         nombre: "Ñoquis",
         sabor: "Papa con espinaca",
         precioKg: 4000,
         tipoVenta: "kg"
     },
 
-    "20": {
+    "FLOR20": {
         nombre: "Fideos",
         sabor: "Al huevo blancos",
         precioKg: 4000,
         tipoVenta: "kg"
     },
 
-    "21": {
+    "FLOR21": {
         nombre: "Fideos",
         sabor: "Al huevo con espinaca",
         precioKg: 4000,
