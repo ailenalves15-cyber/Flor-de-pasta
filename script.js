@@ -1,6 +1,11 @@
 const URL_PRECIOS =
     "https://script.google.com/macros/s/AKfycbyqFaMuv3Fs1pZyHw5i3o69Kt1Xv5-y5fnh52EX8LtJcnntNWZmWTJPbhh1syPduUam/exec";
 
+
+// ==========================================
+// PRODUCTOS
+// ==========================================
+
 const productos = {
 
     "FLOR01": {
@@ -169,44 +174,86 @@ const productos = {
 
 };
 
-async function actualizarPreciosDesdeGoogle() {
+
+// ==========================================
+// ESTADO DE LA APLICACIÓN
+// ==========================================
+
+let preciosCargados = false;
+
+let actualizandoPrecios = false;
+
+
+// ==========================================
+// ACTUALIZAR PRECIOS DESDE GOOGLE SHEETS
+// ==========================================
+
+async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
+
+    // Evitamos dos actualizaciones simultáneas
+    if (actualizandoPrecios) {
+        return preciosCargados;
+    }
+
+    actualizandoPrecios = true;
+
+    if (mostrarMensaje) {
+
+        document.getElementById("mensaje").innerHTML =
+            "⏳ Actualizando precios...";
+    }
 
     try {
 
-        const respuesta = await fetch(URL_PRECIOS);
+        const respuesta =
+            await fetch(URL_PRECIOS + "?t=" + Date.now());
 
         if (!respuesta.ok) {
-            throw new Error("No se pudo conectar con Google Sheets.");
+
+            throw new Error(
+                "No se pudo conectar con Google Sheets."
+            );
         }
 
-        const datos = await respuesta.json();
+        const datos =
+            await respuesta.json();
+
 
         datos.forEach(item => {
 
-            const codigo = String(item.codigo).trim();
+            const codigo =
+                String(item.codigo).trim();
 
-            // Si el producto no existe todavía,
-            // lo creamos desde Google Sheets
+
+            // ==========================================
+            // PRODUCTO NUEVO
+            // ==========================================
+
             if (!productos[codigo]) {
 
                 productos[codigo] = {
 
-                    nombre: item.nombre || "Producto",
+                    nombre:
+                        item.nombre || "Producto",
 
-                    sabor: item.sabor || "",
+                    sabor:
+                        item.sabor || "",
 
                     precioUnidad:
-                        item.precioUnidad !== null
+                        item.precioUnidad !== null &&
+                        item.precioUnidad !== ""
                             ? Number(item.precioUnidad)
                             : null,
 
                     precioDocena:
-                        item.precioDocena !== null
+                        item.precioDocena !== null &&
+                        item.precioDocena !== ""
                             ? Number(item.precioDocena)
                             : null,
 
                     precioKg:
-                        item.precioKg !== null
+                        item.precioKg !== null &&
+                        item.precioKg !== ""
                             ? Number(item.precioKg)
                             : null,
 
@@ -218,35 +265,62 @@ async function actualizarPreciosDesdeGoogle() {
             }
 
 
-            // Si el producto ya existe,
-            // actualizamos sus datos
+            // ==========================================
+            // ACTUALIZAR PRODUCTO EXISTENTE
+            // ==========================================
 
-            if (item.nombre) {
+            if (
+                item.nombre !== null &&
+                item.nombre !== ""
+            ) {
+
                 productos[codigo].nombre =
                     item.nombre;
             }
 
+
             if (item.sabor !== null) {
+
                 productos[codigo].sabor =
                     item.sabor;
             }
 
-            if (item.precioUnidad !== null) {
+
+            if (
+                item.precioUnidad !== null &&
+                item.precioUnidad !== ""
+            ) {
+
                 productos[codigo].precioUnidad =
                     Number(item.precioUnidad);
             }
 
-            if (item.precioDocena !== null) {
+
+            if (
+                item.precioDocena !== null &&
+                item.precioDocena !== ""
+            ) {
+
                 productos[codigo].precioDocena =
                     Number(item.precioDocena);
             }
 
-            if (item.precioKg !== null) {
+
+            if (
+                item.precioKg !== null &&
+                item.precioKg !== ""
+            ) {
+
                 productos[codigo].precioKg =
                     Number(item.precioKg);
             }
 
-            if (item.tipoVenta) {
+
+            if (
+                item.tipoVenta !== null &&
+                item.tipoVenta !== ""
+            ) {
+
                 productos[codigo].tipoVenta =
                     item.tipoVenta;
             }
@@ -254,8 +328,27 @@ async function actualizarPreciosDesdeGoogle() {
         });
 
 
-        document.getElementById("mensaje").innerHTML =
-            "✅ Productos y precios actualizados correctamente";
+        preciosCargados = true;
+
+
+        if (mostrarMensaje) {
+
+            document.getElementById("mensaje").innerHTML =
+                "✅ Productos y precios actualizados correctamente";
+        }
+
+
+        console.log(
+            "✅ Precios actualizados desde Google Sheets"
+        );
+
+        console.log(
+            "Productos cargados:",
+            productos
+        );
+
+
+        return true;
 
 
     } catch (error) {
@@ -265,17 +358,37 @@ async function actualizarPreciosDesdeGoogle() {
             error
         );
 
+
+        preciosCargados = false;
+
+
         document.getElementById("mensaje").innerHTML =
             "❌ No se pudieron actualizar los productos.";
 
+
+        return false;
+
+
+    } finally {
+
+        actualizandoPrecios = false;
     }
 }
 
+
+// ==========================================
+// VENTAS
+// ==========================================
+
 let ventaActual = [];
+
 let totalVenta = 0;
 
+
 let ventasDelDia =
-    JSON.parse(localStorage.getItem("ventasDelDia")) || [];
+    JSON.parse(
+        localStorage.getItem("ventasDelDia")
+    ) || [];
 
 
 // ==========================================
@@ -285,25 +398,38 @@ let ventasDelDia =
 function buscarProducto() {
 
     const codigo =
-        document.getElementById("codigo").value.trim();
+        document
+            .getElementById("codigo")
+            .value
+            .trim();
 
-    const producto = productos[codigo];
+
+    const producto =
+        productos[codigo];
+
 
     if (!producto) {
 
         document.getElementById("resultado").innerHTML =
             "❌ Producto no encontrado";
 
+
         document.getElementById("cantidadProducto").style.display =
             "none";
+
 
         return;
     }
 
 
     document.getElementById("resultado").innerHTML = `
+
         <h3>${producto.nombre}</h3>
-        <p>Sabor: ${producto.sabor}</p>
+
+        <p>
+            Sabor: ${producto.sabor}
+        </p>
+
     `;
 
 
@@ -312,39 +438,68 @@ function buscarProducto() {
 
 
     const formaVentaContainer =
-        document.getElementById("formaVentaContainer");
+        document.getElementById(
+            "formaVentaContainer"
+        );
+
 
     const formaVenta =
-        document.getElementById("formaVenta");
+        document.getElementById(
+            "formaVenta"
+        );
+
 
     const unidadCantidad =
-        document.getElementById("unidadCantidad");
+        document.getElementById(
+            "unidadCantidad"
+        );
+
 
     const cantidad =
-        document.getElementById("cantidad");
+        document.getElementById(
+            "cantidad"
+        );
 
+
+    // ==========================================
+    // PRODUCTOS POR KG
+    // ==========================================
 
     if (producto.tipoVenta === "kg") {
 
-        // PRODUCTOS VENDIDOS POR KILO
+        formaVentaContainer.style.display =
+            "none";
 
-        formaVentaContainer.style.display = "none";
 
-        unidadCantidad.innerText = "kg";
+        unidadCantidad.innerText =
+            "kg";
 
-        cantidad.value = "1";
+
+        cantidad.value =
+            "1";
+
 
     } else {
 
-        // RAVIOLES, RAVIOLONES Y SORRENTINOS
 
-        formaVentaContainer.style.display = "block";
+        // ==========================================
+        // PRODUCTOS POR UNIDAD
+        // ==========================================
 
-        formaVenta.value = "unidad";
+        formaVentaContainer.style.display =
+            "block";
 
-        unidadCantidad.innerText = "unidad";
 
-        cantidad.value = "1";
+        formaVenta.value =
+            "unidad";
+
+
+        unidadCantidad.innerText =
+            "unidad";
+
+
+        cantidad.value =
+            "1";
     }
 }
 
@@ -355,20 +510,28 @@ function buscarProducto() {
 
 document
     .getElementById("formaVenta")
-    .addEventListener("change", function () {
+    .addEventListener(
+        "change",
+        function () {
 
-        const unidadCantidad =
-            document.getElementById("unidadCantidad");
+            const unidadCantidad =
+                document.getElementById(
+                    "unidadCantidad"
+                );
 
-        if (this.value === "docena") {
 
-            unidadCantidad.innerText = "docena";
+            if (this.value === "docena") {
 
-        } else {
+                unidadCantidad.innerText =
+                    "docena";
 
-            unidadCantidad.innerText = "unidad";
+            } else {
+
+                unidadCantidad.innerText =
+                    "unidad";
+            }
         }
-    });
+    );
 
 
 // ==========================================
@@ -378,77 +541,114 @@ document
 function agregarVenta() {
 
     const codigo =
-        document.getElementById("codigo").value;
+        document
+            .getElementById("codigo")
+            .value
+            .trim();
+
 
     const cantidadTexto =
-        document.getElementById("cantidad").value
-        .trim()
-        .replace(",", ".");
+        document
+            .getElementById("cantidad")
+            .value
+            .trim()
+            .replace(",", ".");
+
 
     const cantidad =
         parseFloat(cantidadTexto);
 
+
     const producto =
         productos[codigo];
 
+
     if (!producto) {
-        alert("Producto no encontrado.");
+
+        alert(
+            "Producto no encontrado."
+        );
+
         return;
     }
 
-    if (isNaN(cantidad) || cantidad <= 0) {
-        alert("Ingresá una cantidad válida.");
+
+    if (
+        isNaN(cantidad) ||
+        cantidad <= 0
+    ) {
+
+        alert(
+            "Ingresá una cantidad válida."
+        );
+
         return;
     }
 
 
     let precio;
+
     let unidad;
 
 
-    // =========================
+    // ==========================================
     // PRODUCTOS POR KG
-    // =========================
+    // ==========================================
 
     if (producto.tipoVenta === "kg") {
 
-        precio = producto.precioKg;
+        precio =
+            producto.precioKg;
 
-        unidad = "kg";
+        unidad =
+            "kg";
 
     }
 
 
-    // =========================
+    // ==========================================
     // PRODUCTOS POR UNIDAD
-    // =========================
+    // ==========================================
 
     else {
 
         const formaVenta =
-            document.getElementById("formaVenta").value;
+            document
+                .getElementById("formaVenta")
+                .value;
 
 
         if (formaVenta === "docena") {
 
-            precio = producto.precioDocena;
+            precio =
+                producto.precioDocena;
 
-            unidad = "docena";
+            unidad =
+                "docena";
 
         } else {
 
-            precio = producto.precioUnidad;
+            precio =
+                producto.precioUnidad;
 
-            unidad = "unidad";
+            unidad =
+                "unidad";
         }
     }
 
 
-    // Verificamos que exista un precio
+    // ==========================================
+    // VERIFICAR PRECIO
+    // ==========================================
 
-    if (!precio || precio <= 0) {
+    if (
+        !precio ||
+        precio <= 0
+    ) {
 
-        alert("Este producto no tiene un precio cargado.");
+        alert(
+            "Este producto no tiene un precio cargado."
+        );
 
         return;
     }
@@ -460,17 +660,23 @@ function agregarVenta() {
 
     ventaActual.push({
 
-        nombre: producto.nombre,
+        nombre:
+            producto.nombre,
 
-        sabor: producto.sabor,
+        sabor:
+            producto.sabor,
 
-        precio: precio,
+        precio:
+            precio,
 
-        cantidad: cantidad,
+        cantidad:
+            cantidad,
 
-        unidad: unidad,
+        unidad:
+            unidad,
 
-        subtotal: subtotal
+        subtotal:
+            subtotal
 
     });
 
@@ -480,9 +686,11 @@ function agregarVenta() {
 
     // Limpiar campos
 
-    document.getElementById("codigo").value = "";
+    document.getElementById("codigo").value =
+        "";
 
-    document.getElementById("cantidad").value = 1;
+    document.getElementById("cantidad").value =
+        "1";
 
     document.getElementById("codigo").focus();
 }
@@ -494,56 +702,66 @@ function agregarVenta() {
 
 function mostrarVenta() {
 
-    let html = "";
-
-    totalVenta = 0;
-
-
-    ventaActual.forEach((item, indice) => {
-
-        html += `
-            <div>
-
-                <p>
-
-                    <strong>
-                        ${item.nombre}
-                    </strong>
-                    - ${item.sabor}
-
-                    <br>
-
-                    Cantidad:
-                    ${item.cantidad}
-                    ${item.unidad}
-
-                    <br>
-
-                    Precio:
-                    $${item.precio}
-
-                    <br>
-
-                    Subtotal:
-                    $${item.subtotal}
-
-                </p>
+    let html =
+        "";
 
 
-                <button
-                    onclick="eliminarProducto(${indice})"
-                >
-                    ❌ Eliminar
-                </button>
-
-                <hr>
-
-            </div>
-        `;
+    totalVenta =
+        0;
 
 
-        totalVenta += item.subtotal;
-    });
+    ventaActual.forEach(
+        (item, indice) => {
+
+            html += `
+
+                <div>
+
+                    <p>
+
+                        <strong>
+                            ${item.nombre}
+                        </strong>
+
+                        -
+                        ${item.sabor}
+
+                        <br>
+
+                        Cantidad:
+                        ${item.cantidad}
+                        ${item.unidad}
+
+                        <br>
+
+                        Precio:
+                        $${item.precio}
+
+                        <br>
+
+                        Subtotal:
+                        $${item.subtotal}
+
+                    </p>
+
+
+                    <button
+                        onclick="eliminarProducto(${indice})"
+                    >
+                        ❌ Eliminar
+                    </button>
+
+                    <hr>
+
+                </div>
+
+            `;
+
+
+            totalVenta +=
+                item.subtotal;
+        }
+    );
 
 
     document.getElementById("venta").innerHTML =
@@ -561,7 +779,10 @@ function mostrarVenta() {
 
 function eliminarProducto(indice) {
 
-    ventaActual.splice(indice, 1);
+    ventaActual.splice(
+        indice,
+        1
+    );
 
     mostrarVenta();
 }
@@ -573,85 +794,122 @@ function eliminarProducto(indice) {
 
 function finalizarVenta() {
 
-    if (ventaActual.length === 0) {
+    if (
+        ventaActual.length === 0
+    ) {
 
-        alert("No hay productos en la venta.");
+        alert(
+            "No hay productos en la venta."
+        );
 
         return;
     }
 
 
     const medioPago =
-        document.getElementById("medioPago").value;
+        document
+            .getElementById("medioPago")
+            .value;
 
 
-    const ahora = new Date();
+    const ahora =
+        new Date();
 
 
     const fechaMostrar =
-        ahora.toLocaleString("es-AR");
+        ahora.toLocaleString(
+            "es-AR"
+        );
 
 
     const fechaFiltro =
         ahora.getFullYear() +
         "-" +
-        String(ahora.getMonth() + 1).padStart(2, "0") +
+        String(
+            ahora.getMonth() + 1
+        ).padStart(2, "0") +
         "-" +
-        String(ahora.getDate()).padStart(2, "0");
+        String(
+            ahora.getDate()
+        ).padStart(2, "0");
 
 
     const nuevaVenta = {
 
-        fecha: fechaMostrar,
+        fecha:
+            fechaMostrar,
 
-        fechaFiltro: fechaFiltro,
+        fechaFiltro:
+            fechaFiltro,
 
-        productos: [...ventaActual],
+        productos:
+            [...ventaActual],
 
-        total: totalVenta,
+        total:
+            totalVenta,
 
-        medioPago: medioPago
+        medioPago:
+            medioPago
+
     };
 
 
-    ventasDelDia.push(nuevaVenta);
+    ventasDelDia.push(
+        nuevaVenta
+    );
 
 
     localStorage.setItem(
         "ventasDelDia",
-        JSON.stringify(ventasDelDia)
+        JSON.stringify(
+            ventasDelDia
+        )
     );
 
 
     alert(
         "Venta registrada correctamente.\n" +
-        "Total: $" + totalVenta + "\n" +
-        "Medio de pago: " + medioPago
+        "Total: $" +
+        totalVenta +
+        "\n" +
+        "Medio de pago: " +
+        medioPago
     );
 
 
-    ventaActual = [];
+    ventaActual =
+        [];
 
-    totalVenta = 0;
+
+    totalVenta =
+        0;
 
 
     document.getElementById("venta").innerHTML =
         "";
 
+
     document.getElementById("total").innerHTML =
         "Total: $0";
+
 
     document.getElementById("resultado").innerHTML =
         "";
 
-    document.getElementById("cantidadProducto").style.display =
+
+    document.getElementById(
+        "cantidadProducto"
+    ).style.display =
         "none";
+
 
     document.getElementById("codigo").value =
         "";
 
+
     document.getElementById("cantidad").value =
         "1";
+
 
     document.getElementById("codigo").focus();
 
@@ -666,87 +924,131 @@ function finalizarVenta() {
 // HISTORIAL DE VENTAS
 // ==========================================
 
-function mostrarVentasDelDia(fechaSeleccionada = null) {
+function mostrarVentasDelDia(
+    fechaSeleccionada = null
+) {
 
-    let html = "";
-
-    let total = 0;
-
-    let cantidadVentas = 0;
-
-
-    ventasDelDia.forEach((venta, indice) => {
-
-        if (
-            fechaSeleccionada === null ||
-            venta.fechaFiltro === fechaSeleccionada
-        ) {
-
-            html += `
-                <div>
-
-                    <p>
-
-                        <strong>
-                            Venta ${indice + 1}
-                        </strong>
-
-                        <br>
-
-                        Fecha:
-                        ${venta.fecha}
-
-                        <br>
-
-                        Total:
-                        $${venta.total}
-
-                        <br>
-
-                        Medio de pago:
-                        ${venta.medioPago}
-
-                    </p>
+    let html =
+        "";
 
 
-                    <button
-                        onclick="verDetalleVenta(${indice})"
-                    >
-                        👁️ Ver detalle
-                    </button>
+    let total =
+        0;
 
 
-                    <div
-                        id="detalleVenta${indice}"
-                        style="display: none;"
-                    ></div>
+    let cantidadVentas =
+        0;
 
 
-                    <hr>
+    ventasDelDia
 
-                </div>
-            `;
+        .map(
+            (venta, indice) => ({
+
+                venta:
+                    venta,
+
+                numeroVenta:
+                    indice + 1
+
+            })
+        )
+
+        .filter(
+            item =>
+                fechaSeleccionada === null ||
+                item.venta.fechaFiltro ===
+                fechaSeleccionada
+        )
+
+        .reverse()
+
+        .forEach(
+            item => {
+
+                const venta =
+                    item.venta;
 
 
-            total += venta.total;
-
-            cantidadVentas++;
-        }
-    });
+                const numeroVenta =
+                    item.numeroVenta;
 
 
-    if (cantidadVentas === 0) {
+                html += `
+
+                    <div>
+
+                        <p>
+
+                            <strong>
+                                Venta ${numeroVenta}
+                            </strong>
+
+                            <br>
+
+                            Fecha:
+                            ${venta.fecha}
+
+                            <br>
+
+                            Total:
+                            $${venta.total}
+
+                            <br>
+
+                            Medio de pago:
+                            ${venta.medioPago}
+
+                        </p>
+
+
+                        <button
+                            onclick="verDetalleVenta(${numeroVenta - 1})"
+                        >
+                            👁️ Ver detalle
+                        </button>
+
+
+                        <div
+                            id="detalleVenta${numeroVenta - 1}"
+                            style="display: none;"
+                        ></div>
+
+
+                        <hr>
+
+                    </div>
+
+                `;
+
+
+                total +=
+                    venta.total;
+
+
+                cantidadVentas++;
+            }
+        );
+
+
+    if (
+        cantidadVentas === 0
+    ) {
 
         html =
             "<p>❌ No hay ventas registradas para esta fecha.</p>";
     }
 
 
-    document.getElementById("ventasDelDia").innerHTML =
+    document.getElementById(
+        "ventasDelDia"
+    ).innerHTML =
         html;
 
 
-    document.getElementById("totalDia").innerHTML =
+    document.getElementById(
+        "totalDia"
+    ).innerHTML =
         `Total vendido: $${total}`;
 }
 
@@ -761,66 +1063,93 @@ function verDetalleVenta(indice) {
         ventasDelDia[indice];
 
 
+    if (!venta) {
+
+        return;
+    }
+
+
     const contenedor =
         document.getElementById(
             `detalleVenta${indice}`
         );
 
 
-    if (contenedor.style.display === "none") {
+    if (!contenedor) {
+
+        return;
+    }
+
+
+    if (
+        contenedor.style.display ===
+        "none"
+    ) {
 
         let html = `
+
             <div>
 
                 <strong>
                     📋 Productos de la venta:
                 </strong>
+
         `;
 
 
-        venta.productos.forEach(producto => {
+        venta.productos.forEach(
+            producto => {
 
-            html += `
-                <p>
+                html += `
 
-                    ${producto.cantidad}
-                    ${producto.unidad || ""}
+                    <p>
 
-                    x
+                        ${producto.cantidad}
+                        ${producto.unidad || ""}
 
-                    ${producto.nombre}
-                    -
-                    ${producto.sabor}
+                        x
 
-                    <br>
+                        ${producto.nombre}
 
-                    Precio:
-                    $${producto.precio}
+                        -
 
-                    <br>
+                        ${producto.sabor}
 
-                    Subtotal:
-                    $${producto.subtotal}
+                        <br>
 
-                </p>
-            `;
-        });
+                        Precio:
+                        $${producto.precio}
+
+                        <br>
+
+                        Subtotal:
+                        $${producto.subtotal}
+
+                    </p>
+
+                `;
+            }
+        );
 
 
         html += `
+
                 <strong>
                     Total: $${venta.total}
                 </strong>
 
             </div>
+
         `;
 
 
         contenedor.innerHTML =
             html;
 
+
         contenedor.style.display =
             "block";
+
 
     } else {
 
@@ -837,10 +1166,14 @@ function verDetalleVenta(indice) {
 function filtrarVentasPorFecha() {
 
     const fecha =
-        document.getElementById("fechaFiltro").value;
+        document
+            .getElementById("fechaFiltro")
+            .value;
 
 
-    if (fecha === "") {
+    if (
+        fecha === ""
+    ) {
 
         mostrarVentasDelDia();
 
@@ -848,7 +1181,9 @@ function filtrarVentasPorFecha() {
     }
 
 
-    mostrarVentasDelDia(fecha);
+    mostrarVentasDelDia(
+        fecha
+    );
 }
 
 
@@ -858,22 +1193,31 @@ function filtrarVentasPorFecha() {
 
 function mostrarVentasDeHoy() {
 
-    const ahora = new Date();
+    const ahora =
+        new Date();
 
 
     const hoy =
         ahora.getFullYear() +
         "-" +
-        String(ahora.getMonth() + 1).padStart(2, "0") +
+        String(
+            ahora.getMonth() + 1
+        ).padStart(2, "0") +
         "-" +
-        String(ahora.getDate()).padStart(2, "0");
+        String(
+            ahora.getDate()
+        ).padStart(2, "0");
 
 
-    document.getElementById("fechaFiltro").value =
+    document.getElementById(
+        "fechaFiltro"
+    ).value =
         hoy;
 
 
-    mostrarVentasDelDia(hoy);
+    mostrarVentasDelDia(
+        hoy
+    );
 }
 
 
@@ -883,102 +1227,143 @@ function mostrarVentasDeHoy() {
 
 function mostrarProductosMasVendidos() {
 
-    const productosVendidos = {};
+    const productosVendidos =
+        {};
 
 
-    ventasDelDia.forEach(venta => {
+    ventasDelDia.forEach(
+        venta => {
 
-        venta.productos.forEach(producto => {
+            venta.productos.forEach(
+                producto => {
 
-            const nombreCompleto =
-                producto.nombre + " - " + producto.sabor;
-
-
-            if (!productosVendidos[nombreCompleto]) {
-
-                productosVendidos[nombreCompleto] = {
-
-                    nombre: nombreCompleto,
-
-                    unidades: 0,
-
-                    kg: 0,
-
-                    facturado: 0
-                };
-            }
+                    const nombreCompleto =
+                        producto.nombre +
+                        " - " +
+                        producto.sabor;
 
 
-            // Si se vendió por docena,
-            // convertimos cada docena en 12 unidades
+                    if (
+                        !productosVendidos[
+                            nombreCompleto
+                        ]
+                    ) {
 
-            if (producto.unidad === "docena") {
+                        productosVendidos[
+                            nombreCompleto
+                        ] = {
 
-                productosVendidos[nombreCompleto].unidades +=
-                    producto.cantidad * 12;
+                            nombre:
+                                nombreCompleto,
 
-            }
+                            unidades:
+                                0,
 
+                            kg:
+                                0,
 
-            // Si se vendió por unidad
-
-            else if (producto.unidad === "unidad") {
-
-                productosVendidos[nombreCompleto].unidades +=
-                    producto.cantidad;
-
-            }
-
-
-            // Si se vendió por kilo
-
-            else if (producto.unidad === "kg") {
-
-                productosVendidos[nombreCompleto].kg +=
-                    producto.cantidad;
-            }
+                            facturado:
+                                0
+                        };
+                    }
 
 
-            // Acumulamos el dinero facturado
+                    if (
+                        producto.unidad ===
+                        "docena"
+                    ) {
 
-            productosVendidos[nombreCompleto].facturado +=
-                producto.subtotal;
+                        productosVendidos[
+                            nombreCompleto
+                        ].unidades +=
+                            producto.cantidad *
+                            12;
 
-        });
-    });
+                    }
 
 
-    // Ordenamos por cantidad vendida
+                    else if (
+                        producto.unidad ===
+                        "unidad"
+                    ) {
+
+                        productosVendidos[
+                            nombreCompleto
+                        ].unidades +=
+                            producto.cantidad;
+
+                    }
+
+
+                    else if (
+                        producto.unidad ===
+                        "kg"
+                    ) {
+
+                        productosVendidos[
+                            nombreCompleto
+                        ].kg +=
+                            producto.cantidad;
+                    }
+
+
+                    productosVendidos[
+                        nombreCompleto
+                    ].facturado +=
+                        producto.subtotal;
+
+                }
+            );
+        }
+    );
+
 
     const productosOrdenados =
-        Object.values(productosVendidos)
-        .sort((a, b) => {
+        Object.values(
+            productosVendidos
+        )
+        .sort(
+            (a, b) => {
 
-            // Para productos por unidad,
-            // usamos las unidades vendidas.
+                if (
+                    a.unidades > 0 &&
+                    b.unidades > 0
+                ) {
 
-            if (a.unidades > 0 && b.unidades > 0) {
-                return b.unidades - a.unidades;
+                    return (
+                        b.unidades -
+                        a.unidades
+                    );
+                }
+
+
+                if (
+                    a.kg > 0 &&
+                    b.kg > 0
+                ) {
+
+                    return (
+                        b.kg -
+                        a.kg
+                    );
+                }
+
+
+                return (
+                    b.facturado -
+                    a.facturado
+                );
             }
-
-            // Para productos por kg,
-            // usamos los kilos vendidos.
-
-            if (a.kg > 0 && b.kg > 0) {
-                return b.kg - a.kg;
-            }
-
-            // Si son unidades vs kg,
-            // priorizamos facturación.
-
-            return b.facturado - a.facturado;
-        });
+        );
 
 
-    let html = "";
+    let html =
+        "";
 
 
-    if (productosOrdenados.length === 0) {
+    if (
+        productosOrdenados.length === 0
+    ) {
 
         html =
             "<p>❌ Todavía no hay ventas registradas.</p>";
@@ -992,26 +1377,44 @@ function mostrarProductosMasVendidos() {
                     indice + 1;
 
 
-                let emoji = "🏅";
+                let emoji =
+                    "🏅";
 
 
-                if (posicion === 1) {
-                    emoji = "🥇";
+                if (
+                    posicion === 1
+                ) {
+
+                    emoji =
+                        "🥇";
+
                 }
 
-                else if (posicion === 2) {
-                    emoji = "🥈";
+                else if (
+                    posicion === 2
+                ) {
+
+                    emoji =
+                        "🥈";
+
                 }
 
-                else if (posicion === 3) {
-                    emoji = "🥉";
+                else if (
+                    posicion === 3
+                ) {
+
+                    emoji =
+                        "🥉";
                 }
 
 
-                let cantidadMostrar = "";
+                let cantidadMostrar =
+                    "";
 
 
-                if (producto.unidades > 0) {
+                if (
+                    producto.unidades > 0
+                ) {
 
                     cantidadMostrar =
                         `📦 ${producto.unidades} unidades`;
@@ -1024,6 +1427,7 @@ function mostrarProductosMasVendidos() {
 
 
                 html += `
+
                     <div>
 
                         <p>
@@ -1048,6 +1452,7 @@ function mostrarProductosMasVendidos() {
                         <hr>
 
                     </div>
+
                 `;
             }
         );
@@ -1057,214 +1462,312 @@ function mostrarProductosMasVendidos() {
 
 
 // ==========================================
-// INICIAR
+// MOSTRAR / OCULTAR HISTORIAL
 // ==========================================
 
 function alternarHistorial() {
 
     const historial =
-        document.getElementById("historialVentas");
+        document.getElementById(
+            "historialVentas"
+        );
 
-    if (historial.style.display === "none") {
 
-        historial.style.display = "block";
+    if (
+        historial.style.display ===
+        "none"
+    ) {
+
+        historial.style.display =
+            "block";
 
     } else {
 
-        historial.style.display = "none";
+        historial.style.display =
+            "none";
     }
 }
+
+
+// ==========================================
+// MOSTRAR / OCULTAR REPORTE
+// ==========================================
 
 function alternarReporte() {
 
     const reporte =
-        document.getElementById("reporteMensualContainer");
+        document.getElementById(
+            "reporteMensualContainer"
+        );
 
-    if (reporte.style.display === "none") {
 
-        reporte.style.display = "block";
+    if (
+        reporte.style.display ===
+        "none"
+    ) {
+
+        reporte.style.display =
+            "block";
 
     } else {
 
-        reporte.style.display = "none";
+        reporte.style.display =
+            "none";
     }
 }
 
-actualizarPreciosDesdeGoogle();
 
-mostrarVentasDelDia();
-
-mostrarProductosMasVendidos();
-
-console.log(ventasDelDia);
-
+// ==========================================
+// REPORTE MENSUAL
+// ==========================================
 
 function generarReporteMensual() {
 
     const mesSeleccionado =
-        document.getElementById("mesReporte").value;
+        document
+            .getElementById(
+                "mesReporte"
+            )
+            .value;
 
 
-    if (mesSeleccionado === "") {
+    if (
+        mesSeleccionado === ""
+    ) {
 
-        alert("Seleccioná un mes.");
+        alert(
+            "Seleccioná un mes."
+        );
 
         return;
     }
 
 
-    let totalFacturado = 0;
-
-    let cantidadVentas = 0;
-
-    let efectivo = 0;
-
-    let transferencia = 0;
-
-    let tarjeta = 0;
+    let totalFacturado =
+        0;
 
 
-    const productos = {};
+    let cantidadVentas =
+        0;
 
 
-    ventasDelDia.forEach(venta => {
-
-        // Verificamos que la venta pertenezca al mes seleccionado
-
-        if (
-            venta.fechaFiltro &&
-            venta.fechaFiltro.startsWith(mesSeleccionado)
-        ) {
-
-            cantidadVentas++;
-
-            totalFacturado += venta.total;
+    let efectivo =
+        0;
 
 
-            // =========================
-            // MEDIOS DE PAGO
-            // =========================
+    let transferencia =
+        0;
 
-            if (venta.medioPago === "Efectivo") {
 
-                efectivo += venta.total;
+    let tarjeta =
+        0;
 
+
+    const productos =
+        {};
+
+
+    ventasDelDia.forEach(
+        venta => {
+
+            if (
+                venta.fechaFiltro &&
+                venta.fechaFiltro.startsWith(
+                    mesSeleccionado
+                )
+            ) {
+
+                cantidadVentas++;
+
+
+                totalFacturado +=
+                    venta.total;
+
+
+                if (
+                    venta.medioPago ===
+                    "Efectivo"
+                ) {
+
+                    efectivo +=
+                        venta.total;
+
+                }
+
+                else if (
+                    venta.medioPago ===
+                    "Transferencia"
+                ) {
+
+                    transferencia +=
+                        venta.total;
+
+                }
+
+                else if (
+                    venta.medioPago ===
+                    "Tarjeta"
+                ) {
+
+                    tarjeta +=
+                        venta.total;
+                }
+
+
+                venta.productos.forEach(
+                    producto => {
+
+                        const nombreCompleto =
+                            producto.nombre +
+                            " - " +
+                            producto.sabor;
+
+
+                        if (
+                            !productos[
+                                nombreCompleto
+                            ]
+                        ) {
+
+                            productos[
+                                nombreCompleto
+                            ] = {
+
+                                nombre:
+                                    nombreCompleto,
+
+                                unidades:
+                                    0,
+
+                                kg:
+                                    0,
+
+                                facturado:
+                                    0
+                            };
+                        }
+
+
+                        if (
+                            producto.unidad ===
+                            "docena"
+                        ) {
+
+                            productos[
+                                nombreCompleto
+                            ].unidades +=
+                                producto.cantidad *
+                                12;
+
+                        }
+
+                        else if (
+                            producto.unidad ===
+                            "unidad"
+                        ) {
+
+                            productos[
+                                nombreCompleto
+                            ].unidades +=
+                                producto.cantidad;
+
+                        }
+
+                        else if (
+                            producto.unidad ===
+                            "kg"
+                        ) {
+
+                            productos[
+                                nombreCompleto
+                            ].kg +=
+                                producto.cantidad;
+                        }
+
+
+                        productos[
+                            nombreCompleto
+                        ].facturado +=
+                            producto.subtotal;
+
+                    }
+                );
             }
-
-            else if (venta.medioPago === "Transferencia") {
-
-                transferencia += venta.total;
-
-            }
-
-            else if (venta.medioPago === "Tarjeta") {
-
-                tarjeta += venta.total;
-            }
-
-
-            // =========================
-            // PRODUCTOS
-            // =========================
-
-            venta.productos.forEach(producto => {
-
-                const nombreCompleto =
-                    producto.nombre +
-                    " - " +
-                    producto.sabor;
-
-
-                if (!productos[nombreCompleto]) {
-
-                    productos[nombreCompleto] = {
-
-                        nombre: nombreCompleto,
-
-                        unidades: 0,
-
-                        kg: 0,
-
-                        facturado: 0
-                    };
-                }
-
-
-                if (producto.unidad === "docena") {
-
-                    productos[nombreCompleto].unidades +=
-                        producto.cantidad * 12;
-
-                }
-
-                else if (producto.unidad === "unidad") {
-
-                    productos[nombreCompleto].unidades +=
-                        producto.cantidad;
-
-                }
-
-                else if (producto.unidad === "kg") {
-
-                    productos[nombreCompleto].kg +=
-                        producto.cantidad;
-                }
-
-
-                productos[nombreCompleto].facturado +=
-                    producto.subtotal;
-
-            });
         }
-    });
+    );
 
-
-    // =========================
-    // ORDENAR PRODUCTOS
-    // =========================
 
     const productosOrdenados =
-        Object.values(productos)
-        .sort((a, b) => {
+        Object.values(
+            productos
+        )
+        .sort(
+            (a, b) => {
 
-            if (a.unidades > 0 && b.unidades > 0) {
+                if (
+                    a.unidades > 0 &&
+                    b.unidades > 0
+                ) {
 
-                return b.unidades - a.unidades;
+                    return (
+                        b.unidades -
+                        a.unidades
+                    );
+                }
+
+
+                if (
+                    a.kg > 0 &&
+                    b.kg > 0
+                ) {
+
+                    return (
+                        b.kg -
+                        a.kg
+                    );
+                }
+
+
+                return (
+                    b.facturado -
+                    a.facturado
+                );
             }
+        );
 
-            if (a.kg > 0 && b.kg > 0) {
-
-                return b.kg - a.kg;
-            }
-
-            return b.facturado - a.facturado;
-        });
-
-
-    // =========================
-    // ARMAR REPORTE
-    // =========================
 
     let html = `
 
         <hr>
 
-        <h3>📅 Reporte: ${mesSeleccionado}</h3>
+        <h3>
+            📅 Reporte: ${mesSeleccionado}
+        </h3>
 
-        <h4>💰 Resumen</h4>
+        <h4>
+            💰 Resumen
+        </h4>
 
         <p>
-            <strong>Facturación total:</strong>
+            <strong>
+                Facturación total:
+            </strong>
+
             $${totalFacturado}
         </p>
 
         <p>
-            <strong>Cantidad de ventas:</strong>
+            <strong>
+                Cantidad de ventas:
+            </strong>
+
             ${cantidadVentas}
         </p>
 
 
-        <h4>💳 Medios de pago</h4>
+        <h4>
+            💳 Medios de pago
+        </h4>
 
         <p>
             💵 Efectivo:
@@ -1282,16 +1785,23 @@ function generarReporteMensual() {
         </p>
 
 
-        <h4>🏆 Productos más vendidos</h4>
+        <h4>
+            🏆 Productos más vendidos
+        </h4>
+
     `;
 
 
-    if (productosOrdenados.length === 0) {
+    if (
+        productosOrdenados.length === 0
+    ) {
 
         html += `
+
             <p>
                 ❌ No hubo ventas durante este mes.
             </p>
+
         `;
 
     } else {
@@ -1299,31 +1809,43 @@ function generarReporteMensual() {
         productosOrdenados.forEach(
             (producto, indice) => {
 
-                let emoji = "🏅";
+                let emoji =
+                    "🏅";
 
 
-                if (indice === 0) {
+                if (
+                    indice === 0
+                ) {
 
-                    emoji = "🥇";
-
-                }
-
-                else if (indice === 1) {
-
-                    emoji = "🥈";
+                    emoji =
+                        "🥇";
 
                 }
 
-                else if (indice === 2) {
+                else if (
+                    indice === 1
+                ) {
 
-                    emoji = "🥉";
+                    emoji =
+                        "🥈";
+
+                }
+
+                else if (
+                    indice === 2
+                ) {
+
+                    emoji =
+                        "🥉";
                 }
 
 
                 let cantidadMostrar;
 
 
-                if (producto.unidades > 0) {
+                if (
+                    producto.unidades > 0
+                ) {
 
                     cantidadMostrar =
                         `${producto.unidades} unidades`;
@@ -1360,95 +1882,271 @@ function generarReporteMensual() {
     }
 
 
-    document.getElementById("reporteMensual").innerHTML =
+    document.getElementById(
+        "reporteMensual"
+    ).innerHTML =
         html;
 }
+
 
 // ==========================================
 // ESCÁNER DE CÓDIGOS
 // ==========================================
 
-let escaner = null;
+let escaner =
+    null;
 
-function abrirEscaner() {
 
-    document.getElementById("lectorCodigo").style.display = "block";
+async function abrirEscaner() {
 
-    escaner = new Html5Qrcode("reader");
+    // Si todavía se están cargando los precios,
+    // esperamos antes de abrir el escáner.
 
-    escaner.start(
-        { facingMode: "environment" },
+    if (!preciosCargados) {
 
-        {
-            fps: 10,
-            qrbox: { width: 250, height: 150 }
-        },
+        document.getElementById(
+            "mensaje"
+        ).innerHTML =
+            "⏳ Esperá un momento, estamos actualizando los precios...";
 
-        (codigoEscaneado) => {
 
-            codigoEscaneado =
-                codigoEscaneado.trim();
-
-            console.log(
-                "Código escaneado:",
-                codigoEscaneado
+        const actualizado =
+            await actualizarPreciosDesdeGoogle(
+                false
             );
 
-            document.getElementById("codigo").value =
-                codigoEscaneado;
 
-            buscarProducto();
+        if (!actualizado) {
 
-            cerrarEscaner();
-        },
+            alert(
+                "No se pudieron cargar los precios. Revisá tu conexión a Internet."
+            );
 
-        (error) => {
-            // Ignoramos los errores mientras busca el código
+            return;
         }
-    )
-    .catch((error) => {
+
+
+        document.getElementById(
+            "mensaje"
+        ).innerHTML =
+            "✅ Precios actualizados automáticamente";
+    }
+
+
+    document.getElementById(
+        "lectorCodigo"
+    ).style.display =
+        "block";
+
+
+    // Evitamos crear dos escáneres al mismo tiempo.
+
+    if (escaner) {
+
+        return;
+    }
+
+
+    escaner =
+        new Html5Qrcode(
+            "reader"
+        );
+
+
+    const configuracion = {
+
+        fps: 10,
+
+        qrbox: {
+            width: 300,
+            height: 150
+        }
+
+    };
+
+
+    try {
+
+        await escaner.start(
+
+            {
+                facingMode:
+                    "environment"
+            },
+
+            configuracion,
+
+
+            async (codigoEscaneado) => {
+
+                codigoEscaneado =
+                    codigoEscaneado
+                        .trim();
+
+
+                console.log(
+                    "Código escaneado:",
+                    codigoEscaneado
+                );
+
+
+                // Si por algún motivo todavía
+                // no están cargados los precios,
+                // los actualizamos antes de buscar.
+
+                if (!preciosCargados) {
+
+                    const actualizado =
+                        await actualizarPreciosDesdeGoogle(
+                            false
+                        );
+
+
+                    if (!actualizado) {
+
+                        alert(
+                            "No se pudieron cargar los precios."
+                        );
+
+                        return;
+                    }
+                }
+
+
+                document.getElementById(
+                    "codigo"
+                ).value =
+                    codigoEscaneado;
+
+
+                buscarProducto();
+
+
+                cerrarEscaner();
+
+            },
+
+
+            (error) => {
+
+                // No hacemos nada.
+                // El escáner sigue buscando.
+            }
+
+        );
+
+
+    } catch (error) {
 
         console.error(
-            "No se pudo abrir la cámara:",
+            "Error del escáner:",
             error
         );
 
+
         alert(
-            "No se pudo acceder a la cámara."
+            "No se pudo iniciar el escáner. " +
+            "Revisá que hayas permitido el acceso a la cámara."
         );
-    });
+
+
+        document.getElementById(
+            "lectorCodigo"
+        ).style.display =
+            "none";
+
+
+        escaner =
+            null;
+    }
 }
 
+
+// ==========================================
+// CERRAR ESCÁNER
+// ==========================================
 
 function cerrarEscaner() {
 
     if (escaner) {
 
         escaner.stop()
-        .then(() => {
 
-            escaner.clear();
+            .then(
+                () => {
 
-            escaner = null;
+                    escaner.clear();
 
-            document.getElementById(
-                "lectorCodigo"
-            ).style.display = "none";
+                    escaner =
+                        null;
 
-        })
-        .catch(() => {
 
-            document.getElementById(
-                "lectorCodigo"
-            ).style.display = "none";
+                    document.getElementById(
+                        "lectorCodigo"
+                    ).style.display =
+                        "none";
 
-            escaner = null;
-        });
+                }
+            )
+
+            .catch(
+                () => {
+
+                    document.getElementById(
+                        "lectorCodigo"
+                    ).style.display =
+                        "none";
+
+
+                    escaner =
+                        null;
+                }
+            );
 
     } else {
 
         document.getElementById(
             "lectorCodigo"
-        ).style.display = "none";
+        ).style.display =
+            "none";
     }
 }
+
+
+// ==========================================
+// INICIAR APLICACIÓN
+// ==========================================
+
+async function iniciarAplicacion() {
+
+    // Primero mostramos las ventas guardadas
+    // para que la aplicación cargue normalmente.
+
+    mostrarVentasDelDia();
+
+    mostrarProductosMasVendidos();
+
+
+    // Después actualizamos automáticamente
+    // los precios desde Google Sheets.
+
+    await actualizarPreciosDesdeGoogle(
+        true
+    );
+
+
+    console.log(
+        "Aplicación iniciada."
+    );
+
+
+    console.log(
+        "Ventas guardadas:",
+        ventasDelDia
+    );
+}
+
+
+// Iniciar todo
+
+iniciarAplicacion();
