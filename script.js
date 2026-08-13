@@ -183,7 +183,7 @@ async function actualizarPreciosDesdeGoogle() {
 
         datos.forEach(item => {
 
-            const codigo = String(item.codigo).trim();
+            const codigo = String(item.codigo).trim().toUpperCase();
 
             // Si el producto no existe, lo creamos desde Google Sheets
             if (!productos[codigo]) {
