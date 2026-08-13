@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flor de Pasta</title>
+</head>
+
+<body>
+    <h1>
+    <img src="logo.png" alt="Flor de Pasta" style="width: 80px; vertical-align: middle;">
+    Flor de Pasta
+</h1>
+
+    <h2>Registro de ventas</h2>
+
+    <h3>Buscar producto</h3>
+
+    <input 
+        type="text" 
+        id="codigo" 
+        placeholder="Escaneá o escribí el código"
+    >
+
+    <button onclick="abrirEscaner()">
+    📷 Escanear código
+</button>
+
+<div id="lectorCodigo" style="display: none;">
+    <div id="reader" style="width: 300px;"></div>
+
+    <button onclick="cerrarEscaner()">
+        ❌ Cerrar escáner
+    </button>
+</div>
+
+    <button onclick="buscarProducto()">
+        Buscar producto
+    </button>
+
+   <div id="resultado"></div>
+
+<div id="cantidadProducto" style="display: none;">
+
+    <div id="formaVentaContainer">
+
+        <label for="formaVenta">Forma de venta:</label>
+
+        <select id="formaVenta">
+            <option value="unidad">Unidad</option>
+            <option value="docena">Docena</option>
+        </select>
+
+    </div>
+
+    <br>
+
+    <label for="cantidad">Cantidad:</label>
+
+<input 
+    type="text"
+    id="cantidad"
+    value="1"
+    inputmode="decimal"
+    placeholder="Ej: 0,5"
+>
+
+    <span id="unidadCantidad">unidad</span>
+
+    <br><br>
+
+    <button onclick="agregarVenta()">
+        Agregar a la venta
+    </button>
+
+</div>
+
+<h3>Venta actual</h3>
+
+<div id="venta"></div>
+
+<h2 id="total">Total: $0</h2>
+
+<h3>Medio de pago</h3>
+
+<select id="medioPago">
+    <option value="Efectivo">Efectivo</option>
+    <option value="Transferencia">Transferencia</option>
+    <option value="Tarjeta">Tarjeta</option>
+</select>
+
+<br><br>
+
+<button onclick="finalizarVenta()">
+    ✅ Finalizar venta
+</button>
+
+<button onclick="actualizarPreciosDesdeGoogle()">
+    🔄 Actualizar precios
+</button>
+
+<div id="mensaje"></div>
+
+<hr>
+
+<button onclick="alternarHistorial()">
+    📋 Ver / ocultar historial de ventas
+</button>
+
+<div id="historialVentas" style="display: none;">
+
+    <h2>📊 Historial de ventas</h2>
+
+    <label for="fechaFiltro">
+        Seleccionar fecha:
+    </label>
+
+    <input 
+        type="date" 
+        id="fechaFiltro"
+        onchange="filtrarVentasPorFecha()"
+    >
+
+    <button onclick="mostrarVentasDeHoy()">
+        📅 Ver ventas de hoy
+    </button>
+
+    <div id="ventasDelDia"></div>
+
+    <h3 id="totalDia">
+        Total vendido: $0
+    </h3>
+
+</div>
+
+<hr>
+
+<button onclick="alternarReporte()">
+    📊 Ver / ocultar reporte mensual
+</button>
+
+<div id="reporteMensualContainer" style="display: none;">
+
+    <h2>📊 Reporte mensual</h2>
+
+    <label for="mesReporte">Seleccionar mes:</label>
+
+    <input
+        type="month"
+        id="mesReporte"
+    >
+
+    <button onclick="generarReporteMensual()">
+        📊 Ver reporte
+    </button>
+
+    <div id="reporteMensual"></div>
+
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
