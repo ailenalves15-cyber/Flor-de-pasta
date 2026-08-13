@@ -185,6 +185,8 @@ async function actualizarPreciosDesdeGoogle() {
 
             const codigo = String(item.codigo).trim().toUpperCase();
 
+            console.log("Producto recibido:", item);
+
             // Si el producto no existe, lo creamos desde Google Sheets
             if (!productos[codigo]) {
 
