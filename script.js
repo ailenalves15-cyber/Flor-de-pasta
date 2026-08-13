@@ -173,7 +173,7 @@ async function actualizarPreciosDesdeGoogle() {
 
     try {
 
-        const respuesta = await fetch(URL_PRECIOS);
+        const respuesta = await fetch(URL_PRECIOS + "?t=" + Date.now());
 
         if (!respuesta.ok) {
             throw new Error("No se pudo conectar con Google Sheets.");
