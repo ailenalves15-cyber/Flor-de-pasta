@@ -792,7 +792,7 @@ function eliminarProducto(indice) {
 // FINALIZAR VENTA
 // ==========================================
 
-async function finalizarVenta() {
+function finalizarVenta() {
 
     if (
         ventaActual.length === 0
@@ -849,14 +849,10 @@ async function finalizarVenta() {
             totalVenta,
 
         medioPago:
-            medioPago,
+            medioPago
 
-        numeroVenta:
-            ventasDelDia.length + 1
     };
 
-
-    // GUARDAR LOCALMENTE
 
     ventasDelDia.push(
         nuevaVenta
@@ -869,42 +865,6 @@ async function finalizarVenta() {
             ventasDelDia
         )
     );
-
-
-    // GUARDAR EN GOOGLE SHEETS
-
-    try {
-
-        await fetch(
-            URL_PRECIOS,
-            {
-                method: "POST",
-
-                mode: "no-cors",
-
-                headers: {
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
-
-                body: JSON.stringify({
-                    venta: nuevaVenta
-                })
-            }
-        );
-
-        console.log(
-            "✅ Venta enviada a Google Sheets"
-        );
-
-    } catch (error) {
-
-        console.error(
-            "❌ No se pudo enviar la venta a Google Sheets:",
-            error
-        );
-
-    }
 
 
     alert(
