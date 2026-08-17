@@ -873,14 +873,13 @@ async function finalizarVenta() {
 
     // GUARDAR EN GOOGLE SHEETS
 
-    try {
+try {
 
+    const respuesta =
         await fetch(
             URL_PRECIOS,
             {
                 method: "POST",
-
-                mode: "no-cors",
 
                 headers: {
                     "Content-Type":
@@ -893,18 +892,22 @@ async function finalizarVenta() {
             }
         );
 
-        console.log(
-            "✅ Venta enviada a Google Sheets"
-        );
+    const resultado =
+        await respuesta.text();
 
-    } catch (error) {
+    console.log(
+        "Respuesta de Google Sheets:",
+        resultado
+    );
 
-        console.error(
-            "❌ No se pudo enviar la venta a Google Sheets:",
-            error
-        );
+} catch (error) {
 
-    }
+    console.error(
+        "❌ No se pudo enviar la venta a Google Sheets:",
+        error
+    );
+
+}
 
 
     alert(
