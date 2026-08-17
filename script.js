@@ -875,29 +875,57 @@ async function finalizarVenta() {
 
 try {
 
-    const respuesta =
-        await fetch(
-            URL_PRECIOS,
-            {
-                method: "POST",
+    await fetch(
+        URL_PRECIOS,
+        {
+            method: "POST",
 
-                headers: {
-                    "Content-Type":
-                        "text/plain;charset=utf-8"
-                },
+            mode: "no-cors",
 
-                body: JSON.stringify({
-                    venta: nuevaVenta
-                })
-            }
-        );
+            headers: {
+                "Content-Type":
+                    "text/plain;charset=utf-8"
+            },
 
-    const resultado =
-        await respuesta.text();
+            body: JSON.stringify({
+                venta: nuevaVenta
+            })
+        }
+    );
 
     console.log(
-        "Respuesta de Google Sheets:",
-        resultado
+        "✅ Venta enviada a Google Sheets"
+    );
+
+} catch (error) {
+
+    console.error(
+        "❌ No se pudo enviar la venta a Google Sheets:",
+        error
+    );
+
+}try {
+
+    await fetch(
+        URL_PRECIOS,
+        {
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+                "Content-Type":
+                    "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify({
+                venta: nuevaVenta
+            })
+        }
+    );
+
+    console.log(
+        "✅ Venta enviada a Google Sheets"
     );
 
 } catch (error) {
