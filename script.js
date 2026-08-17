@@ -523,13 +523,22 @@ function formatearFecha(fecha) {
         return fecha;
     }
 
-    return fechaObjeto.toLocaleString("es-AR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-    });
+    const dia =
+        String(fechaObjeto.getDate()).padStart(2, "0");
+
+    const mes =
+        String(fechaObjeto.getMonth() + 1).padStart(2, "0");
+
+    const año =
+        fechaObjeto.getFullYear();
+
+    const hora =
+        String(fechaObjeto.getHours()).padStart(2, "0");
+
+    const minutos =
+        String(fechaObjeto.getMinutes()).padStart(2, "0");
+
+    return `${dia}/${mes}/${año} ${hora}:${minutos}`;
 }
 
 function obtenerFechaFiltro(fecha) {
@@ -998,10 +1007,8 @@ async function finalizarVenta() {
         new Date();
 
 
-    const fechaMostrar =
-        ahora.toLocaleString(
-            "es-AR"
-        );
+ const fechaMostrar =
+    ahora.toISOString();
 
 
     const fechaFiltro =
@@ -1213,10 +1220,15 @@ function mostrarVentasDelDia(
 
                             <br>
 
-                            Total:
-                            $${venta.total}
+                        Total:
+$${venta.total}
 
-                        </p>
+<br>
+
+Medio de pago:
+${venta.medioPago || "Sin definir"}
+
+</p>
 
 
                         <button
