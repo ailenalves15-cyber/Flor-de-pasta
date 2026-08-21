@@ -404,6 +404,70 @@ let ventasDelDia =
     ) || [];
 
 // ==========================================
+// CARGAR VENTAS DESDE GOOGLE SHEETS
+// ==========================================
+
+async function cargarVentasDesdeGoogle() {
+
+    try {
+
+        const respuesta =
+            await fetch(
+                URL_PRECIOS + "?t=" + Date.now()
+            );
+
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "No se pudieron cargar las ventas."
+            );
+        }
+
+
+        const datos =
+            await respuesta.json();
+
+
+        if (
+            Array.isArray(datos.ventas)
+        ) {
+
+            ventasDelDia =
+                datos.ventas;
+
+
+            localStorage.setItem(
+                "ventasDelDia",
+                JSON.stringify(
+                    ventasDelDia
+                )
+            );
+
+
+            console.log(
+                "✅ Ventas cargadas desde Google Sheets:",
+                ventasDelDia
+            );
+
+
+            mostrarVentasDelDia();
+
+            mostrarProductosMasVendidos();
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "❌ Error cargando ventas desde Google Sheets:",
+            error
+        );
+
+    }
+}
+
+// ==========================================
     // BUSCAR PRODUCTOS
     // ==========================================
 
@@ -941,22 +1005,24 @@ function finalizarVenta() {
 
     const nuevaVenta = {
 
-        fecha:
-            fechaMostrar,
+    fecha:
+        fechaMostrar,
 
-        fechaFiltro:
-            fechaFiltro,
+    fechaFiltro:
+        fechaFiltro,
 
-        productos:
-            [...ventaActual],
+    numeroVenta:
+        Date.now().toString(),
 
-        total:
-            totalVenta,
+    productos:
+        [...ventaActual],
 
-        medioPago:
-            medioPago
+    total:
+        totalVenta,
 
-    };
+    medioPago:
+        medioPago
+};
 
 
     ventasDelDia.push(
@@ -2270,20 +2336,29 @@ function cerrarEscaner() {
 
 async function iniciarAplicacion() {
 
-    // Primero mostramos las ventas guardadas
-    // para que la aplicación cargue normalmente.
+    // ==========================================
+    // MOSTRAR VENTAS LOCALES MIENTRAS CARGA
+    // ==========================================
 
     mostrarVentasDelDia();
 
     mostrarProductosMasVendidos();
 
 
-    // Después actualizamos automáticamente
-    // los precios desde Google Sheets.
+    // ==========================================
+    // ACTUALIZAR PRODUCTOS Y PRECIOS
+    // ==========================================
 
     await actualizarPreciosDesdeGoogle(
         true
     );
+
+
+    // ==========================================
+    // CARGAR VENTAS DESDE GOOGLE SHEETS
+    // ==========================================
+
+    await cargarVentasDesdeGoogle();
 
 
     console.log(
@@ -2292,7 +2367,7 @@ async function iniciarAplicacion() {
 
 
     console.log(
-        "Ventas guardadas:",
+        "Ventas sincronizadas:",
         ventasDelDia
     );
 }
