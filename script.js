@@ -2316,19 +2316,22 @@ if (
 const campoCantidad =
     document.getElementById("cantidad");
 
-if (
+// Guardamos la cantidad que escribió el usuario
+// ANTES de procesar el código escaneado.
+
+const cantidadEscaneada =
     campoCantidad.value.trim() === ""
-) {
+        ? "1"
+        : campoCantidad.value.trim();
 
-    campoCantidad.value = "1";
-}
+// Nos aseguramos de que la cantidad
+// quede puesta nuevamente en el campo.
 
+campoCantidad.value =
+    cantidadEscaneada;
 
-// Agregamos automáticamente.
-// NO llamamos a buscarProducto()
-// porque los productos unitarios
-// ya se agregan automáticamente
-// desde buscarProducto().
+// Agregamos el producto usando
+// la cantidad indicada.
 
 agregarVenta();
 
