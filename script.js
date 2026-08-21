@@ -219,7 +219,7 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
             await respuesta.json();
 
 
-        datos.forEach(item => {
+       datos.productos.forEach(item => {
 
             const codigo =
                 String(item.codigo).trim();
