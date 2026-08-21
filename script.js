@@ -8,7 +8,7 @@ const URL_PRECIOS =
 
 const productos = {
 
-    "FLOR01": {
+    "F01": {
         nombre: "Ravioles",
         sabor: "Jamón y queso",
         precioUnidad: 500,
@@ -16,7 +16,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR02": {
+    "F02": {
         nombre: "Ravioles",
         sabor: "Pollo",
         precioUnidad: 500,
@@ -24,7 +24,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR03": {
+    "F03": {
         nombre: "Ravioles",
         sabor: "Verdura",
         precioUnidad: 500,
@@ -32,7 +32,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR04": {
+    "F04": {
         nombre: "Raviolones",
         sabor: "Jamón y queso",
         precioUnidad: 700,
@@ -40,7 +40,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR05": {
+    "F05": {
         nombre: "Raviolones",
         sabor: "Jamón, queso y roquefort",
         precioUnidad: 700,
@@ -48,7 +48,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR06": {
+    "F06": {
         nombre: "Raviolones",
         sabor: "Verdura",
         precioUnidad: 700,
@@ -56,7 +56,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR07": {
+    "F07": {
         nombre: "Raviolones",
         sabor: "Pollo al verdeo",
         precioUnidad: 700,
@@ -64,7 +64,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR08": {
+    "F08": {
         nombre: "Raviolones",
         sabor: "Osobuco con provoleta",
         precioUnidad: 700,
@@ -72,7 +72,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR09": {
+    "F09": {
         nombre: "Raviolones",
         sabor: "Camarones",
         precioUnidad: 700,
@@ -80,7 +80,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR10": {
+    "F10": {
         nombre: "Raviolones",
         sabor: "Salmón",
         precioUnidad: 700,
@@ -88,7 +88,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR11": {
+    "F11": {
         nombre: "Raviolones",
         sabor: "Frutos de mar",
         precioUnidad: 700,
@@ -96,7 +96,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR12": {
+    "F12": {
         nombre: "Raviolones",
         sabor: "Bondiola a la mostaza",
         precioUnidad: 700,
@@ -104,7 +104,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR13": {
+    "F13": {
         nombre: "Raviolones",
         sabor: "Veganos",
         precioUnidad: 700,
@@ -112,7 +112,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR14": {
+    "F14": {
         nombre: "Raviolones",
         sabor: "Ricota, espinaca y nuez",
         precioUnidad: 700,
@@ -120,7 +120,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR15": {
+    "F15": {
         nombre: "Raviolones",
         sabor: "Berenjena, cherry y queso",
         precioUnidad: 700,
@@ -128,7 +128,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR16": {
+    "F16": {
         nombre: "Sorrentinos",
         sabor: "Jamón y queso",
         precioUnidad: 600,
@@ -136,7 +136,7 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR17": {
+    "F17": {
         nombre: "Sorrentinos",
         sabor: "Zapallo, queso y almendras tostadas",
         precioUnidad: 600,
@@ -144,28 +144,28 @@ const productos = {
         tipoVenta: "unidad"
     },
 
-    "FLOR18": {
+    "F18": {
         nombre: "Ñoquis",
         sabor: "Papa",
         precioKg: 4000,
         tipoVenta: "kg"
     },
 
-    "FLOR19": {
+    "F19": {
         nombre: "Ñoquis",
         sabor: "Papa con espinaca",
         precioKg: 4000,
         tipoVenta: "kg"
     },
 
-    "FLOR20": {
+    "F20": {
         nombre: "Fideos",
         sabor: "Al huevo blancos",
         precioKg: 4000,
         tipoVenta: "kg"
     },
 
-    "FLOR21": {
+    "F21": {
         nombre: "Fideos",
         sabor: "Al huevo con espinaca",
         precioKg: 4000,
@@ -710,58 +710,73 @@ function mostrarVenta() {
         0;
 
 
-    ventaActual.forEach(
-        (item, indice) => {
+    ventaActual
+        .map(
+            (item, indice) => ({
+                item: item,
+                indice: indice
+            })
+        )
+        .reverse()
+        .forEach(
+            dato => {
 
-            html += `
+                const item =
+                    dato.item;
 
-                <div>
-
-                    <p>
-
-                        <strong>
-                            ${item.nombre}
-                        </strong>
-
-                        -
-                        ${item.sabor}
-
-                        <br>
-
-                        Cantidad:
-                        ${item.cantidad}
-                        ${item.unidad}
-
-                        <br>
-
-                        Precio:
-                        $${item.precio}
-
-                        <br>
-
-                        Subtotal:
-                        $${item.subtotal}
-
-                    </p>
+                const indice =
+                    dato.indice;
 
 
-                    <button
-                        onclick="eliminarProducto(${indice})"
-                    >
-                        ❌ Eliminar
-                    </button>
+                html += `
 
-                    <hr>
+                    <div>
 
-                </div>
+                        <p>
 
-            `;
+                            <strong>
+                                ${item.nombre}
+                            </strong>
+
+                            -
+                            ${item.sabor}
+
+                            <br>
+
+                            Cantidad:
+                            ${item.cantidad}
+                            ${item.unidad}
+
+                            <br>
+
+                            Precio:
+                            $${item.precio}
+
+                            <br>
+
+                            Subtotal:
+                            $${item.subtotal}
+
+                        </p>
 
 
-            totalVenta +=
-                item.subtotal;
-        }
-    );
+                        <button
+                            onclick="eliminarProducto(${indice})"
+                        >
+                            ❌ Eliminar
+                        </button>
+
+                        <hr>
+
+                    </div>
+
+                `;
+
+
+                totalVenta +=
+                    item.subtotal;
+            }
+        );
 
 
     document.getElementById("venta").innerHTML =
