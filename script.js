@@ -263,8 +263,12 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
         ? Number(item.precioPlancha)
         : null,
 
-                    tipoVenta:
-                        item.tipoVenta || "unidad",
+                 tipoVenta:
+    item.tipoVenta || "unidad",
+
+permiteDocena:
+    item.permiteDocena === true ||
+    String(item.permiteDocena).toLowerCase() === "sí"
                 };
 
                 return;
@@ -337,6 +341,13 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
                 productos[codigo].tipoVenta =
                     item.tipoVenta;
             }
+
+            if (item.permiteDocena !== undefined) {
+
+    productos[codigo].permiteDocena =
+        item.permiteDocena === true ||
+        String(item.permiteDocena).toLowerCase() === "sí";
+}
 
         });
 
