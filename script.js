@@ -219,7 +219,7 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
             await respuesta.json();
 
 
-      datos.productos.forEach(item => {
+        datos.forEach(item => {
 
             const codigo =
                 String(item.codigo).trim();
@@ -347,6 +347,7 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
             productos
         );
 
+        console.log("PRECIO FLOR01:", productos["FLOR01"].precioUnidad);
 
         return true;
 
@@ -787,61 +788,12 @@ function eliminarProducto(indice) {
     mostrarVenta();
 }
 
-// ==========================================
-// ENVIAR VENTA A GOOGLE SHEETS
-// ==========================================
-
-async function guardarVentaEnGoogleSheets(venta) {
-
-    try {
-
-        const respuesta = await fetch(
-            URL_PRECIOS,
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8"
-                },
-
-                body: JSON.stringify({
-                    venta: venta
-                })
-            }
-        );
-
-        const datos = await respuesta.json();
-
-        console.log(
-            "Respuesta de Google Sheets:",
-            datos
-        );
-
-        if (!datos.ok) {
-
-            throw new Error(
-                datos.error || "No se pudo guardar la venta."
-            );
-        }
-
-        return true;
-
-    } catch (error) {
-
-        console.error(
-            "Error guardando venta en Google Sheets:",
-            error
-        );
-
-        return false;
-    }
-}
 
 // ==========================================
 // FINALIZAR VENTA
 // ==========================================
 
-async function finalizarVenta() {
+function finalizarVenta() {
 
     if (
         ventaActual.length === 0
@@ -883,11 +835,6 @@ async function finalizarVenta() {
         ).padStart(2, "0");
 
 
-    // Número de venta
-    const numeroVenta =
-        ventasDelDia.length + 1;
-
-
     const nuevaVenta = {
 
         fecha:
@@ -895,9 +842,6 @@ async function finalizarVenta() {
 
         fechaFiltro:
             fechaFiltro,
-
-        numeroVenta:
-            numeroVenta,
 
         productos:
             [...ventaActual],
@@ -910,38 +854,6 @@ async function finalizarVenta() {
 
     };
 
-
-    // ==========================================
-    // GUARDAR EN GOOGLE SHEETS
-    // ==========================================
-
-    document.getElementById("mensaje").innerHTML =
-        "⏳ Guardando venta en Google Sheets...";
-
-
-    const guardada =
-        await guardarVentaEnGoogleSheets(
-            nuevaVenta
-        );
-
-
-    if (!guardada) {
-
-        alert(
-            "❌ No se pudo guardar la venta en Google Sheets.\n\n" +
-            "La venta NO se va a borrar de la pantalla."
-        );
-
-        document.getElementById("mensaje").innerHTML =
-            "❌ Error al guardar la venta en Google Sheets.";
-
-        return;
-    }
-
-
-    // ==========================================
-    // GUARDAR TAMBIÉN EN EL HISTORIAL LOCAL
-    // ==========================================
 
     ventasDelDia.push(
         nuevaVenta
@@ -957,17 +869,13 @@ async function finalizarVenta() {
 
 
     alert(
-        "✅ Venta registrada correctamente.\n" +
+        "Venta registrada correctamente.\n" +
         "Total: $" +
         totalVenta +
         "\n" +
         "Medio de pago: " +
         medioPago
     );
-
-
-    document.getElementById("mensaje").innerHTML =
-        "✅ Venta guardada correctamente";
 
 
     ventaActual =
@@ -1011,6 +919,7 @@ async function finalizarVenta() {
 
     mostrarProductosMasVendidos();
 }
+
 
 // ==========================================
 // HISTORIAL DE VENTAS
