@@ -923,6 +923,52 @@ function finalizarVenta() {
         )
     );
 
+    // ==========================================
+// ENVIAR VENTA A GOOGLE SHEETS
+// ==========================================
+
+fetch(URL_PRECIOS, {
+
+    method: "POST",
+
+    headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+    },
+
+    body: JSON.stringify({
+        venta: nuevaVenta
+    })
+
+})
+.then(respuesta => respuesta.json())
+
+.then(datos => {
+
+    if (datos.ok) {
+
+        console.log(
+            "✅ Venta guardada en Google Sheets"
+        );
+
+    } else {
+
+        console.error(
+            "❌ Google Sheets rechazó la venta:",
+            datos.error
+        );
+
+    }
+
+})
+
+.catch(error => {
+
+    console.error(
+        "❌ Error enviando venta a Google Sheets:",
+        error
+    );
+
+});
 
     alert(
         "Venta registrada correctamente.\n" +
