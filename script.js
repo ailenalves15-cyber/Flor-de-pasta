@@ -2258,16 +2258,81 @@ async function abrirEscaner() {
                 }
 
 
-                document.getElementById(
-                    "codigo"
-                ).value =
-                    codigoEscaneado;
+              // ==========================================
+// PROCESAR PRODUCTO ESCANEADO
+// ==========================================
+
+document.getElementById(
+    "codigo"
+).value =
+    codigoEscaneado;
 
 
-                buscarProducto();
+const productoEscaneado =
+    productos[codigoEscaneado];
 
 
-                cerrarEscaner();
+// ------------------------------------------
+// PRODUCTO NO ENCONTRADO
+// ------------------------------------------
+
+if (!productoEscaneado) {
+
+    buscarProducto();
+
+    cerrarEscaner();
+
+    return;
+}
+
+
+// ------------------------------------------
+// PRODUCTOS PROPIOS / CONFIGURABLES
+// ------------------------------------------
+
+// Si permite docena, funciona como siempre.
+// También kg y plancha funcionan como siempre.
+
+if (
+    productoEscaneado.permiteDocena === true ||
+    productoEscaneado.tipoVenta.trim() === "kg" ||
+    productoEscaneado.tipoVenta.trim() === "plancha"
+) {
+
+    buscarProducto();
+
+    cerrarEscaner();
+
+    return;
+}
+
+// ------------------------------------------
+// PRODUCTO UNITARIO AUTOMÁTICO
+// ------------------------------------------
+
+// Si no se indicó cantidad,
+// usamos automáticamente 1.
+
+const campoCantidad =
+    document.getElementById("cantidad");
+
+if (
+    campoCantidad.value.trim() === ""
+) {
+
+    campoCantidad.value = "1";
+}
+
+
+// Agregamos automáticamente.
+// NO llamamos a buscarProducto()
+// porque los productos unitarios
+// ya se agregan automáticamente
+// desde buscarProducto().
+
+agregarVenta();
+
+cerrarEscaner();
 
             },
 
