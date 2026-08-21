@@ -219,7 +219,7 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
             await respuesta.json();
 
 
-        datos.productos.forEach(item => {
+      datos.productos.forEach(item => {
 
             const codigo =
                 String(item.codigo).trim();
@@ -385,202 +385,11 @@ let ventaActual = [];
 let totalVenta = 0;
 
 
-let ventasDelDia = [];
+let ventasDelDia =
+    JSON.parse(
+        localStorage.getItem("ventasDelDia")
+    ) || [];
 
-// ==========================================
-// CARGAR VENTAS DESDE GOOGLE SHEETS
-// ==========================================
-
-async function cargarVentasDesdeGoogle() {
-
-    try {
-
-        const respuesta =
-            await fetch(URL_PRECIOS + "?t=" + Date.now());
-
-        if (!respuesta.ok) {
-
-            throw new Error(
-                "No se pudieron cargar las ventas."
-            );
-        }
-
-        const datos =
-            await respuesta.json();
-
-
-        // ==========================================
-        // RECONSTRUIR LAS VENTAS
-        // ==========================================
-
-        const ventas = {};
-
-
-        datos.ventas.forEach(item => {
-
-            const numero =
-                String(item.numeroVenta);
-
-
-            if (!ventas[numero]) {
-
-            ventas[numero] = {
-
-    fecha:
-        formatearFecha(item.fecha),
-
-    fechaFiltro:
-        obtenerFechaFiltro(item.fecha),
-
-    productos: [],
-
-    total: 0,
-
-    medioPago:
-        item.medioPago || "",
-
-    numeroVenta:
-        Number(item.numeroVenta)
-
-};
-
-            }
-
-
-            ventas[numero].productos.push({
-
-                nombre:
-                    item.nombre,
-
-                sabor:
-                    item.sabor,
-
-                cantidad:
-                    Number(item.cantidad),
-
-                unidad:
-                    item.unidad,
-
-                precio:
-                    Number(item.precio),
-
-                subtotal:
-                    Number(item.subtotal)
-
-            });
-
-
-            ventas[numero].total +=
-                Number(item.subtotal);
-
-        });
-
-
-        ventasDelDia =
-            Object.values(ventas);
-
-
-        // Guardamos una copia local como respaldo
-
-        localStorage.setItem(
-            "ventasDelDia",
-            JSON.stringify(ventasDelDia)
-        );
-
-
-        console.log(
-            "✅ Ventas cargadas desde Google Sheets:",
-            ventasDelDia
-        );
-
-
-        mostrarVentasDelDia();
-
-        mostrarProductosMasVendidos();
-
-
-    } catch (error) {
-
-        console.error(
-            "❌ Error cargando ventas:",
-            error
-        );
-
-    }
-
-}
-
-
-// ==========================================
-// OBTENER FECHA PARA FILTRAR
-// ==========================================
-
-function formatearFecha(fecha) {
-
-    const fechaObjeto = new Date(fecha);
-
-    if (isNaN(fechaObjeto)) {
-        return fecha;
-    }
-
-    const dia =
-        String(fechaObjeto.getDate()).padStart(2, "0");
-
-    const mes =
-        String(fechaObjeto.getMonth() + 1).padStart(2, "0");
-
-    const año =
-        fechaObjeto.getFullYear();
-
-    const hora =
-        String(fechaObjeto.getHours()).padStart(2, "0");
-
-    const minutos =
-        String(fechaObjeto.getMinutes()).padStart(2, "0");
-
-    return `${dia}/${mes}/${año} ${hora}:${minutos}`;
-}
-
-function obtenerFechaFiltro(fecha) {
-
-    const fechaObjeto =
-        new Date(fecha);
-
-
-    if (isNaN(fechaObjeto)) {
-
-        return "";
-    }
-
-
-    return fechaObjeto.getFullYear() +
-        "-" +
-        String(
-            fechaObjeto.getMonth() + 1
-        ).padStart(2, "0") +
-        "-" +
-        String(
-            fechaObjeto.getDate()
-        ).padStart(2, "0");
-}
-
-function obtenerProximoNumeroVenta() {
-
-    if (ventasDelDia.length === 0) {
-        return 1;
-    }
-
-    const numeros =
-        ventasDelDia
-            .map(venta => Number(venta.numeroVenta))
-            .filter(numero => !isNaN(numero));
-
-    if (numeros.length === 0) {
-        return 1;
-    }
-
-    return Math.max(...numeros) + 1;
-}
 
 // ==========================================
 // BUSCAR PRODUCTO
@@ -978,6 +787,55 @@ function eliminarProducto(indice) {
     mostrarVenta();
 }
 
+// ==========================================
+// ENVIAR VENTA A GOOGLE SHEETS
+// ==========================================
+
+async function guardarVentaEnGoogleSheets(venta) {
+
+    try {
+
+        const respuesta = await fetch(
+            URL_PRECIOS,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify({
+                    venta: venta
+                })
+            }
+        );
+
+        const datos = await respuesta.json();
+
+        console.log(
+            "Respuesta de Google Sheets:",
+            datos
+        );
+
+        if (!datos.ok) {
+
+            throw new Error(
+                datos.error || "No se pudo guardar la venta."
+            );
+        }
+
+        return true;
+
+    } catch (error) {
+
+        console.error(
+            "Error guardando venta en Google Sheets:",
+            error
+        );
+
+        return false;
+    }
+}
 
 // ==========================================
 // FINALIZAR VENTA
@@ -1007,8 +865,10 @@ async function finalizarVenta() {
         new Date();
 
 
- const fechaMostrar =
-    ahora.toISOString();
+    const fechaMostrar =
+        ahora.toLocaleString(
+            "es-AR"
+        );
 
 
     const fechaFiltro =
@@ -1023,6 +883,11 @@ async function finalizarVenta() {
         ).padStart(2, "0");
 
 
+    // Número de venta
+    const numeroVenta =
+        ventasDelDia.length + 1;
+
+
     const nuevaVenta = {
 
         fecha:
@@ -1031,6 +896,9 @@ async function finalizarVenta() {
         fechaFiltro:
             fechaFiltro,
 
+        numeroVenta:
+            numeroVenta,
+
         productos:
             [...ventaActual],
 
@@ -1038,14 +906,42 @@ async function finalizarVenta() {
             totalVenta,
 
         medioPago:
-            medioPago,
+            medioPago
 
-      numeroVenta:
-    obtenerProximoNumeroVenta()
     };
 
 
-    // GUARDAR LOCALMENTE
+    // ==========================================
+    // GUARDAR EN GOOGLE SHEETS
+    // ==========================================
+
+    document.getElementById("mensaje").innerHTML =
+        "⏳ Guardando venta en Google Sheets...";
+
+
+    const guardada =
+        await guardarVentaEnGoogleSheets(
+            nuevaVenta
+        );
+
+
+    if (!guardada) {
+
+        alert(
+            "❌ No se pudo guardar la venta en Google Sheets.\n\n" +
+            "La venta NO se va a borrar de la pantalla."
+        );
+
+        document.getElementById("mensaje").innerHTML =
+            "❌ Error al guardar la venta en Google Sheets.";
+
+        return;
+    }
+
+
+    // ==========================================
+    // GUARDAR TAMBIÉN EN EL HISTORIAL LOCAL
+    // ==========================================
 
     ventasDelDia.push(
         nuevaVenta
@@ -1059,51 +955,19 @@ async function finalizarVenta() {
         )
     );
 
-// ==========================================
-// GUARDAR EN GOOGLE SHEETS
-// ==========================================
-
-try {
-
-    await fetch(
-        URL_PRECIOS,
-        {
-            method: "POST",
-
-            mode: "no-cors",
-
-            headers: {
-                "Content-Type":
-                    "text/plain;charset=utf-8"
-            },
-
-            body: JSON.stringify({
-                venta: nuevaVenta
-            })
-        }
-    );
-
-    console.log(
-        "✅ Venta enviada a Google Sheets"
-    );
-
-} catch (error) {
-
-    console.error(
-        "❌ No se pudo enviar la venta a Google Sheets:",
-        error
-    );
-
-}
 
     alert(
-        "Venta registrada correctamente.\n" +
+        "✅ Venta registrada correctamente.\n" +
         "Total: $" +
         totalVenta +
         "\n" +
         "Medio de pago: " +
         medioPago
     );
+
+
+    document.getElementById("mensaje").innerHTML =
+        "✅ Venta guardada correctamente";
 
 
     ventaActual =
@@ -1147,7 +1011,6 @@ try {
 
     mostrarProductosMasVendidos();
 }
-
 
 // ==========================================
 // HISTORIAL DE VENTAS
@@ -1220,15 +1083,15 @@ function mostrarVentasDelDia(
 
                             <br>
 
-                        Total:
-$${venta.total}
+                            Total:
+                            $${venta.total}
 
-<br>
+                            <br>
 
-Medio de pago:
-${venta.medioPago || "Sin definir"}
+                            Medio de pago:
+                            ${venta.medioPago}
 
-</p>
+                        </p>
 
 
                         <button
@@ -2348,16 +2211,20 @@ function cerrarEscaner() {
 
 async function iniciarAplicacion() {
 
-    // Primero cargamos productos y precios
+    // Primero mostramos las ventas guardadas
+    // para que la aplicación cargue normalmente.
+
+    mostrarVentasDelDia();
+
+    mostrarProductosMasVendidos();
+
+
+    // Después actualizamos automáticamente
+    // los precios desde Google Sheets.
 
     await actualizarPreciosDesdeGoogle(
         true
     );
-
-
-    // Después cargamos las ventas desde Google Sheets
-
-    await cargarVentasDesdeGoogle();
 
 
     console.log(
@@ -2366,7 +2233,7 @@ async function iniciarAplicacion() {
 
 
     console.log(
-        "Ventas cargadas:",
+        "Ventas guardadas:",
         ventasDelDia
     );
 }
