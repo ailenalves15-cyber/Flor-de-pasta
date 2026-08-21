@@ -256,6 +256,12 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
                         item.precioKg !== ""
                             ? Number(item.precioKg)
                             : null,
+                    
+                    precioPlancha:
+    item.precioPlancha !== null &&
+    item.precioPlancha !== ""
+        ? Number(item.precioPlancha)
+        : null,
 
                     tipoVenta:
                         item.tipoVenta || "unidad"
@@ -315,7 +321,14 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
                     Number(item.precioKg);
             }
 
+            if (
+    item.precioPlancha !== null &&
+    item.precioPlancha !== ""
+) {
 
+    productos[codigo].precioPlancha =
+        Number(item.precioPlancha);
+}
             if (
                 item.tipoVenta !== null &&
                 item.tipoVenta !== ""
@@ -390,10 +403,9 @@ let ventasDelDia =
         localStorage.getItem("ventasDelDia")
     ) || [];
 
-
 // ==========================================
-// BUSCAR PRODUCTO
-// ==========================================
+    // BUSCAR PRODUCTOS
+    // ==========================================
 
 function buscarProducto() {
 
@@ -479,12 +491,35 @@ function buscarProducto() {
             "1";
 
 
-    } else {
+    }
 
 
-        // ==========================================
-        // PRODUCTOS POR UNIDAD
-        // ==========================================
+    // ==========================================
+    // PRODUCTOS POR PLANCHA
+    // ==========================================
+
+    else if (producto.tipoVenta === "plancha") {
+
+        formaVentaContainer.style.display =
+            "none";
+
+
+        unidadCantidad.innerText =
+            "plancha";
+
+
+        cantidad.value =
+            "1";
+
+
+    }
+
+
+    // ==========================================
+    // PRODUCTOS POR UNIDAD / DOCENA
+    // ==========================================
+
+    else {
 
         formaVentaContainer.style.display =
             "block";
@@ -595,52 +630,65 @@ if (
 
     let unidad;
 
+// ==========================================
+// PRODUCTOS POR KG
+// ==========================================
 
-    // ==========================================
-    // PRODUCTOS POR KG
-    // ==========================================
+if (producto.tipoVenta === "kg") {
 
-    if (producto.tipoVenta === "kg") {
+    precio =
+        producto.precioKg;
+
+    unidad =
+        "kg";
+
+}
+
+
+// ==========================================
+// PRODUCTOS POR PLANCHA
+// ==========================================
+
+else if (producto.tipoVenta === "plancha") {
+
+    precio =
+        producto.precioPlancha;
+
+    unidad =
+        "plancha";
+
+}
+
+
+// ==========================================
+// PRODUCTOS POR UNIDAD / DOCENA
+// ==========================================
+
+else {
+
+    const formaVenta =
+        document
+            .getElementById("formaVenta")
+            .value;
+
+
+    if (formaVenta === "docena") {
 
         precio =
-            producto.precioKg;
+            producto.precioDocena;
 
         unidad =
-            "kg";
+            "docena";
 
+    } else {
+
+        precio =
+            producto.precioUnidad;
+
+        unidad =
+            "unidad";
     }
-
-
-    // ==========================================
-    // PRODUCTOS POR UNIDAD
-    // ==========================================
-
-    else {
-
-        const formaVenta =
-            document
-                .getElementById("formaVenta")
-                .value;
-
-
-        if (formaVenta === "docena") {
-
-            precio =
-                producto.precioDocena;
-
-            unidad =
-                "docena";
-
-        } else {
-
-            precio =
-                producto.precioUnidad;
-
-            unidad =
-                "unidad";
-        }
-    }
-
+}
 
     // ==========================================
     // VERIFICAR PRECIO
