@@ -555,37 +555,42 @@ function agregarVenta() {
             .replace(",", ".");
 
 
-    const cantidad =
-        parseFloat(cantidadTexto);
+ const cantidad =
+    parseFloat(cantidadTexto);
 
 
-    const producto =
-        productos[codigo];
+const producto =
+    productos[codigo];
 
 
-    if (!producto) {
+if (!producto) {
 
-        alert(
-            "Producto no encontrado."
-        );
+    alert(
+        "Producto no encontrado."
+    );
 
-        return;
-    }
+    return;
+}
 
+// ==========================================
+// VALIDAR CANTIDAD SEGÚN FORMA DE VENTA
+// ==========================================
 
-    if (
-        isNaN(cantidad) ||
-        cantidad <= 0
-    ) {
-
-        alert(
-            "Ingresá una cantidad válida."
-        );
-
-        return;
-    }
+const formaVenta =
+    document.getElementById("formaVenta").value;
 
 
+if (
+    formaVenta === "unidad" &&
+    !Number.isInteger(cantidad)
+) {
+
+    alert(
+        "Para productos por unidad, ingresá una cantidad entera."
+    );
+
+    return;
+}
     let precio;
 
     let unidad;
@@ -802,6 +807,43 @@ function eliminarProducto(indice) {
     mostrarVenta();
 }
 
+function vaciarVenta() {
+
+    if (ventaActual.length === 0) {
+        return;
+    }
+
+    const confirmar =
+        confirm(
+            "¿Seguro que querés borrar todos los productos de esta venta?"
+        );
+
+    if (!confirmar) {
+        return;
+    }
+
+    ventaActual = [];
+
+    totalVenta = 0;
+
+    mostrarVenta();
+
+    document.getElementById("resultado").innerHTML =
+        "";
+
+    document.getElementById(
+        "cantidadProducto"
+    ).style.display =
+        "none";
+
+    document.getElementById("codigo").value =
+        "";
+
+    document.getElementById("cantidad").value =
+        "1";
+
+    document.getElementById("codigo").focus();
+}
 
 // ==========================================
 // FINALIZAR VENTA
