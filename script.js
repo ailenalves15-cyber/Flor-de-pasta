@@ -264,7 +264,7 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
         : null,
 
                     tipoVenta:
-                        item.tipoVenta || "unidad"
+                        item.tipoVenta || "unidad",
                 };
 
                 return;
@@ -580,28 +580,35 @@ function buscarProducto() {
 
 
     // ==========================================
-    // PRODUCTOS POR UNIDAD / DOCENA
-    // ==========================================
+// PRODUCTOS POR UNIDAD / DOCENA
+// ==========================================
 
-    else {
+else {
+
+    if (producto.permiteDocena) {
 
         formaVentaContainer.style.display =
             "block";
 
-
         formaVenta.value =
             "unidad";
 
+    } else {
 
-        unidadCantidad.innerText =
+        formaVentaContainer.style.display =
+            "none";
+
+        formaVenta.value =
             "unidad";
-
-
-        cantidad.value =
-            "1";
     }
-}
 
+    unidadCantidad.innerText =
+        "unidad";
+
+    cantidad.value =
+        "1";
+}
+}
 
 // ==========================================
 // CAMBIAR UNIDAD / DOCENA
