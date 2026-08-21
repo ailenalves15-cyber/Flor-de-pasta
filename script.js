@@ -593,6 +593,12 @@ else {
         formaVenta.value =
             "unidad";
 
+        unidadCantidad.innerText =
+            "unidad";
+
+        cantidad.value =
+            "1";
+
     } else {
 
         formaVentaContainer.style.display =
@@ -600,13 +606,17 @@ else {
 
         formaVenta.value =
             "unidad";
+
+        unidadCantidad.innerText =
+            "unidad";
+
+        cantidad.value =
+            "1";
+
+        // Agregar automáticamente productos
+        // que se venden solamente por unidad
+        agregarVenta();
     }
-
-    unidadCantidad.innerText =
-        "unidad";
-
-    cantidad.value =
-        "1";
 }
 }
 
