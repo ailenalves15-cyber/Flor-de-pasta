@@ -1279,29 +1279,22 @@ function vaciarVenta() {
     document.getElementById("codigo").focus();
 }
 
-
 // ==========================================
 // FINALIZAR VENTA
 // ==========================================
 
-
-function finalizarVenta() {
-
+async function finalizarVenta() {
 
     if (
         ventaActual.length === 0
     ) {
 
-
         alert(
             "No hay productos en la venta."
         );
 
-
         return;
     }
-
-
 
 
     const medioPago =
@@ -1310,20 +1303,14 @@ function finalizarVenta() {
             .value;
 
 
-
-
     const ahora =
         new Date();
-
-
 
 
     const fechaMostrar =
         ahora.toLocaleString(
             "es-AR"
         );
-
-
 
 
     const fechaFiltro =
@@ -1338,191 +1325,208 @@ function finalizarVenta() {
         ).padStart(2, "0");
 
 
-
-
     const nuevaVenta = {
 
+        fecha:
+            fechaMostrar,
 
-    fecha:
-        fechaMostrar,
+        fechaFiltro:
+            fechaFiltro,
 
+        numeroVenta:
+            Date.now().toString(),
 
-    fechaFiltro:
-        fechaFiltro,
+        productos:
+            [...ventaActual],
 
+        total:
+            totalVenta,
 
-    numeroVenta:
-        Date.now().toString(),
-
-
-    productos:
-        [...ventaActual],
-
-
-    total:
-        totalVenta,
-
-
-    medioPago:
-        medioPago
-};
-
-
-
-
-    ventasDelDia.push(
-        nuevaVenta
-    );
-
-
-
-
-    localStorage.setItem(
-        "ventasDelDia",
-        JSON.stringify(
-            ventasDelDia
-        )
-    );
+        medioPago:
+            medioPago
+    };
 
 
     // ==========================================
-// ENVIAR VENTA A GOOGLE SHEETS
-// ==========================================
+    // AVISAR QUE SE ESTÁ REGISTRANDO
+    // ==========================================
+
+    document.getElementById("mensaje").innerHTML =
+        "⏳ Registrando venta en Google Sheets...";
 
 
-fetch(URL_PRECIOS, {
+    try {
+
+        // ==========================================
+        // ENVIAR VENTA A GOOGLE SHEETS
+        // ==========================================
+
+        const respuesta =
+            await fetch(URL_PRECIOS, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body:
+                    JSON.stringify({
+                        venta: nuevaVenta
+                    })
+            });
 
 
-    method: "POST",
+        // ==========================================
+        // VERIFICAR CONEXIÓN
+        // ==========================================
+
+        if (!respuesta.ok) {
+
+            throw new Error(
+                "No se pudo conectar con Google Sheets."
+            );
+        }
 
 
-    headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-    },
+        // ==========================================
+        // LEER RESPUESTA DE GOOGLE SHEETS
+        // ==========================================
+
+        const datos =
+            await respuesta.json();
 
 
-    body: JSON.stringify({
-        venta: nuevaVenta
-    })
+        // ==========================================
+        // VERIFICAR SI GOOGLE SHEETS CONFIRMÓ
+        // ==========================================
+
+        if (!datos.ok) {
+
+            throw new Error(
+                datos.error ||
+                "Google Sheets no confirmó el registro."
+            );
+        }
 
 
-})
-.then(respuesta => respuesta.json())
+        // ==========================================
+        // SOLO SI GOOGLE SHEETS CONFIRMÓ:
+        // GUARDAR LOCALMENTE
+        // ==========================================
 
-
-.then(datos => {
-
-
-    if (datos.ok) {
-
-
-        console.log(
-            "✅ Venta guardada en Google Sheets"
+        ventasDelDia.push(
+            nuevaVenta
         );
 
 
-    } else {
+        localStorage.setItem(
+            "ventasDelDia",
+            JSON.stringify(
+                ventasDelDia
+            )
+        );
 
+
+        // ==========================================
+        // CONFIRMACIÓN
+        // ==========================================
+
+        alert(
+            "✅ Venta registrada correctamente en Google Sheets.\n\n" +
+            "Total: $" +
+            totalVenta +
+            "\n" +
+            "Medio de pago: " +
+            medioPago
+        );
+
+
+        document.getElementById("mensaje").innerHTML =
+            "✅ Venta registrada correctamente en Google Sheets.";
+
+
+        // ==========================================
+        // LIMPIAR VENTA
+        // ==========================================
+
+        ventaActual =
+            [];
+
+
+        totalVenta =
+            0;
+
+
+        document.getElementById("venta").innerHTML =
+            "";
+
+
+        document.getElementById("total").innerHTML =
+            "Total: $0";
+
+
+        document.getElementById("resultado").innerHTML =
+            "";
+
+
+        document.getElementById(
+            "cantidadProducto"
+        ).style.display =
+            "none";
+
+
+        document.getElementById("codigo").value =
+            "";
+
+
+        document.getElementById("cantidad").value =
+            "1";
+
+
+        document.getElementById("codigo").focus();
+
+
+        mostrarVentasDelDia();
+
+
+        mostrarProductosMasVendidos();
+
+
+    } catch (error) {
+
+        // ==========================================
+        // ERROR
+        // ==========================================
 
         console.error(
-            "❌ Google Sheets rechazó la venta:",
-            datos.error
+            "❌ Error registrando venta:",
+            error
         );
 
 
+        alert(
+            "❌ NO se pudo confirmar el registro de la venta en Google Sheets.\n\n" +
+            "La venta NO se marcó como registrada.\n\n" +
+            "Error: " +
+            error.message
+        );
+
+
+        document.getElementById("mensaje").innerHTML =
+            "❌ No se pudo confirmar la venta en Google Sheets.";
+
+
+        // ==========================================
+        // IMPORTANTE:
+        // NO BORRAMOS LA VENTA
+        // ==========================================
+
+        // ventaActual queda intacta
+        // para poder intentar nuevamente.
     }
-
-
-})
-
-
-.catch(error => {
-
-
-    console.error(
-        "❌ Error enviando venta a Google Sheets:",
-        error
-    );
-
-
-});
-
-
-    alert(
-        "Venta registrada correctamente.\n" +
-        "Total: $" +
-        totalVenta +
-        "\n" +
-        "Medio de pago: " +
-        medioPago
-    );
-
-
-
-
-    ventaActual =
-        [];
-
-
-
-
-    totalVenta =
-        0;
-
-
-
-
-    document.getElementById("venta").innerHTML =
-        "";
-
-
-
-
-    document.getElementById("total").innerHTML =
-        "Total: $0";
-
-
-
-
-    document.getElementById("resultado").innerHTML =
-        "";
-
-
-
-
-    document.getElementById(
-        "cantidadProducto"
-    ).style.display =
-        "none";
-
-
-
-
-    document.getElementById("codigo").value =
-        "";
-
-
-
-
-    document.getElementById("cantidad").value =
-        "1";
-
-
-
-
-    document.getElementById("codigo").focus();
-
-
-
-
-    mostrarVentasDelDia();
-
-
-    mostrarProductosMasVendidos();
 }
-
-
-
 
 // ==========================================
 // HISTORIAL DE VENTAS
