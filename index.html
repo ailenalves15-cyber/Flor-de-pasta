@@ -3,639 +3,1049 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>Flor de Pasta</title>
+<title>Flor de Pasta</title>
 
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-        }
+/* ==========================================
+   BASE
+========================================== */
 
+* {
+    box-sizing: border-box;
+}
 
-        body {
+html {
+    width: 100%;
+    overflow-x: hidden;
+}
 
-            margin: 0;
+body {
+    margin: 0;
+    padding: 20px;
+    background: #f5f5f5;
+    color: #171717;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
-            padding: 20px;
 
-            background: #f5f5f5;
+/* ==========================================
+   APP
+========================================== */
 
-            color: #171717;
+.app {
+    width: 100%;
+    max-width: 1250px;
+    margin: 0 auto;
+}
 
-            font-family:
-                Arial,
-                Helvetica,
-                sans-serif;
 
-        }
+/* ==========================================
+   ENCABEZADO
+========================================== */
 
+.encabezado {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 16px 20px;
+    margin-bottom: 18px;
+    text-align: center;
 
-        .app {
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.08);
+}
 
-            max-width: 700px;
+.encabezado h1 {
+    margin: 0;
 
-            margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        }
+    gap: 10px;
 
+    font-size: 30px;
+    font-weight: 800;
+}
 
-        /* ==========================================
-           ENCABEZADO
-        ========================================== */
+.encabezado img {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+}
 
-        .encabezado {
+.subtitulo {
+    margin-top: 4px;
+    color: #666;
+    font-size: 15px;
+}
 
-            background: #ffffff;
 
-            border-radius: 20px;
+/* ==========================================
+   DOS COLUMNAS
+========================================== */
 
-            padding: 20px;
+.contenedorColumnas {
 
-            margin-bottom: 18px;
+    display: grid;
 
-            text-align: center;
+    grid-template-columns:
+        minmax(0, 1.65fr)
+        minmax(300px, 0.8fr);
 
-            box-shadow:
-                0 4px 15px rgba(0,0,0,0.08);
+    gap: 18px;
 
-        }
+    align-items: start;
+}
 
 
-        .encabezado img {
+/* ==========================================
+   COLUMNAS
+========================================== */
 
-            width: 75px;
+.columnaIzquierda,
+.columnaDerecha {
+    min-width: 0;
+}
 
-            height: 75px;
 
-            object-fit: contain;
+/* ==========================================
+   TARJETAS
+========================================== */
 
-            vertical-align: middle;
+.tarjeta {
 
-            margin-right: 8px;
+    width: 100%;
 
-        }
+    background: #ffffff;
 
+    border-radius: 16px;
 
-        .encabezado h1 {
+    padding: 16px;
 
-            margin: 0;
+    margin-bottom: 14px;
 
-            font-size: 30px;
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.07);
+}
 
-            font-weight: 800;
+.tarjeta h2 {
 
-        }
+    margin-top: 0;
+    margin-bottom: 10px;
 
+    font-size: 20px;
+}
 
-        .subtitulo {
+.tarjeta h3 {
 
-            margin-top: 8px;
+    margin-top: 13px;
+    margin-bottom: 7px;
 
-            color: #666;
+    font-size: 17px;
+}
 
-            font-size: 15px;
 
-        }
+/* ==========================================
+   INPUTS
+========================================== */
 
+input,
+select {
 
-        /* ==========================================
-           TARJETAS
-        ========================================== */
+    width: 100%;
+    min-width: 0;
 
-        .tarjeta {
+    padding: 11px 12px;
 
-            background: #ffffff;
+    margin-top: 5px;
+    margin-bottom: 8px;
 
-            border-radius: 18px;
+    border: 1px solid #d5d5d5;
 
-            padding: 20px;
+    border-radius: 10px;
 
-            margin-bottom: 18px;
+    font-size: 16px;
 
-            box-shadow:
-                0 4px 15px rgba(0,0,0,0.07);
+    background: #ffffff;
+    color: #171717;
+}
 
-        }
+input:focus,
+select:focus {
 
+    outline: none;
 
-        .tarjeta h2 {
+    border-color: #f47b20;
 
-            margin-top: 0;
+    box-shadow:
+        0 0 0 3px rgba(244,123,32,0.15);
+}
 
-            font-size: 21px;
+label {
 
-        }
+    font-weight: 600;
+    font-size: 14px;
+}
 
 
-        .tarjeta h3 {
+/* ==========================================
+   BOTONES
+========================================== */
 
-            margin-top: 0;
+button {
 
-        }
+    width: 100%;
 
+    min-height: 44px;
 
-        /* ==========================================
-           INPUTS
-        ========================================== */
+    padding: 11px 14px;
 
-        input,
-        select {
+    margin-top: 5px;
+    margin-bottom: 5px;
 
-            width: 100%;
+    border: none;
 
-            padding: 13px;
+    border-radius: 10px;
 
-            margin-top: 7px;
+    background: #171717;
+    color: #ffffff;
 
-            margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: 700;
 
-            border: 1px solid #d5d5d5;
+    cursor: pointer;
 
-            border-radius: 10px;
+    transition:
+        transform 0.1s,
+        opacity 0.2s;
+}
 
-            font-size: 16px;
+button:hover {
+    opacity: 0.9;
+}
 
-            background: #ffffff;
+button:active {
+    transform: scale(0.98);
+}
 
-            color: #171717;
 
-        }
+/* ==========================================
+   BOTONES PRINCIPALES
+========================================== */
 
+button[onclick="abrirEscaner()"],
+button[onclick="agregarVenta()"],
+button[onclick="finalizarVenta()"] {
 
-        input:focus,
-        select:focus {
+    background: #f47b20;
+    color: #ffffff;
+}
 
-            outline: none;
 
-            border-color: #f47b20;
+/* ==========================================
+   ESCÁNER
+========================================== */
 
-            box-shadow:
-                0 0 0 3px rgba(244,123,32,0.15);
+#lectorCodigo {
 
-        }
+    width: 100%;
 
+    margin-top: 10px;
 
-        label {
+    padding: 12px;
 
-            font-weight: 600;
+    background: #171717;
 
-            font-size: 14px;
+    border-radius: 14px;
 
-        }
+    text-align: center;
+}
 
+#reader {
 
-        /* ==========================================
-           BOTONES
-        ========================================== */
+    width: 100% !important;
 
-        button {
+    max-width: 400px;
 
-            width: 100%;
+    margin: auto;
 
-            padding: 13px 16px;
+    border-radius: 10px;
 
-            margin-top: 7px;
+    overflow: hidden;
+}
 
-            margin-bottom: 7px;
+#lectorCodigo button {
 
-            border: none;
+    background: #ffffff;
+    color: #171717;
+}
 
-            border-radius: 11px;
 
-            background: #171717;
+/* ==========================================
+   CÓDIGO + BUSCAR
+========================================== */
 
-            color: #ffffff;
+.codigoBusqueda {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
 
-            font-size: 16px;
+.codigoBusqueda input {
+    flex: 1;
+    width: auto;
+    margin: 0;
+}
 
-            font-weight: 700;
+.codigoBusqueda button {
+    width: auto;
+    min-width: 90px;
+    min-height: 44px;
+    margin: 0;
+    padding: 10px 14px;
+    white-space: nowrap;
+}
 
-            cursor: pointer;
 
-            transition:
-                transform 0.1s,
-                opacity 0.2s;
+/* ==========================================
+   RESULTADO PRODUCTO
+========================================== */
 
-        }
+#resultado {
 
+    width: 100%;
 
-        button:hover {
+    margin-top: 9px;
+}
 
-            opacity: 0.9;
+#resultado h3 {
 
-        }
+    margin-bottom: 4px;
 
+    color: #f47b20;
+}
 
-        button:active {
 
-            transform: scale(0.98);
+/* ==========================================
+   CANTIDAD
+========================================== */
 
-        }
+#cantidadProducto {
 
+    width: 100%;
 
-        /* ==========================================
-           BOTONES NARANJAS
-        ========================================== */
+    margin-top: 10px;
 
-        button[onclick="abrirEscaner()"],
-        button[onclick="agregarVenta()"],
-        button[onclick="finalizarVenta()"] {
+    padding: 13px;
 
-            background: #f47b20;
+    background: #fafafa;
 
-            color: #ffffff;
+    border-radius: 13px;
 
-        }
+    border: 1px solid #eeeeee;
+}
 
+#cantidad {
 
-        /* ==========================================
-           ESCÁNER
-        ========================================== */
+    margin-bottom: 4px;
+}
 
-        #lectorCodigo {
+#unidadCantidad {
 
-            margin-top: 15px;
+    display: inline-block;
 
-            padding: 15px;
+    margin-bottom: 7px;
+}
 
-            background: #171717;
 
-            border-radius: 15px;
+/* =====================================================
+   VENTA ACTUAL — DISEÑO COMPACTO
+===================================================== */
 
-            text-align: center;
+#venta {
 
-        }
+    width: 100%;
 
+    margin-top: 7px;
+}
 
-        #reader {
+#venta > div {
 
-            width: 100% !important;
+    width: 100%;
 
-            max-width: 400px;
+    display: grid;
 
-            margin: auto;
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto;
 
-            border-radius: 10px;
+    gap: 7px;
 
-            overflow: hidden;
+    align-items: center;
 
-        }
+    background: #fafafa;
 
+    border: 1px solid #e9e9e9;
 
-        #lectorCodigo button {
+    border-left: 3px solid #f47b20;
 
-            background: #ffffff;
+    border-radius: 8px;
 
-            color: #171717;
+    padding: 6px 8px;
 
-        }
+    margin-bottom: 4px;
 
+    font-size: 15px;
 
-        /* ==========================================
-           RESULTADO PRODUCTO
-        ========================================== */
+    line-height: 1.15;
 
-        #resultado {
+    overflow-wrap: break-word;
+}
 
-            margin-top: 15px;
+#venta > div p {
 
-        }
+    margin: 1px 0;
 
+    line-height: 1.15;
+}
 
-        #resultado h3 {
+#venta > div strong {
 
-            margin-bottom: 5px;
+    font-size: 16px;
+}
 
-            color: #f47b20;
+#venta > div button {
 
-        }
+    width: auto;
 
+    min-width: 32px;
 
-        #cantidadProducto {
+    min-height: 30px;
 
-            margin-top: 15px;
+    padding: 4px 7px;
 
-            padding: 18px;
+    margin: 0;
 
-            background: #fafafa;
+    border-radius: 7px;
 
-            border-radius: 14px;
+    background: #171717;
 
-            border: 1px solid #eeeeee;
+    font-size: 11px;
 
-        }
+    line-height: 1;
 
+    white-space: nowrap;
+}
 
-        /* ==========================================
-           VENTA ACTUAL
-        ========================================== */
 
-        #venta {
+/* ==========================================
+   TOTAL
+========================================== */
 
-            margin-top: 15px;
+#total {
 
-        }
+    width: 100%;
 
+    background: #171717;
 
-        #venta > div {
+    color: #ffffff;
 
-            background: #fafafa;
+    padding: 11px;
 
-            border: 1px solid #eeeeee;
+    border-radius: 10px;
 
-            border-left: 5px solid #f47b20;
+    text-align: center;
 
-            border-radius: 12px;
+    margin-top: 8px;
 
-            padding: 13px;
+    margin-bottom: 6px;
 
-            margin-bottom: 10px;
+    font-size: 21px;
+}
 
-        }
 
+/* ==========================================
+   VACIAR VENTA
+========================================== */
 
-        #venta p {
+button[onclick="vaciarVenta()"] {
 
-            margin: 5px 0;
+    background: #eeeeee;
 
-            line-height: 1.5;
+    color: #171717;
 
-        }
+    min-height: 40px;
 
+    margin-top: 3px;
+}
 
-        #venta button {
 
-            width: auto;
+/* ==========================================
+   BLOQUE DE PAGO
+========================================== */
 
-            padding: 8px 12px;
+#bloquePago {
 
-            font-size: 13px;
+    width: 100%;
 
-            background: #171717;
+    margin-top: 12px;
 
-        }
+    text-align: left;
+}
 
 
-        /* ==========================================
-           TOTAL
-        ========================================== */
+/* ==========================================
+   MEDIO DE PAGO
+========================================== */
 
-        #total {
+#medioPago {
 
-            background: #171717;
+    width: auto;
 
-            color: #ffffff;
+    min-width: 180px;
 
-            padding: 18px;
+    margin-bottom: 8px;
+}
 
-            border-radius: 14px;
 
-            text-align: center;
+/* ==========================================
+   FINALIZAR VENTA
+========================================== */
 
-            margin-top: 18px;
+button[onclick="finalizarVenta()"] {
 
-            font-size: 25px;
+    width: auto;
 
-        }
+    min-width: 180px;
 
+    min-height: 50px;
 
-        /* ==========================================
-           VACIAR VENTA
-        ========================================== */
+    padding: 13px 20px;
 
-        button[onclick="vaciarVenta()"] {
+    font-size: 17px;
 
-            background: #eeeeee;
+    margin-top: 7px;
 
-            color: #171717;
+    display: block;
+}
 
-        }
 
+/* ==========================================
+   VENTA A RESTAURANTE
+========================================== */
 
-        /* ==========================================
-           MEDIO DE PAGO
-        ========================================== */
+#ventaRestaurante {
 
-        #medioPago {
+    width: 24px !important;
+    height: 24px;
 
-            margin-bottom: 15px;
+    margin: 0;
 
-        }
+    flex-shrink: 0;
+}
 
 
-        /* ==========================================
-           MENSAJES
-        ========================================== */
+/* ==========================================
+   DATOS RESTAURANTE
+========================================== */
 
-        #mensaje {
+#datosRestaurante {
 
-            text-align: center;
+    width: 100%;
 
-            font-weight: 600;
+    background: #fafafa;
 
-            margin-top: 12px;
+    border: 1px solid #eeeeee;
 
-            padding: 8px;
+    border-radius: 12px;
 
-        }
+    padding: 11px;
 
+    margin-top: 7px;
+}
 
-        #cargandoPrecios {
+#datosRestaurante h3 {
 
-            text-align: center;
+    margin-top: 5px;
+}
 
-            padding: 10px;
 
-        }
+/* ==========================================
+   RESUMEN PAGO
+========================================== */
 
+#resumenPago {
 
-        /* ==========================================
-           HISTORIAL Y REPORTE
-        ========================================== */
+    width: 100%;
 
-        #historialVentas,
-        #reporteMensualContainer {
+    overflow-wrap: break-word;
 
-            margin-top: 15px;
+    padding: 10px !important;
 
-            background: #ffffff;
+    margin-bottom: 10px !important;
+}
 
-            padding: 18px;
 
-            border-radius: 15px;
+/* ==========================================
+   MENSAJES
+========================================== */
 
-        }
+#mensaje {
 
+    text-align: center;
 
-        #historialVentas h2,
-        #reporteMensualContainer h2 {
+    font-weight: 600;
 
-            color: #171717;
+    margin-top: 7px;
 
-            border-bottom:
-                3px solid #f47b20;
+    padding: 5px;
 
-            padding-bottom: 10px;
+    overflow-wrap: break-word;
+}
 
-        }
+#cargandoPrecios {
 
+    text-align: center;
 
-        #ventasDelDia > div {
+    padding: 7px;
+}
 
-            background: #fafafa;
 
-            border-radius: 12px;
+/* ==========================================
+   CUENTAS CORRIENTES
+========================================== */
 
-            padding: 13px;
+#cuentasCorrientesSection {
 
-            margin-bottom: 10px;
+    width: 100%;
 
-            border: 1px solid #eeeeee;
+    overflow: hidden;
 
-        }
+    margin-top: 8px;
+}
 
+#listaCuentasCorrientes {
 
-        #ventasDelDia button {
+    width: 100%;
 
-            font-size: 14px;
+    max-height: 550px;
 
-            padding: 9px;
+    overflow-y: auto;
 
-        }
+    overflow-wrap: break-word;
+}
 
 
-        #totalDia {
+/* ==========================================
+   HISTORIAL
+========================================== */
 
-            background: #f47b20;
+#historialVentas {
 
-            color: #ffffff;
+    width: 100%;
 
-            padding: 15px;
+    margin-top: 10px;
 
-            border-radius: 12px;
+    background: #ffffff;
 
-            text-align: center;
+    padding: 15px;
 
-        }
+    border-radius: 14px;
 
+    overflow: hidden;
+}
 
-        /* ==========================================
-           REPORTE
-        ========================================== */
+#historialVentas h2 {
 
-        #reporteMensual {
+    color: #171717;
 
-            margin-top: 15px;
+    border-bottom:
+        3px solid #f47b20;
 
-            line-height: 1.6;
+    padding-bottom: 8px;
+}
 
-        }
+#ventasDelDia > div {
 
+    width: 100%;
 
-        #reporteMensual p {
+    background: #fafafa;
 
-            background: #fafafa;
+    border-radius: 10px;
 
-            padding: 10px;
+    padding: 10px;
 
-            border-radius: 10px;
+    margin-bottom: 8px;
 
-        }
+    border: 1px solid #eeeeee;
 
+    overflow-wrap: break-word;
+}
 
-        /* ==========================================
-           SEPARADORES
-        ========================================== */
+#ventasDelDia button {
 
-        hr {
+    font-size: 13px;
 
-            border: none;
+    padding: 8px;
+}
 
-            border-top:
-                1px solid #e5e5e5;
+#totalDia {
 
-            margin: 22px 0;
+    width: 100%;
 
-        }
+    background: #f47b20;
 
+    color: #ffffff;
 
-        /* ==========================================
-           CELULAR
-        ========================================== */
+    padding: 12px;
 
-        @media (max-width: 600px) {
+    border-radius: 10px;
 
-            body {
+    text-align: center;
 
-                padding: 10px;
+    overflow-wrap: break-word;
+}
 
-            }
 
+/* ==========================================
+   REPORTE MENSUAL
+========================================== */
 
-            .encabezado {
+#reporteMensualContainer {
 
-                padding: 15px;
+    width: 100%;
 
-            }
+    margin-top: 10px;
 
+    background: #ffffff;
 
-            .encabezado h1 {
+    padding: 15px;
 
-                font-size: 25px;
+    border-radius: 14px;
 
-            }
+    overflow: hidden;
+}
 
+#reporteMensualContainer h2 {
 
-            .encabezado img {
+    color: #171717;
 
-                width: 60px;
+    border-bottom:
+        3px solid #f47b20;
 
-                height: 60px;
+    padding-bottom: 8px;
+}
 
-            }
+#reporteMensual {
 
+    width: 100%;
 
-            .tarjeta {
+    margin-top: 10px;
 
-                padding: 15px;
+    line-height: 1.5;
 
-                border-radius: 15px;
+    overflow-wrap: break-word;
+}
 
-            }
+#reporteMensual p {
 
+    background: #fafafa;
 
-            button {
+    padding: 9px;
 
-                min-height: 48px;
+    border-radius: 9px;
+}
 
-            }
 
+/* ==========================================
+   SEPARADORES
+========================================== */
 
-            input,
-            select {
+hr {
 
-                min-height: 48px;
+    border: none;
 
-            }
+    border-top:
+        1px solid #e5e5e5;
 
+    margin: 16px 0;
+}
 
-            #total {
 
-                font-size: 23px;
+/* ==========================================
+   PANTALLAS MEDIANAS
+========================================== */
 
-            }
+@media (max-width: 950px) and (min-width: 701px) {
 
-        }
+    .contenedorColumnas {
 
-    </style>
+        grid-template-columns:
+            minmax(0, 1.35fr)
+            minmax(260px, 0.8fr);
+
+        gap: 14px;
+    }
+
+    body {
+
+        padding: 15px;
+    }
+
+    .tarjeta {
+
+        padding: 14px;
+    }
+
+    #venta > div {
+
+        font-size: 12px;
+
+        padding: 5px 7px;
+    }
+
+    #venta > div button {
+
+        min-height: 28px;
+
+        padding: 4px 6px;
+
+        font-size: 10px;
+    }
+}
+
+
+/* ==========================================
+   CELULAR
+========================================== */
+
+@media (max-width: 700px) {
+
+    body {
+
+        padding: 10px;
+    }
+
+    .app {
+
+        max-width: none;
+    }
+
+
+    /* ENCABEZADO */
+
+    .encabezado {
+
+        padding: 13px 10px;
+
+        border-radius: 16px;
+
+        margin-bottom: 12px;
+    }
+
+    .encabezado h1 {
+
+        font-size: 24px;
+
+        gap: 7px;
+    }
+
+    .encabezado img {
+
+        width: 55px;
+        height: 55px;
+    }
+
+    .subtitulo {
+
+        font-size: 14px;
+    }
+
+
+    /* UNA SOLA COLUMNA */
+
+    .contenedorColumnas {
+
+        display: block;
+    }
+
+    .columnaIzquierda,
+    .columnaDerecha {
+
+        width: 100%;
+    }
+
+
+    /* TARJETAS */
+
+    .tarjeta {
+
+        padding: 14px;
+
+        border-radius: 15px;
+
+        margin-bottom: 12px;
+    }
+
+    .tarjeta h2 {
+
+        font-size: 20px;
+    }
+
+    .tarjeta h3 {
+
+        font-size: 17px;
+    }
+
+
+    /* INPUTS */
+
+    input,
+    select {
+
+        min-height: 48px;
+
+        font-size: 16px;
+    }
+
+
+    /* BOTONES */
+
+    button {
+
+        min-height: 48px;
+
+        font-size: 16px;
+    }
+
+
+    /* ESCÁNER */
+
+    #lectorCodigo {
+
+        padding: 10px;
+    }
+
+    #reader {
+
+        max-width: 100%;
+    }
+
+
+    /* VENTA COMPACTA EN CELULAR */
+
+    #venta > div {
+
+        padding: 9px;
+
+        margin-bottom: 5px;
+
+        font-size: 16px;
+
+        gap: 6px;
+    }
+
+    #venta > div button {
+
+        min-height: 32px;
+
+        padding: 5px 7px;
+
+        font-size: 11px;
+    }
+
+
+    /* TOTAL */
+
+    #total {
+
+        font-size: 22px;
+
+        padding: 15px 10px;
+    }
+
+
+    /* HISTORIAL / REPORTE */
+
+    #historialVentas,
+    #reporteMensualContainer {
+
+        padding: 14px;
+    }
+}
+
+
+/* ==========================================
+   CELULARES MUY ANGOSTOS
+========================================== */
+
+@media (max-width: 380px) {
+
+    body {
+
+        padding: 7px;
+    }
+
+    .tarjeta {
+
+        padding: 12px;
+    }
+
+    .encabezado h1 {
+
+        font-size: 22px;
+    }
+
+    .encabezado img {
+
+        width: 50px;
+        height: 50px;
+    }
+
+    .tarjeta h2 {
+
+        font-size: 18px;
+    }
+
+    button {
+
+        font-size: 15px;
+    }
+
+    #total {
+
+        font-size: 20px;
+    }
+
+   #venta > div {
+
+    font-size: 15px;
+
+    padding: 7px;
+    }
+
+    #venta > div button {
+
+        min-width: 30px;
+
+        min-height: 30px;
+
+        font-size: 10px;
+    }
+}
+
+</style>
 
 </head>
 
@@ -646,350 +1056,573 @@
 <div class="app">
 
 
-    <!-- ==========================================
-         ENCABEZADO
-    ========================================== -->
+<!-- ==========================================
+     ENCABEZADO
+========================================== -->
 
-    <div class="encabezado">
+<div class="encabezado">
 
-        <h1>
+    <h1>
 
-            <img
-                src="Logo.png"
-                alt="Flor de Pasta"
-            >
+        <img
+            src="Logo.png"
+            alt="Flor de Pasta"
+        >
 
-            Flor de Pasta
+        Flor de Pasta
 
-        </h1>
+    </h1>
 
-        <div class="subtitulo">
+    <div class="subtitulo">
 
-            Registro de ventas
-
-        </div>
+        Registro de ventas
 
     </div>
 
+</div>
 
-    <!-- ==========================================
-         BUSCAR PRODUCTO
-    ========================================== -->
 
-    <div class="tarjeta">
 
-        <h2>🔎 Buscar producto</h2>
+<!-- ==========================================
+     DOS COLUMNAS
+========================================== -->
 
+<div class="contenedorColumnas">
+
+
+<!-- =====================================================
+     COLUMNA IZQUIERDA
+===================================================== -->
+
+<div class="columnaIzquierda">
+
+
+<!-- ==========================================
+     BUSCAR PRODUCTO
+========================================== -->
+
+<div class="tarjeta">
+
+    <h2>🔎 Buscar producto</h2>
+
+    <div class="codigoBusqueda">
 
         <input
             type="text"
             id="codigo"
-            placeholder="Escaneá o escribí el código"
+            placeholder="Escribí el código Ej: F01"
         >
-
-
-        <button onclick="abrirEscaner()">
-
-            📷 Escanear código
-
-        </button>
-
-
-        <div
-            id="lectorCodigo"
-            style="display: none;"
-        >
-
-            <div id="reader"></div>
-
-
-            <button onclick="cerrarEscaner()">
-
-                ❌ Cerrar escáner
-
-            </button>
-
-        </div>
-
 
         <button onclick="buscarProducto()">
 
-            🔎 Buscar producto
+            🔎 Buscar
 
         </button>
 
-
-        <div id="resultado"></div>
-
-
-        <div
-            id="cantidadProducto"
-            style="display: none;"
-        >
-
-            <div id="formaVentaContainer">
-
-                <label for="formaVenta">
-
-                    Forma de venta:
-
-                </label>
+    </div>
 
 
-                <select id="formaVenta">
+    <button onclick="abrirEscaner()">
 
-                    <option value="unidad">
-                        Unidad
-                    </option>
+        Escanear código
 
-                    <option value="docena">
-                        Docena
-                    </option>
-
-                </select>
-
-            </div>
+    </button>
 
 
-            <label for="cantidad">
+    <div
+        id="lectorCodigo"
+        style="display: none;"
+    >
 
-                Cantidad:
+        <div id="reader"></div>
+
+
+        <button onclick="cerrarEscaner()">
+
+            ❌ Cerrar escáner
+
+        </button>
+
+    </div>
+
+
+    <div id="resultado"></div>
+
+
+    <div
+        id="cantidadProducto"
+        style="display: none;"
+    >
+
+        <div id="formaVentaContainer">
+
+            <label for="formaVenta">
+
+                Forma de venta:
 
             </label>
 
 
-            <input
-                type="text"
-                id="cantidad"
-                value="1"
-                inputmode="decimal"
-                placeholder="Ej: 0,5"
-            >
+            <select id="formaVenta">
 
+                <option value="unidad">
 
-            <span id="unidadCantidad">
+                    Unidad
 
-                unidad
+                </option>
 
-            </span>
+                <option value="docena">
 
+                    Docena
 
-            <button onclick="agregarVenta()">
+                </option>
 
-                ➕ Agregar a la venta
-
-            </button>
+            </select>
 
         </div>
 
-    </div>
+
+        <label for="cantidad">
+
+            Cantidad:
+
+        </label>
 
 
-    <!-- ==========================================
-         VENTA ACTUAL
-    ========================================== -->
-
-    <div class="tarjeta">
-
-        <h2>🛒 Venta actual</h2>
-
-
-        <div id="venta"></div>
+        <input
+            type="text"
+            id="cantidad"
+            value="1"
+            inputmode="decimal"
+            placeholder="Ej: 0,5"
+        >
 
 
-        <h2 id="total">
+        <span id="unidadCantidad">
 
-            Total: $0
+            unidad
 
-        </h2>
-
-
-        <button onclick="vaciarVenta()">
-
-            🗑️ Vaciar venta
-
-        </button>
+        </span>
 
 
-        <h3>💳 Medio de pago</h3>
+        <button onclick="agregarVenta()">
 
-
-        <select id="medioPago">
-
-            <option value="Efectivo">
-                Efectivo
-            </option>
-
-            <option value="Transferencia">
-                Transferencia
-            </option>
-
-            <option value="Tarjeta">
-                Tarjeta
-            </option>
-
-        </select>
-
-
-        <button onclick="finalizarVenta()">
-
-            ✅ Finalizar venta
+            ➕ Agregar a la venta
 
         </button>
 
     </div>
 
-
-    <!-- ==========================================
-         PRECIOS
-    ========================================== -->
-
-    <div class="tarjeta">
-
-        <button
-            onclick="actualizarPreciosDesdeGoogle()"
-        >
-
-            🔄 Actualizar precios
-
-        </button>
+</div>
 
 
-        <div id="mensaje"></div>
+
+<!-- ==========================================
+     ACTUALIZAR PRECIOS
+========================================== -->
+
+<div class="tarjeta">
+
+    <button
+        onclick="actualizarPreciosDesdeGoogle()"
+    >
+
+        🔄 Actualizar precios
+
+    </button>
 
 
-        <div
-            id="cargandoPrecios"
-            style="display: none;"
-        >
+    <div id="mensaje"></div>
 
-            ⏳ Actualizando precios...
 
-        </div>
+    <div
+        id="cargandoPrecios"
+        style="display: none;"
+    >
+
+        ⏳ Actualizando precios...
 
     </div>
 
+</div>
+
+
+
+<!-- ==========================================
+     VENTA ACTUAL
+========================================== -->
+
+<div class="tarjeta">
+
+    <h2>
+
+        Detalle de la venta
+
+    </h2>
+
+
+    <div id="venta"></div>
+
+
+    <h2 id="total">
+
+        TOTAL: $0
+
+    </h2>
+
+
+    <button onclick="vaciarVenta()">
+
+        🗑️ Vaciar venta
+
+    </button>
+
 
     <!-- ==========================================
-         HISTORIAL
+         PAGO VENTA PARTICULAR
+         Este bloque se mueve automáticamente
+         cuando se selecciona restaurante.
     ========================================== -->
 
-    <div class="tarjeta">
+    <div id="pagoVentaParticular">
 
-        <button onclick="alternarHistorial()">
+        <div id="bloquePago">
 
-            📋 Ver / ocultar historial de ventas
+            <h3>
 
-        </button>
-
-
-        <div
-            id="historialVentas"
-            style="display: none;"
-        >
-
-            <h2>
-
-                📊 Historial de ventas
-
-            </h2>
-
-
-            <label for="fechaFiltro">
-
-                Seleccionar fecha:
-
-            </label>
-
-
-            <input
-                type="date"
-                id="fechaFiltro"
-                onchange="filtrarVentasPorFecha()"
-            >
-
-
-            <button onclick="mostrarVentasDeHoy()">
-
-                📅 Ver ventas de hoy
-
-            </button>
-
-
-            <div id="ventasDelDia"></div>
-
-
-            <h3 id="totalDia">
-
-                Total vendido: $0
+                Medio de pago
 
             </h3>
 
-        </div>
 
-    </div>
+            <select id="medioPago">
 
+                <option value="Efectivo">
 
-    <!-- ==========================================
-         REPORTE MENSUAL
-    ========================================== -->
+                    Efectivo
 
-    <div class="tarjeta">
+                </option>
 
-        <button onclick="alternarReporte()">
+                <option value="Transferencia">
 
-            📊 Ver / ocultar reporte mensual
+                    Transferencia
 
-        </button>
+                </option>
 
+                <option value="Tarjeta">
 
-        <div
-            id="reporteMensualContainer"
-            style="display: none;"
-        >
+                    Tarjeta
 
-            <h2>
+                </option>
 
-                📊 Reporte mensual
-
-            </h2>
+            </select>
 
 
-            <label for="mesReporte">
+            <button onclick="finalizarVenta()">
 
-                Seleccionar mes:
-
-            </label>
-
-
-            <input
-                type="month"
-                id="mesReporte"
-            >
-
-
-            <button onclick="generarReporteMensual()">
-
-                📊 Ver reporte
+                FINALIZAR VENTA
 
             </button>
 
-
-            <div id="reporteMensual"></div>
-
         </div>
 
     </div>
+
+</div>
 
 
 </div>
 
 
+
+<!-- =====================================================
+     COLUMNA DERECHA
+===================================================== -->
+
+<div class="columnaDerecha">
+
+
+<!-- ==========================================
+     CUENTAS CORRIENTES
+========================================== -->
+
+<div class="tarjeta">
+
+    <button
+        id="botonCuentasCorrientes"
+        onclick="alternarCuentasCorrientes()"
+    >
+
+        Ver cuentas corrientes
+
+    </button>
+
+
+    <div
+        id="cuentasCorrientesSection"
+        hidden
+    >
+
+        <h2>
+
+            Cuentas corrientes
+
+        </h2>
+
+
+        <div id="listaCuentasCorrientes">
+
+            <p style="text-align:center;">
+
+                ⏳ Cargando cuentas corrientes...
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================
+     HISTORIAL
+========================================== -->
+
+<div class="tarjeta">
+
+    <button
+        id="botonHistorial"
+        onclick="alternarHistorial()"
+    >
+
+        Ver historial de ventas
+
+    </button>
+
+
+    <div
+        id="historialVentas"
+        hidden
+    >
+
+        <h2>
+
+            Historial de ventas
+
+        </h2>
+
+
+        <label for="fechaFiltro">
+
+            Seleccionar fecha:
+
+        </label>
+
+
+        <input
+            type="date"
+            id="fechaFiltro"
+            onchange="filtrarVentasPorFecha()"
+        >
+
+
+        <div id="ventasDelDia"></div>
+
+
+        <h3 id="totalDia">
+
+            Total vendido: $0
+
+        </h3>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================
+     REPORTE MENSUAL
+========================================== -->
+
+<div class="tarjeta">
+
+    <button
+        id="botonReporte"
+        onclick="alternarReporte()"
+    >
+
+        Ver reporte mensual
+
+    </button>
+
+
+    <div
+        id="reporteMensualContainer"
+        hidden
+    >
+
+        <h2>
+
+            Reporte mensual
+
+        </h2>
+
+
+        <label for="mesReporte">
+
+            Seleccionar mes:
+
+        </label>
+
+
+        <input
+            type="month"
+            id="mesReporte"
+            onchange="generarReporteMensual()"
+        >
+
+
+        <div id="reporteMensual"></div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==========================================
+     VENTA A RESTAURANTE
+========================================== -->
+
+<div class="tarjeta">
+
+    <label
+        style="
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+        "
+    >
+
+        <input
+            type="checkbox"
+            id="ventaRestaurante"
+            onchange="actualizarModoVenta()"
+            style="
+                width: 24px;
+                height: 24px;
+                margin: 0;
+                flex-shrink: 0;
+            "
+        >
+
+        <span>
+
+            Venta a restaurante
+
+        </span>
+
+    </label>
+
+
+    <!-- ==========================================
+         DATOS RESTAURANTE
+    ========================================== -->
+
+    <div
+        id="datosRestaurante"
+        style="display: none;"
+    >
+
+        <h3>
+
+            Cliente
+
+        </h3>
+
+
+        <select id="cliente">
+
+            <option value="">
+
+                Seleccionar cliente
+
+            </option>
+
+        </select>
+
+
+        <h3>
+
+            Pago inicial
+
+        </h3>
+
+
+        <input
+            type="text"
+            id="montoPagado"
+            value=""
+            inputmode="decimal"
+            placeholder="Ingrese el monto"
+            oninput="actualizarResumenPago()"
+        >
+
+
+        <div
+            id="resumenPago"
+            style="
+                background: #ffffff;
+                border: 1px solid #eeeeee;
+                border-radius: 10px;
+                padding: 10px;
+                margin-bottom: 10px;
+            "
+        >
+
+            <strong>
+
+                Saldo pendiente: $0
+
+            </strong>
+
+        </div>
+
+
+        <!-- ==========================================
+             ACÁ SE MUEVE EL BLOQUE DE PAGO
+             CUANDO ES RESTAURANTE
+        ========================================== -->
+
+        <div id="pagoRestaurante"></div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- ==========================================
+     LIBRERÍAS
+========================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 
-<script src="script.js?v=4"></script>
+<script src="script.js?v=6"></script>
 
 
 </body>
