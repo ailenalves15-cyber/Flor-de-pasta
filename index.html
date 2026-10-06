@@ -1153,35 +1153,7 @@ hr {
         id="cantidadProducto"
         style="display: none;"
     >
-
-        <div id="formaVentaContainer">
-
-            <label for="formaVenta">
-
-                Forma de venta:
-
-            </label>
-
-
-            <select id="formaVenta">
-
-                <option value="unidad">
-
-                    Unidad
-
-                </option>
-
-                <option value="docena">
-
-                    Docena
-
-                </option>
-
-            </select>
-
-        </div>
-
-
+ 
         <label for="cantidad">
 
             Cantidad:
@@ -1194,22 +1166,48 @@ hr {
             id="cantidad"
             value="1"
             inputmode="decimal"
-            placeholder="Ej: 0,5"
+            placeholder="Ej: 4"
         >
 
+<span id="unidadCantidad">
 
-        <span id="unidadCantidad">
+    unidad
 
-            unidad
-
-        </span>
+</span>
 
 
-        <button onclick="agregarVenta()">
+<div
+    id="formaVentaContainer"
+    style="display: none; margin-top: 8px;"
+>
 
-            ➕ Agregar a la venta
+    <label for="formaVenta">
 
-        </button>
+        Forma de venta:
+
+    </label>
+
+
+<select id="formaVenta">
+
+    <option value="unidad">
+        Unidad
+    </option>
+
+    <option value="docena">
+        Docena
+    </option>
+
+</select>
+
+</div>
+
+
+<button onclick="agregarVenta()">
+
+    ➕ Agregar a la venta
+
+</button>
 
     </div>
 
@@ -1622,7 +1620,7 @@ hr {
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 
-<script src="script.js?v=6"></script>
+<script src="script.js?v=8"></script>
 
 
 </body>
