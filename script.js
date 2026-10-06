@@ -19,6 +19,10 @@ const productos = {
         precioUnidad: null,
         precioDocena: null,
         precioPlancha: null,
+        precioDosPlanchas: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "plancha"
     },
 
@@ -28,6 +32,10 @@ const productos = {
         precioUnidad: null,
         precioDocena: null,
         precioPlancha: null,
+        precioDosPlanchas: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "plancha"
     },
 
@@ -37,6 +45,10 @@ const productos = {
         precioUnidad: null,
         precioDocena: null,
         precioPlancha: null,
+        precioDosPlanchas: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "plancha"
     },
 
@@ -45,6 +57,9 @@ const productos = {
         sabor: "Jamón y queso",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -54,6 +69,9 @@ const productos = {
         sabor: "Jamón, queso y roquefort",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -63,6 +81,9 @@ const productos = {
         sabor: "Verdura",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -72,6 +93,9 @@ const productos = {
         sabor: "Pollo al verdeo",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -81,6 +105,9 @@ const productos = {
         sabor: "Osobuco con provoleta",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -90,6 +117,9 @@ const productos = {
         sabor: "Camarones",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -99,6 +129,9 @@ const productos = {
         sabor: "Salmón",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -108,6 +141,9 @@ const productos = {
         sabor: "Frutos de mar",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -117,6 +153,9 @@ const productos = {
         sabor: "Bondiola a la mostaza",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -126,6 +165,9 @@ const productos = {
         sabor: "Veganos",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -135,6 +177,9 @@ const productos = {
         sabor: "Ricota, espinaca y nuez",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -144,6 +189,9 @@ const productos = {
         sabor: "Berenjena, cherry y queso",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -153,6 +201,9 @@ const productos = {
         sabor: "Jamón y queso",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -162,6 +213,9 @@ const productos = {
         sabor: "Zapallo, queso y almendras tostadas",
         precioUnidad: null,
         precioDocena: null,
+        precioMediaDocena: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "unidad",
         permiteDocena: true
     },
@@ -170,6 +224,9 @@ const productos = {
         nombre: "Ñoquis",
         sabor: "Papa",
         precioKg: null,
+        precioMedioKg: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "kg"
     },
 
@@ -177,6 +234,9 @@ const productos = {
         nombre: "Ñoquis",
         sabor: "Papa con espinaca",
         precioKg: null,
+        precioMedioKg: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "kg"
     },
 
@@ -184,6 +244,9 @@ const productos = {
         nombre: "Fideos",
         sabor: "Al huevo blancos",
         precioKg: null,
+        precioMedioKg: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "kg"
     },
 
@@ -191,6 +254,9 @@ const productos = {
         nombre: "Fideos",
         sabor: "Al huevo con espinaca",
         precioKg: null,
+        precioMedioKg: null,
+        precioMayorista: null,
+        unidadMayorista: "",
         tipoVenta: "kg"
     }
 
@@ -222,14 +288,23 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
 
     if (mostrarMensaje) {
 
-        document.getElementById("mensaje").innerHTML =
-            "⏳ Actualizando precios...";
+        const mensaje =
+            document.getElementById("mensaje");
+
+        if (mensaje) {
+
+            mensaje.innerHTML =
+                "⏳ Actualizando precios...";
+        }
     }
 
     try {
 
         const respuesta =
-            await fetch(URL_PRECIOS + "?t=" + Date.now());
+            await fetch(
+                URL_PRECIOS + "?t=" + Date.now()
+            );
+
 
         if (!respuesta.ok) {
 
@@ -238,12 +313,13 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
             );
         }
 
+
         const datos =
             await respuesta.json();
 
 
         // ==========================================
-        // CARGAR RESTAURANTES
+        // CARGAR CLIENTES / RESTAURANTES
         // ==========================================
 
         cargarClientesDesdeGoogle(datos);
@@ -263,6 +339,7 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
             );
         }
 
+
         if (
             datos.productos.length === 0
         ) {
@@ -281,6 +358,7 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
 
             const codigo =
                 String(item.codigo || "").trim();
+
 
             if (!codigo) {
                 return;
@@ -322,6 +400,13 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
                             ? Number(item.precioKg)
                             : null,
 
+                    precioMedioKg:
+                        item.precioMedioKg !== null &&
+                        item.precioMedioKg !== undefined &&
+                        item.precioMedioKg !== ""
+                            ? Number(item.precioMedioKg)
+                            : null,
+
                     precioPlancha:
                         item.precioPlancha !== null &&
                         item.precioPlancha !== undefined &&
@@ -329,13 +414,39 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
                             ? Number(item.precioPlancha)
                             : null,
 
+                    precioDosPlanchas:
+                        item.precioDosPlanchas !== null &&
+                        item.precioDosPlanchas !== undefined &&
+                        item.precioDosPlanchas !== ""
+                            ? Number(item.precioDosPlanchas)
+                            : null,
+
+                    precioMediaDocena:
+                        item.precioMediaDocena !== null &&
+                        item.precioMediaDocena !== undefined &&
+                        item.precioMediaDocena !== ""
+                            ? Number(item.precioMediaDocena)
+                            : null,
+
+                    precioMayorista:
+                        item.precioMayorista !== null &&
+                        item.precioMayorista !== undefined &&
+                        item.precioMayorista !== ""
+                            ? Number(item.precioMayorista)
+                            : null,
+
+                    unidadMayorista:
+                        item.unidadMayorista || "",
+
                     tipoVenta:
                         item.tipoVenta || "unidad",
 
                     permiteDocena:
                         item.permiteDocena === true ||
-                        String(item.permiteDocena).toLowerCase() === "sí"
+                        String(item.permiteDocena)
+                            .toLowerCase() === "sí"
                 };
+
 
                 return;
             }
@@ -442,6 +553,31 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
 
 
             // ==========================================
+            // PRECIO MEDIO KG
+            // ==========================================
+
+            if (
+                item.precioMedioKg !== null &&
+                item.precioMedioKg !== undefined &&
+                item.precioMedioKg !== ""
+            ) {
+
+                const precio =
+                    Number(item.precioMedioKg);
+
+                productos[codigo].precioMedioKg =
+                    Number.isFinite(precio)
+                        ? precio
+                        : null;
+
+            } else {
+
+                productos[codigo].precioMedioKg =
+                    null;
+            }
+
+
+            // ==========================================
             // PRECIO PLANCHA
             // ==========================================
 
@@ -467,53 +603,132 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
 
 
             // ==========================================
-            // TIPO DE VENTA
+            // PRECIO 2 PLANCHAS
             // ==========================================
 
             if (
-                item.tipoVenta !== null &&
-                item.tipoVenta !== undefined &&
-                item.tipoVenta !== ""
+                item.precioDosPlanchas !== null &&
+                item.precioDosPlanchas !== undefined &&
+                item.precioDosPlanchas !== ""
             ) {
 
-                productos[codigo].tipoVenta =
-                    item.tipoVenta;
+                const precio =
+                    Number(item.precioDosPlanchas);
+
+                productos[codigo].precioDosPlanchas =
+                    Number.isFinite(precio)
+                        ? precio
+                        : null;
+
+            } else {
+
+                productos[codigo].precioDosPlanchas =
+                    null;
             }
+
+
+            // ==========================================
+            // PRECIO MEDIA DOCENA
+            // ==========================================
+
+            if (
+                item.precioMediaDocena !== null &&
+                item.precioMediaDocena !== undefined &&
+                item.precioMediaDocena !== ""
+            ) {
+
+                const precio =
+                    Number(item.precioMediaDocena);
+
+                productos[codigo].precioMediaDocena =
+                    Number.isFinite(precio)
+                        ? precio
+                        : null;
+
+            } else {
+
+                productos[codigo].precioMediaDocena =
+                    null;
+            }
+
+
+            // ==========================================
+            // PRECIO MAYORISTA
+            // ==========================================
+
+            if (
+                item.precioMayorista !== null &&
+                item.precioMayorista !== undefined &&
+                item.precioMayorista !== ""
+            ) {
+
+                const precio =
+                    Number(item.precioMayorista);
+
+                productos[codigo].precioMayorista =
+                    Number.isFinite(precio)
+                        ? precio
+                        : null;
+
+            } else {
+
+                productos[codigo].precioMayorista =
+                    null;
+            }
+
+
+            // ==========================================
+            // UNIDAD MAYORISTA
+            // ==========================================
+
+            productos[codigo].unidadMayorista =
+                item.unidadMayorista || "";
+
+
+            // ==========================================
+            // TIPO DE VENTA
+            // ==========================================
+
+            productos[codigo].tipoVenta =
+                item.tipoVenta || "unidad";
 
 
             // ==========================================
             // PERMITE DOCENA
             // ==========================================
 
-            if (
-                item.permiteDocena !== undefined
-            ) {
-
-                productos[codigo].permiteDocena =
-                    item.permiteDocena === true ||
-                    String(item.permiteDocena).toLowerCase() === "sí";
-            }
+            productos[codigo].permiteDocena =
+                item.permiteDocena === true ||
+                String(item.permiteDocena)
+                    .toLowerCase() === "sí";
 
         });
 
 
+        // ==========================================
+        // PRECIOS CARGADOS CORRECTAMENTE
+        // ==========================================
+
         preciosCargados = true;
+
+        actualizandoPrecios = false;
 
 
         if (mostrarMensaje) {
 
-            document.getElementById("mensaje").innerHTML =
-                "✅ Productos y precios actualizados correctamente";
+            const mensaje =
+                document.getElementById("mensaje");
+
+            if (mensaje) {
+
+                mensaje.innerHTML =
+                    "✅ Precios actualizados correctamente.";
+            }
         }
 
 
         console.log(
-            "✅ Precios actualizados desde Google Sheets"
-        );
-
-        console.log(
-            "Productos cargados:",
-            productos
+            "✅ Precios actualizados desde Google Sheets."
         );
 
 
@@ -523,31 +738,30 @@ async function actualizarPreciosDesdeGoogle(mostrarMensaje = true) {
     } catch (error) {
 
         console.error(
-            "❌ Error actualizando productos:",
+            "❌ Error actualizando precios:",
             error
         );
 
 
         preciosCargados = false;
 
+        actualizandoPrecios = false;
 
-        if (
-            document.getElementById("mensaje")
-        ) {
 
-            document.getElementById("mensaje").innerHTML =
-                "🚨 NO SE PUDIERON CARGAR LOS PRECIOS. No se pueden registrar ventas.";
+        if (mostrarMensaje) {
 
+            const mensaje =
+                document.getElementById("mensaje");
+
+            if (mensaje) {
+
+                mensaje.innerHTML =
+                    "❌ No se pudieron actualizar los precios.";
+            }
         }
 
 
         return false;
-
-
-    } finally {
-
-        actualizandoPrecios = false;
-
     }
 }
 
@@ -560,6 +774,7 @@ function cargarClientesDesdeGoogle(datos) {
 
     const select =
         document.getElementById("cliente");
+
 
     if (!select) {
         return;
@@ -578,14 +793,19 @@ function cargarClientesDesdeGoogle(datos) {
         const opcionVacia =
             document.createElement("option");
 
-        opcionVacia.value = "";
+
+        opcionVacia.value =
+            "";
+
 
         opcionVacia.textContent =
             "No hay restaurantes cargados";
 
+
         select.appendChild(
             opcionVacia
         );
+
 
         return;
     }
@@ -596,11 +816,14 @@ function cargarClientesDesdeGoogle(datos) {
         const opcion =
             document.createElement("option");
 
+
         opcion.value =
             cliente.restaurante;
 
+
         opcion.textContent =
             cliente.restaurante;
+
 
         select.appendChild(
             opcion
@@ -635,6 +858,8 @@ let ventasDelDia =
 // ==========================================
 
 let cuentasCorrientes = [];
+let cuentasDetalle = [];
+let cobros = [];
 
 
 // ==========================================
@@ -649,6 +874,7 @@ async function cargarVentasDesdeGoogle() {
             document.getElementById(
                 "listaCuentasCorrientes"
             );
+
 
         if (contenedor) {
 
@@ -679,14 +905,39 @@ async function cargarVentasDesdeGoogle() {
 
 
         if (
-            Array.isArray(datos.ventas)
+            Array.isArray(
+                datos.ventas
+            )
         ) {
 
             ventasDelDia =
                 datos.ventas;
 
+
+            /*
+             * Cuentas corrientes agrupadas
+             * por cliente.
+             */
+
             cuentasCorrientes =
                 datos.cuentasCorrientes || [];
+
+
+            /*
+             * Detalle de cada venta
+             * de cuenta corriente.
+             */
+
+            cuentasDetalle =
+                datos.cuentasDetalle || [];
+
+
+            /*
+             * Historial de cobros.
+             */
+
+            cobros =
+                datos.cobros || [];
 
 
             localStorage.setItem(
@@ -700,6 +951,18 @@ async function cargarVentasDesdeGoogle() {
             console.log(
                 "✅ Ventas cargadas desde Google Sheets:",
                 ventasDelDia
+            );
+
+
+            console.log(
+                "✅ Cuentas corrientes:",
+                cuentasCorrientes
+            );
+
+
+            console.log(
+                "✅ Cobros cargados:",
+                cobros
             );
 
 
@@ -721,7 +984,6 @@ async function cargarVentasDesdeGoogle() {
     }
 }
 
-
 // ==========================================
 // MOSTRAR CUENTAS CORRIENTES
 // ==========================================
@@ -729,14 +991,17 @@ async function cargarVentasDesdeGoogle() {
 function mostrarCuentasCorrientes() {
 
     const contenedor =
-        document.getElementById("listaCuentasCorrientes");
+        document.getElementById(
+            "listaCuentasCorrientes"
+        );
 
     if (!contenedor) return;
 
 
     const cuentasPendientes =
         cuentasCorrientes.filter(
-            cuenta => Number(cuenta.saldo || 0) > 0
+            cuenta =>
+                Number(cuenta.saldo || 0) > 0
         );
 
 
@@ -757,35 +1022,41 @@ function mostrarCuentasCorrientes() {
 
     cuentasPendientes.forEach(cuenta => {
 
-        const total =
-            Number(cuenta.total || 0);
+        const totalVentas =
+            Number(
+                cuenta.totalVentas ||
+                0
+            );
 
-        const pagado =
-            Number(cuenta.pagado || 0);
+
+        const totalPagado =
+            Number(
+                cuenta.totalPagado ||
+                0
+            );
+
 
         const saldo =
-            Number(cuenta.saldo || 0);
+            Number(
+                cuenta.saldo ||
+                0
+            );
 
-        const estado =
-            cuenta.estado || "Pendiente";
 
         const cliente =
-            cuenta.cliente || "Consumidor final";
+            cuenta.cliente ||
+            "Sin cliente";
 
 
-        let fechaVenta =
-            cuenta.fecha || "Sin fecha";
-
-
-        const fechaObjeto =
-            new Date(fechaVenta);
-
-
-        if (!isNaN(fechaObjeto.getTime())) {
-
-            fechaVenta =
-                fechaObjeto.toLocaleDateString("es-AR");
-        }
+        /*
+         * Usamos encodeURIComponent para poder
+         * pasar correctamente el nombre del cliente
+         * aunque tenga espacios, tildes, etc.
+         */
+        const clienteCodificado =
+            encodeURIComponent(
+                cliente
+            );
 
 
         html += `
@@ -798,37 +1069,27 @@ function mostrarCuentasCorrientes() {
                 margin-bottom:12px;
             ">
 
-                <strong style="font-size:18px;">
+                <strong style="
+                    font-size:20px;
+                    display:block;
+                    margin-bottom:10px;
+                ">
                     ${cliente}
                 </strong>
 
 
                 <p>
-                    Venta Nº:
-                    ${cuenta.numeroVenta}
-                </p>
-
-
-                <p>
-                    Fecha de venta:
+                    Total comprado:
                     <strong>
-                        ${fechaVenta}
+                        $${totalVentas.toLocaleString("es-AR")}
                     </strong>
                 </p>
 
 
                 <p>
-                    Total:
+                    Total pagado:
                     <strong>
-                        $${total.toLocaleString("es-AR")}
-                    </strong>
-                </p>
-
-
-                <p>
-                    Pagado:
-                    <strong>
-                        $${pagado.toLocaleString("es-AR")}
+                        $${totalPagado.toLocaleString("es-AR")}
                     </strong>
                 </p>
 
@@ -837,34 +1098,46 @@ function mostrarCuentasCorrientes() {
                     font-size:18px;
                     font-weight:bold;
                     color:red;
+                    margin-top:8px;
                 ">
                     Saldo pendiente:
                     $${saldo.toLocaleString("es-AR")}
                 </p>
 
 
-                <p>
-                    Estado:
-                    <strong>
-                        ${estado}
-                    </strong>
-                </p>
+                <div style="
+                    display:flex;
+                    gap:8px;
+                    flex-wrap:wrap;
+                    margin-top:12px;
+                ">
+
+                    <button
+                        onclick="
+                            verCuentaCorriente(
+                                decodeURIComponent('${clienteCodificado}')
+                            )
+                        "
+                    >
+                        Ver cuenta
+                    </button>
 
 
-                <button
-                    data-detalle-venta="${cuenta.numeroVenta}"
-                    onclick="
-                        verDetalleCuentaCorriente(
-                            '${cuenta.numeroVenta}'
-                        )
-                    "
-                >
-                    Ver detalle de la venta
-                </button>
+                    <button
+                        onclick="
+                            registrarPagoCuenta(
+                                decodeURIComponent('${clienteCodificado}')
+                            )
+                        "
+                    >
+                        Registrar pago
+                    </button>
+
+                </div>
 
 
                 <div
-                    id="detalleCuenta${cuenta.numeroVenta}"
+                    id="cuentaCliente${clienteCodificado}"
                     style="
                         display:none;
                         margin-top:12px;
@@ -873,17 +1146,6 @@ function mostrarCuentasCorrientes() {
                         border-radius:10px;
                     "
                 ></div>
-
-
-                <button
-                    onclick="
-                        registrarPagoCuenta(
-                            '${cuenta.numeroVenta}'
-                        )
-                    "
-                >
-                    Registrar pago
-                </button>
 
             </div>
 
@@ -894,7 +1156,6 @@ function mostrarCuentasCorrientes() {
     contenedor.innerHTML =
         html;
 }
-
 
 // ==========================================
 // VER DETALLE DE UNA VENTA
@@ -992,11 +1253,89 @@ function verDetalleCuentaCorriente(numeroVenta) {
             const cantidad =
                 Number(producto.cantidad) || 0;
 
-            const precio =
-                Number(producto.precio) || 0;
 
             const subtotal =
                 Number(producto.subtotal) || 0;
+
+
+            /*
+             * Detectamos si la venta corresponde
+             * a un restaurante.
+             *
+             * Las ventas particulares tienen
+             * "Consumidor final".
+             */
+
+            const esRestaurante =
+                venta.cliente &&
+                venta.cliente !== "Consumidor final";
+
+
+            let textoPrecio = "";
+
+
+            if (esRestaurante) {
+
+                /*
+                 * En las ventas a restaurante,
+                 * actualmente el precio guardado
+                 * puede ser el precio equivalente
+                 * por unidad.
+                 *
+                 * Por eso calculamos nuevamente
+                 * el precio según el total y la cantidad.
+                 */
+
+                if (cantidad > 0) {
+
+                    const precioPorUnidad =
+                        subtotal / cantidad;
+
+
+                    /*
+                     * Si la cantidad está guardada
+                     * en unidades, mostramos el precio
+                     * por docena.
+                     *
+                     * Ejemplo:
+                     *
+                     * 240 unidades
+                     * $152.000 total
+                     *
+                     * $152.000 / 240 = $633,33
+                     *
+                     * $633,33 × 12 = $7.600
+                     */
+
+                    const precioPorDocena =
+                        precioPorUnidad * 12;
+
+
+                    textoPrecio = `
+                        Precio:
+                        $${Math.round(precioPorDocena).toLocaleString("es-AR")}
+                        por docena
+                    `;
+
+                }
+
+            } else {
+
+                /*
+                 * Venta particular:
+                 * mostramos el precio que ya
+                 * tiene guardado la venta.
+                 */
+
+                const precio =
+                    Number(producto.precio) || 0;
+
+
+                textoPrecio = `
+                    Precio:
+                    $${precio.toLocaleString("es-AR")}
+                `;
+            }
 
 
             html += `
@@ -1021,8 +1360,7 @@ function verDetalleCuentaCorriente(numeroVenta) {
 
                     <br>
 
-                    Precio:
-                    $${precio.toLocaleString("es-AR")}
+                    ${textoPrecio}
 
                     <br>
 
@@ -1087,25 +1425,425 @@ function verDetalleCuentaCorriente(numeroVenta) {
     }
 }
 
+function verCuentaCorriente(cliente) {
+
+    const clienteTexto =
+        String(cliente || "").trim();
+
+    if (!clienteTexto) return;
+
+    const clienteCodificado =
+        encodeURIComponent(clienteTexto);
+
+    const idContenedor =
+        "cuentaCliente" + clienteCodificado;
+
+    const contenedor =
+        document.getElementById(idContenedor);
+
+    if (!contenedor) return;
+
+    /*
+     * Buscamos el botón "Ver cuenta"
+     * correspondiente a este cliente.
+     */
+
+    const botones =
+        document.querySelectorAll("button");
+
+    let botonCuenta = null;
+
+    botones.forEach(boton => {
+
+        const texto =
+            boton.innerText.trim();
+
+        if (
+            (
+                texto === "Ver cuenta" ||
+                texto === "Ocultar cuenta"
+            ) &&
+            boton.getAttribute("onclick") &&
+            boton.getAttribute("onclick")
+                .includes(clienteCodificado)
+        ) {
+            botonCuenta = boton;
+        }
+
+    });
+
+    /*
+     * Si ya está abierto,
+     * lo ocultamos.
+     */
+
+    if (
+        contenedor.style.display === "block"
+    ) {
+
+        contenedor.style.display = "none";
+
+        if (botonCuenta) {
+            botonCuenta.innerText = "Ver cuenta";
+        }
+
+        return;
+    }
+
+    /*
+     * Buscamos la cuenta del cliente.
+     */
+
+    const cuenta =
+        cuentasCorrientes.find(
+            item =>
+                String(item.cliente || "").trim() ===
+                clienteTexto
+        );
+
+    if (!cuenta) {
+
+        contenedor.innerHTML = `
+            <p>
+                ⚠️ No se encontró la cuenta
+                corriente de este cliente.
+            </p>
+        `;
+
+        contenedor.style.display = "block";
+
+        if (botonCuenta) {
+            botonCuenta.innerText = "Ocultar cuenta";
+        }
+
+        return;
+    }
+
+    const ventas =
+        Array.isArray(cuenta.ventas)
+            ? cuenta.ventas.filter(
+                venta =>
+                    Number(venta.saldo || 0) > 0
+            )
+            : [];
+
+    /*
+     * Ordenamos las ventas desde
+     * la más antigua hasta la más nueva.
+     */
+
+    ventas.sort(
+        (a, b) => {
+
+            const fechaA =
+                convertirFechaCuenta(a.fecha);
+
+            const fechaB =
+                convertirFechaCuenta(b.fecha);
+
+            return (
+                (fechaA ? fechaA.getTime() : 0) -
+                (fechaB ? fechaB.getTime() : 0)
+            );
+        }
+    );
+
+    let html = `
+        <strong>
+            Movimientos de la cuenta
+        </strong>
+
+        <br><br>
+    `;
+
+    /*
+     * Mostramos las ventas.
+     */
+
+    if (ventas.length === 0) {
+
+        html += `
+            <p>
+                No hay ventas registradas.
+            </p>
+        `;
+
+    } else {
+
+        ventas.forEach(venta => {
+
+            let fecha =
+                venta.fecha || "Sin fecha";
+
+            const fechaObjeto =
+                convertirFechaCuenta(venta.fecha);
+
+            if (fechaObjeto) {
+
+                fecha =
+                    fechaObjeto.toLocaleDateString(
+                        "es-AR"
+                    );
+            }
+
+            const totalVenta =
+                Number(venta.total || 0);
+
+            const pagadoVenta =
+                Number(venta.pagado || 0);
+
+            const saldoVenta =
+                Number(venta.saldo || 0);
+
+            html += `
+                <div style="
+                    background:white;
+                    border:1px solid #ddd;
+                    border-radius:8px;
+                    padding:10px;
+                    margin-bottom:10px;
+                ">
+
+                    <strong>
+                        ${fecha}
+                    </strong>
+
+                    <p style="
+                        margin:6px 0;
+                    ">
+                        Total de la venta:
+                        <strong>
+                            $${totalVenta.toLocaleString("es-AR")}
+                        </strong>
+                    </p>
+
+                    <p style="
+                        margin:6px 0;
+                    ">
+                        Pagado:
+                        <strong>
+                            $${pagadoVenta.toLocaleString("es-AR")}
+                        </strong>
+                    </p>
+
+                    <p style="
+                        margin:6px 0;
+                    ">
+                        Saldo:
+                        <strong>
+                            $${saldoVenta.toLocaleString("es-AR")}
+                        </strong>
+                    </p>
+
+                </div>
+            `;
+        });
+    }
+
+    /*
+     * Pagos registrados.
+     *
+     * Mostramos solamente los
+     * últimos 10 pagos.
+     */
+
+    const pagos =
+        Array.isArray(cobros)
+            ? cobros
+                .filter(
+                    cobro =>
+                        String(cobro.cliente || "").trim() ===
+                        clienteTexto
+                )
+                .sort(
+                    (a, b) => {
+
+                        const fechaA =
+                            convertirFechaCuenta(a.fecha);
+
+                        const fechaB =
+                            convertirFechaCuenta(b.fecha);
+
+                        return (
+                            (fechaB ? fechaB.getTime() : 0) -
+                            (fechaA ? fechaA.getTime() : 0)
+                        );
+                    }
+                )
+                .slice(0, 10)
+            : [];
+
+    if (pagos.length > 0) {
+
+        html += `
+            <hr style="
+                margin:15px 0;
+            ">
+
+            <strong>
+                Pagos registrados
+            </strong>
+
+            <br><br>
+        `;
+
+        pagos.forEach(pago => {
+
+            let fecha =
+                pago.fecha || "Sin fecha";
+
+            const fechaObjeto =
+                convertirFechaCuenta(pago.fecha);
+
+            if (fechaObjeto) {
+
+                fecha =
+                    fechaObjeto.toLocaleDateString(
+                        "es-AR"
+                    );
+            }
+
+            const monto =
+                Number(pago.monto || 0);
+
+            html += `
+                <p style="
+                    margin-bottom:8px;
+                ">
+
+                    ${fecha}
+                    —
+                    Pago:
+                    <strong>
+                        -$${monto.toLocaleString("es-AR")}
+                    </strong>
+
+                </p>
+            `;
+        });
+    }
+
+    /*
+     * Saldo final.
+     */
+
+    html += `
+        <hr style="
+            margin:15px 0;
+        ">
+
+        <p style="
+            font-size:18px;
+            font-weight:bold;
+            color:red;
+        ">
+            SALDO ACTUAL:
+            $${Number(
+                cuenta.saldo || 0
+            ).toLocaleString("es-AR")}
+        </p>
+    `;
+
+    contenedor.innerHTML = html;
+
+    contenedor.style.display = "block";
+
+    if (botonCuenta) {
+        botonCuenta.innerText = "Ocultar cuenta";
+    }
+}
+
+function convertirFechaCuenta(fecha) {
+
+    if (!fecha) return null;
+
+
+    if (fecha instanceof Date) {
+
+        return fecha;
+    }
+
+
+    const texto =
+        String(fecha).trim();
+
+
+    const partes =
+        texto.match(
+            /^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2}):(\d{2}))?$/
+        );
+
+
+    if (partes) {
+
+        return new Date(
+            Number(partes[3]),
+            Number(partes[2]) - 1,
+            Number(partes[1]),
+            Number(partes[4] || 0),
+            Number(partes[5] || 0),
+            Number(partes[6] || 0)
+        );
+    }
+
+
+    const fechaConvertida =
+        new Date(texto);
+
+
+    if (
+        !isNaN(
+            fechaConvertida.getTime()
+        )
+    ) {
+
+        return fechaConvertida;
+    }
+
+
+    return null;
+}
+
 
 // ==========================================
 // REGISTRAR PAGO DE CUENTA CORRIENTE
 // ==========================================
 
-async function registrarPagoCuenta(numeroVenta) {
+async function registrarPagoCuenta(cliente) {
+
+    const clienteTexto =
+        String(cliente || "").trim();
+
+
+    if (!clienteTexto) {
+
+        alert(
+            "❌ No se encontró el cliente."
+        );
+
+        return;
+    }
+
+
+    /*
+     * Buscamos la cuenta agrupada
+     * del cliente.
+     */
 
     const cuenta =
         cuentasCorrientes.find(
             item =>
-                String(item.numeroVenta) ===
-                String(numeroVenta)
+                String(
+                    item.cliente || ""
+                ).trim() ===
+                clienteTexto
         );
 
 
     if (!cuenta) {
 
         alert(
-            "❌ No se encontró la cuenta corriente."
+            "❌ No se encontró la cuenta corriente de este cliente."
         );
 
         return;
@@ -1113,7 +1851,9 @@ async function registrarPagoCuenta(numeroVenta) {
 
 
     const saldoActual =
-        Number(cuenta.saldo || 0);
+        Number(
+            cuenta.saldo || 0
+        );
 
 
     if (
@@ -1134,11 +1874,11 @@ async function registrarPagoCuenta(numeroVenta) {
             "¿Cuánto paga ahora?\n\n" +
 
             "Cliente: " +
-            cuenta.cliente +
-            "\n" +
+            clienteTexto +
+            "\n\n" +
 
             "Saldo pendiente: $" +
-            saldoActual
+            saldoActual.toLocaleString("es-AR")
 
         );
 
@@ -1151,10 +1891,76 @@ async function registrarPagoCuenta(numeroVenta) {
     }
 
 
+    /*
+     * Permitimos escribir:
+     *
+     * 50000
+     * 50000,50
+     * 50.000
+     *
+     * y tratamos de convertirlo
+     * correctamente a número.
+     */
+
+    let textoMonto =
+        montoTexto.trim();
+
+
+    textoMonto =
+        textoMonto.replace(
+            /\$/g,
+            ""
+        );
+
+
+    textoMonto =
+        textoMonto.replace(
+            /\s/g,
+            ""
+        );
+
+
+    /*
+     * Si tiene punto y coma:
+     *
+     * 50.000,50
+     *
+     * quitamos los puntos y
+     * convertimos la coma en punto.
+     */
+
+    if (
+        textoMonto.includes(",") &&
+        textoMonto.includes(".")
+    ) {
+
+        textoMonto =
+            textoMonto.replace(
+                /\./g,
+                ""
+            );
+
+        textoMonto =
+            textoMonto.replace(
+                ",",
+                "."
+            );
+
+    } else if (
+        textoMonto.includes(",")
+    ) {
+
+        textoMonto =
+            textoMonto.replace(
+                ",",
+                "."
+            );
+    }
+
+
     const monto =
         parseFloat(
-            montoTexto
-                .replace(",", ".")
+            textoMonto
         );
 
 
@@ -1176,17 +1982,29 @@ async function registrarPagoCuenta(numeroVenta) {
     ) {
 
         alert(
+
             "❌ El pago no puede ser mayor al saldo pendiente.\n\n" +
+
             "Saldo pendiente: $" +
-            saldoActual
+            saldoActual.toLocaleString("es-AR")
+
         );
 
         return;
     }
 
 
-    document.getElementById("mensaje").innerHTML =
-        "⏳ Registrando cobro...";
+    const mensaje =
+        document.getElementById(
+            "mensaje"
+        );
+
+
+    if (mensaje) {
+
+        mensaje.innerHTML =
+            "⏳ Registrando cobro...";
+    }
 
 
     try {
@@ -1212,8 +2030,8 @@ async function registrarPagoCuenta(numeroVenta) {
                             accion:
                                 "registrarCobro",
 
-                            numeroVenta:
-                                numeroVenta,
+                            cliente:
+                                clienteTexto,
 
                             monto:
                                 monto
@@ -1254,39 +2072,38 @@ async function registrarPagoCuenta(numeroVenta) {
             "✅ Cobro registrado correctamente.\n\n" +
 
             "Cliente: " +
-            cuenta.cliente +
+            clienteTexto +
             "\n" +
 
             "Cobró ahora: $" +
-            monto
+            monto.toLocaleString("es-AR") +
+            "\n" +
+
+            "Nuevo saldo: $" +
+            Number(
+                datos.saldoNuevo || 0
+            ).toLocaleString("es-AR")
 
         );
 
 
-        document.getElementById("mensaje").innerHTML =
-            "✅ Cobro registrado correctamente.";
+        if (mensaje) {
+
+            mensaje.innerHTML =
+                "✅ Cobro registrado correctamente.";
+        }
 
 
-        console.log(
-            "🔄 Voy a recargar cuentas desde Google..."
-        );
-
+        /*
+         * Volvemos a cargar los datos desde
+         * Google Sheets para actualizar
+         * la cuenta corriente.
+         */
 
         await cargarVentasDesdeGoogle();
 
 
-        console.log(
-            "📋 Cuentas después de recargar:",
-            cuentasCorrientes
-        );
-
-
         mostrarCuentasCorrientes();
-
-
-        console.log(
-            "✅ Pantalla actualizada"
-        );
 
 
     } catch (error) {
@@ -1307,8 +2124,11 @@ async function registrarPagoCuenta(numeroVenta) {
         );
 
 
-        document.getElementById("mensaje").innerHTML =
-            "❌ No se pudo registrar el cobro.";
+        if (mensaje) {
+
+            mensaje.innerHTML =
+                "❌ No se pudo registrar el cobro.";
+        }
 
     }
 
@@ -1323,42 +2143,15 @@ function buscarProducto() {
 
     if (!preciosCargados) {
 
-        document.getElementById("resultado").innerHTML = `
-
-            <div style="
-                background:#fff3cd;
-                border:1px solid #ffc107;
-                color:#856404;
-                padding:12px;
-                border-radius:10px;
-                font-weight:bold;
-            ">
-
-                ⚠️ Los precios no están disponibles.
-
-                <br><br>
-
-                Actualizá los precios antes de realizar una venta.
-
-            </div>
-
-        `;
-
-
-        document.getElementById(
-            "cantidadProducto"
-        ).style.display = "none";
-
+        document.getElementById("resultado").innerHTML =
+            "<p style='color:red;'>Los precios todavía no fueron cargados. Esperá unos segundos y probá nuevamente.</p>";
 
         return;
     }
 
 
     const codigo =
-        document
-            .getElementById("codigo")
-            .value
-            .trim();
+        document.getElementById("codigo").value.trim();
 
 
     const producto =
@@ -1367,110 +2160,249 @@ function buscarProducto() {
 
     if (!producto) {
 
-        document.getElementById("resultado").innerHTML = `
-
-            <div style="
-                background:#f8d7da;
-                border:1px solid #f5c6cb;
-                color:#721c24;
-                padding:12px;
-                border-radius:10px;
-            ">
-
-                ❌ Producto no encontrado
-
-
-                <button
-                    onclick="cerrarResultadoProducto()"
-                    style="
-                        width:auto;
-                        min-height:34px;
-                        padding:7px 12px;
-                        margin-top:10px;
-                    "
-                >
-                    ❌ Cerrar
-                </button>
-
-            </div>
-
-        `;
-
-
-        document.getElementById(
-            "cantidadProducto"
-        ).style.display = "none";
-
+        document.getElementById("resultado").innerHTML =
+            "<p style='color:red;'>Producto no encontrado.</p>";
 
         return;
     }
 
 
+        // ==========================================
+    // PREPARAR TEXTO DEL PRECIO
+    // ==========================================
+
+    let textoPrecio = "";
+
+
+    // ==========================================
+    // VER SI ES VENTA A RESTAURANTE
+    // ==========================================
+
+    const ventaRestaurante =
+        document
+            .getElementById("ventaRestaurante")
+            ?.checked || false;
+
+
+    // ==========================================
+    // PRECIO MAYORISTA
+    // ==========================================
+
+    if (ventaRestaurante) {
+
+        const precioMayorista =
+            Number(producto.precioMayorista);
+
+
+        const unidadMayorista =
+            String(
+                producto.unidadMayorista || ""
+            )
+                .trim()
+                .toLowerCase();
+
+
+        if (
+            Number.isFinite(precioMayorista) &&
+            precioMayorista > 0 &&
+            unidadMayorista
+        ) {
+
+            textoPrecio =
+                `Precio mayorista: $${precioMayorista.toLocaleString("es-AR")} por ${unidadMayorista}`;
+
+        } else {
+
+            textoPrecio =
+                `<span style="color:red;">
+                    ⚠️ Este producto no tiene precio mayorista cargado.
+                </span>`;
+        }
+
+    }
+
+
+    // ==========================================
+    // PRECIOS MINORISTAS
+    // ==========================================
+
+    else {
+
+        if (
+            producto.tipoVenta === "plancha"
+        ) {
+
+            const precioPlancha =
+                Number(producto.precioPlancha);
+
+
+            const precioDosPlanchas =
+                Number(producto.precioDosPlanchas);
+
+
+            if (
+                Number.isFinite(precioPlancha) &&
+                precioPlancha > 0
+            ) {
+
+                textoPrecio =
+                    `Precio: $${precioPlancha.toLocaleString("es-AR")} por plancha`;
+
+            }
+
+
+            if (
+                Number.isFinite(precioDosPlanchas) &&
+                precioDosPlanchas > 0
+            ) {
+
+                textoPrecio +=
+                    `<br>2 planchas: $${precioDosPlanchas.toLocaleString("es-AR")}`;
+            }
+
+        }
+
+
+        else if (
+            producto.tipoVenta === "kg"
+        ) {
+
+            const precioKg =
+                Number(producto.precioKg);
+
+
+            const precioMedioKg =
+                Number(producto.precioMedioKg);
+
+
+            if (
+                Number.isFinite(precioKg) &&
+                precioKg > 0
+            ) {
+
+                textoPrecio =
+                    `Precio: $${precioKg.toLocaleString("es-AR")} por kg`;
+
+            }
+
+
+            if (
+                Number.isFinite(precioMedioKg) &&
+                precioMedioKg > 0
+            ) {
+
+                textoPrecio +=
+                    `<br>½ kg: $${precioMedioKg.toLocaleString("es-AR")}`;
+            }
+
+        }
+
+
+        else {
+
+            const precioUnidad =
+                Number(producto.precioUnidad);
+
+
+            const precioDocena =
+                Number(producto.precioDocena);
+
+
+            const precioMediaDocena =
+                Number(producto.precioMediaDocena);
+
+
+            if (
+                Number.isFinite(precioUnidad) &&
+                precioUnidad > 0
+            ) {
+
+                textoPrecio =
+                    `Precio: $${precioUnidad.toLocaleString("es-AR")} por unidad`;
+            }
+
+
+            if (
+                Number.isFinite(precioDocena) &&
+                precioDocena > 0
+            ) {
+
+                textoPrecio +=
+                    `<br>Docena: $${precioDocena.toLocaleString("es-AR")}`;
+            }
+
+
+            if (
+                Number.isFinite(precioMediaDocena) &&
+                precioMediaDocena > 0
+            ) {
+
+                textoPrecio +=
+                    `<br>½ docena: $${precioMediaDocena.toLocaleString("es-AR")}`;
+            }
+
+        }
+
+    }
+
+    // ==========================================
+    // MOSTRAR PRODUCTO Y PRECIO
+    // ==========================================
+
     document.getElementById("resultado").innerHTML = `
 
-        <div style="
-            background:#fafafa;
-            border:1px solid #eeeeee;
-            border-radius:12px;
-            padding:12px;
-        ">
+        <div class="producto-encontrado">
 
-            <h3>
+            <strong>
                 ${producto.nombre}
-            </h3>
+            </strong>
 
+            ${
+                producto.sabor
+                    ? `<span>${producto.sabor}</span>`
+                    : ""
+            }
 
-            <p>
-                Sabor: ${producto.sabor}
-            </p>
-
-
-            <button
-                onclick="cerrarResultadoProducto()"
-                style="
-                    width:auto;
-                    min-height:36px;
-                    padding:7px 12px;
-                    background:#eeeeee;
-                    color:#171717;
-                    font-size:14px;
-                "
-            >
-                ❌ Cerrar
-            </button>
+            ${
+                textoPrecio
+                    ? `
+                        <div style="
+                            margin-top:8px;
+                            font-weight:bold;
+                        ">
+                            ${textoPrecio}
+                        </div>
+                      `
+                    : ""
+            }
 
         </div>
 
     `;
 
 
-    document.getElementById(
-        "cantidadProducto"
-    ).style.display = "block";
+    document.getElementById("cantidadProducto").style.display =
+        "block";
 
 
     const formaVentaContainer =
-        document.getElementById(
-            "formaVentaContainer"
-        );
+        document.getElementById("formaVentaContainer");
 
 
     const formaVenta =
-        document.getElementById(
-            "formaVenta"
-        );
+        document.getElementById("formaVenta");
 
 
     const unidadCantidad =
-        document.getElementById(
-            "unidadCantidad"
-        );
+        document.getElementById("unidadCantidad");
 
 
     const cantidad =
-        document.getElementById(
-            "cantidad"
-        );
+        document.getElementById("cantidad");
+
+
+    formaVenta.innerHTML =
+        "";
 
 
     // ==========================================
@@ -1484,12 +2416,16 @@ function buscarProducto() {
         formaVentaContainer.style.display =
             "none";
 
+
         unidadCantidad.innerText =
             "kg";
+
 
         cantidad.value =
             "1";
 
+
+        return;
     }
 
 
@@ -1497,19 +2433,23 @@ function buscarProducto() {
     // PRODUCTOS POR PLANCHA
     // ==========================================
 
-    else if (
+    if (
         producto.tipoVenta === "plancha"
     ) {
 
         formaVentaContainer.style.display =
             "none";
 
+
         unidadCantidad.innerText =
             "plancha";
+
 
         cantidad.value =
             "1";
 
+
+        return;
     }
 
 
@@ -1517,43 +2457,123 @@ function buscarProducto() {
     // PRODUCTOS POR UNIDAD / DOCENA
     // ==========================================
 
-    else {
+    if (
+        producto.precioUnidad !== null &&
+        producto.precioUnidad !== undefined &&
+        producto.precioUnidad > 0
+    ) {
+
+        const opcionUnidad =
+            document.createElement("option");
+
+
+        opcionUnidad.value =
+            "unidad";
+
+
+        opcionUnidad.textContent =
+            "Unidad";
+
+
+        formaVenta.appendChild(
+            opcionUnidad
+        );
+    }
+
+
+    if (
+        producto.precioDocena !== null &&
+        producto.precioDocena !== undefined &&
+        producto.precioDocena > 0
+    ) {
+
+        const opcionDocena =
+            document.createElement("option");
+
+
+        opcionDocena.value =
+            "docena";
+
+
+        opcionDocena.textContent =
+            "Docena";
+
+
+        formaVenta.appendChild(
+            opcionDocena
+        );
+    }
+
+
+    if (
+        formaVenta.options.length === 0
+    ) {
+
+        formaVentaContainer.style.display =
+            "none";
+
+
+        unidadCantidad.innerText =
+            "unidad";
+
+
+        cantidad.value =
+            "1";
+
+
+        agregarVenta();
+
+
+        return;
+    }
+
+
+    formaVentaContainer.style.display =
+        "block";
+
+
+    if (
+        producto.precioUnidad !== null &&
+        producto.precioUnidad !== undefined &&
+        producto.precioUnidad > 0
+    ) {
+
+        formaVenta.value =
+            "unidad";
+
+
+        unidadCantidad.innerText =
+            "unidad";
+
+    } else {
+
+        formaVenta.selectedIndex =
+            0;
+
+
+        const seleccion =
+            formaVenta.value;
+
 
         if (
-            producto.permiteDocena
+            seleccion === "docena"
         ) {
 
-            formaVentaContainer.style.display =
-                "block";
-
-            formaVenta.value =
-                "unidad";
-
             unidadCantidad.innerText =
-                "unidad";
-
-            cantidad.value =
-                "1";
+                "docena";
 
         } else {
 
-            formaVentaContainer.style.display =
-                "none";
-
-            formaVenta.value =
-                "unidad";
-
             unidadCantidad.innerText =
                 "unidad";
-
-            cantidad.value =
-                "1";
-
-            agregarVenta();
         }
-    }
-}
 
+    }
+
+
+    cantidad.value =
+        "1";
+}
 
 // ==========================================
 // CERRAR PRODUCTO ENCONTRADO
@@ -1568,7 +2588,8 @@ function cerrarResultadoProducto() {
 
     document.getElementById(
         "cantidadProducto"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
 
     document.getElementById(
@@ -1614,19 +2635,20 @@ document
                     "unidadCantidad"
                 );
 
+if (
+    this.value === "docena"
+) {
 
-            if (
-                this.value === "docena"
-            ) {
+    unidadCantidad.innerText =
+        "docena";
 
-                unidadCantidad.innerText =
-                    "docena";
+} else {
 
-            } else {
+    unidadCantidad.innerText =
+        "unidad";
+}
 
-                unidadCantidad.innerText =
-                    "unidad";
-            }
+
         }
     );
 
@@ -1716,6 +2738,8 @@ function agregarVenta() {
 
     let unidad;
 
+    let subtotal;
+
 
     // ==========================================
     // PRODUCTOS POR KG
@@ -1725,11 +2749,82 @@ function agregarVenta() {
         producto.tipoVenta === "kg"
     ) {
 
+        const precioKg =
+            Number(producto.precioKg);
+
+
+        const precioMedioKg =
+            Number(producto.precioMedioKg);
+
+
+        if (
+            !Number.isFinite(precioKg) ||
+            precioKg <= 0
+        ) {
+
+            alert(
+                "⚠️ Este producto no tiene cargado el precio por kilo."
+            );
+
+            return;
+        }
+
+
+        if (
+            !Number.isFinite(precioMedioKg) ||
+            precioMedioKg <= 0
+        ) {
+
+            alert(
+                "⚠️ Este producto no tiene cargado el precio por medio kilo."
+            );
+
+            return;
+        }
+
+
+        if (
+            !Number.isInteger(cantidad * 2)
+        ) {
+
+            alert(
+                "⚠️ Para fideos y ñoquis, la cantidad debe ser en múltiplos de 0,5 kg."
+            );
+
+            return;
+        }
+
+
+        const kilosCompletos =
+            Math.floor(cantidad);
+
+
+        const quedaMedioKilo =
+            cantidad - kilosCompletos;
+
+
+        subtotal =
+            kilosCompletos * precioKg;
+
+
+        if (
+            Math.abs(
+                quedaMedioKilo - 0.5
+            ) < 0.0001
+        ) {
+
+            subtotal +=
+                precioMedioKg;
+        }
+
+
         precio =
-            producto.precioKg;
+            subtotal / cantidad;
+
 
         unidad =
             "kg";
+
     }
 
 
@@ -1741,11 +2836,81 @@ function agregarVenta() {
         producto.tipoVenta === "plancha"
     ) {
 
+        if (
+            !Number.isInteger(cantidad)
+        ) {
+
+            alert(
+                "Para los ravioles, ingresá una cantidad entera de planchas."
+            );
+
+            return;
+        }
+
+
+        const precioPlancha =
+            Number(producto.precioPlancha);
+
+
+        const precioDosPlanchas =
+            Number(producto.precioDosPlanchas);
+
+
+        if (
+            !Number.isFinite(precioPlancha) ||
+            precioPlancha <= 0
+        ) {
+
+            alert(
+                "⚠️ Este producto no tiene cargado el precio de una plancha."
+            );
+
+            return;
+        }
+
+
+        if (
+            cantidad >= 2 &&
+            (
+                !Number.isFinite(precioDosPlanchas) ||
+                precioDosPlanchas <= 0
+            )
+        ) {
+
+            alert(
+                "⚠️ Este producto no tiene cargado el precio promocional de 2 planchas."
+            );
+
+            return;
+        }
+
+
+        const pares =
+            Math.floor(cantidad / 2);
+
+
+        const impar =
+            cantidad % 2;
+
+
+        subtotal =
+            (
+                pares *
+                precioDosPlanchas
+            ) +
+            (
+                impar *
+                precioPlancha
+            );
+
+
         precio =
-            producto.precioPlancha;
+            subtotal / cantidad;
+
 
         unidad =
             "plancha";
+
     }
 
 
@@ -1753,25 +2918,275 @@ function agregarVenta() {
     // PRODUCTOS POR UNIDAD / DOCENA
     // ==========================================
 
-    else {
+            else {
+
+            const precioUnidad =
+                Number(producto.precioUnidad) || 0;
+
+
+            const precioMediaDocena =
+                Number(producto.precioMediaDocena) || 0;
+
+
+            const precioDocena =
+                Number(producto.precioDocena) || 0;
+
+
+            // ==========================================
+            // SI SOLO TIENE PRECIO POR UNIDAD
+            // ==========================================
+
+            if (
+                precioUnidad > 0 &&
+                precioDocena <= 0 &&
+                precioMediaDocena <= 0
+            ) {
+
+                subtotal =
+                    cantidad *
+                    precioUnidad;
+
+
+                precio =
+                    precioUnidad;
+
+
+                unidad =
+                    "unidad";
+            }
+
+
+            // ==========================================
+            // SI TIENE PRECIO POR DOCENA / MEDIA DOCENA
+            // ==========================================
+
+            else {
+
+                let docenas =
+                    Math.floor(cantidad / 12);
+
+
+                let resto =
+                    cantidad % 12;
+
+
+                let subtotalCalculado =
+                    0;
+
+
+                // DOCENAS
+
+                if (
+                    docenas > 0
+                ) {
+
+                    if (
+                        precioDocena > 0
+                    ) {
+
+                        subtotalCalculado +=
+                            docenas *
+                            precioDocena;
+
+                    } else {
+
+                        subtotalCalculado +=
+                            docenas *
+                            12 *
+                            precioUnidad;
+                    }
+
+
+                    resto -=
+                        docenas *
+                        12;
+                }
+
+
+                // MEDIA DOCENA
+
+                if (
+                    resto >= 6
+                ) {
+
+                    if (
+                        precioMediaDocena > 0
+                    ) {
+
+                        subtotalCalculado +=
+                            precioMediaDocena;
+
+                    } else {
+
+                        subtotalCalculado +=
+                            6 *
+                            precioUnidad;
+                    }
+
+
+                    resto -=
+                        6;
+                }
+
+
+                // UNIDADES RESTANTES
+
+                subtotalCalculado +=
+                    resto *
+                    precioUnidad;
+
+
+                subtotal =
+                    subtotalCalculado;
+
+
+                precio =
+                    subtotal /
+                    cantidad;
+
+
+                unidad =
+                    "unidad";
+            }
+        }
+
+    // ==========================================
+    // PRECIO MAYORISTA PARA RESTAURANTES
+    // ==========================================
+
+    const ventaRestaurante =
+        document
+            .getElementById(
+                "ventaRestaurante"
+            )
+            ?.checked || false;
+
+
+    if (
+        ventaRestaurante &&
+        producto.precioMayorista !== null &&
+        producto.precioMayorista !== undefined &&
+        Number.isFinite(
+            Number(
+                producto.precioMayorista
+            )
+        ) &&
+        Number(
+            producto.precioMayorista
+        ) > 0 &&
+        producto.unidadMayorista
+    ) {
+
+        const precioMayorista =
+            Number(
+                producto.precioMayorista
+            );
+
+
+        const unidadMayorista =
+            String(
+                producto.unidadMayorista
+            )
+                .trim()
+                .toLowerCase();
+
+
+        // ==========================================
+        // MAYORISTA POR DOCENA
+        // ==========================================
 
         if (
-            formaVenta === "docena"
+            unidadMayorista === "docena"
+        ) {
+
+            // IMPORTANTE:
+            // La cantidad se transforma a unidades.
+            //
+            // 12 unidades = 1 docena
+            // 6 unidades = 0,5 docena
+            // 210 unidades = 17,5 docenas
+
+            let cantidadEnUnidades;
+
+
+            if (
+                unidad === "docena"
+            ) {
+
+                cantidadEnUnidades =
+                    cantidad * 12;
+
+            } else if (
+                unidad === "media docena"
+            ) {
+
+                cantidadEnUnidades =
+                    cantidad * 6;
+
+            } else {
+
+                cantidadEnUnidades =
+                    cantidad;
+            }
+
+
+            const cantidadDocenas =
+                cantidadEnUnidades / 12;
+
+
+            subtotal =
+                cantidadDocenas *
+                precioMayorista;
+
+
+            precio =
+                subtotal /
+                cantidadEnUnidades;
+
+
+            // Guardamos siempre la cantidad
+            // real en unidades.
+
+            cantidadMayoristaActual =
+                cantidadEnUnidades;
+
+        }
+
+
+        // ==========================================
+        // MAYORISTA POR UNIDAD
+        // ==========================================
+
+        else if (
+            unidadMayorista === "unidad"
         ) {
 
             precio =
-                producto.precioDocena;
+                precioMayorista;
 
-            unidad =
-                "docena";
 
-        } else {
+            subtotal =
+                precioMayorista *
+                cantidad;
+
+        }
+
+
+        // ==========================================
+        // MAYORISTA POR KG
+        // ==========================================
+
+        else if (
+            unidadMayorista === "kg"
+        ) {
 
             precio =
-                producto.precioUnidad;
+                precioMayorista;
 
-            unidad =
-                "unidad";
+
+            subtotal =
+                precioMayorista *
+                cantidad;
         }
     }
 
@@ -1783,7 +3198,9 @@ function agregarVenta() {
     if (
         precio === null ||
         precio === undefined ||
-        !Number.isFinite(Number(precio)) ||
+        !Number.isFinite(
+            Number(precio)
+        ) ||
         Number(precio) <= 0
     ) {
 
@@ -1807,9 +3224,7 @@ function agregarVenta() {
         ventaActual.find(
             item =>
                 item.nombre === producto.nombre &&
-                item.sabor === producto.sabor &&
-                item.unidad === unidad &&
-                item.precio === precio
+                item.sabor === producto.sabor
         );
 
 
@@ -1821,13 +3236,571 @@ function agregarVenta() {
         productoExistente
     ) {
 
-        productoExistente.cantidad +=
-            cantidad;
+        // ==========================================
+        // RAVIOLES POR PLANCHA
+        // ==========================================
+
+        if (
+            producto.tipoVenta === "plancha"
+        ) {
+
+            const nuevaCantidad =
+                productoExistente.cantidad +
+                cantidad;
+
+
+            const precioPlancha =
+                Number(
+                    producto.precioPlancha
+                );
+
+
+            const precioDosPlanchas =
+                Number(
+                    producto.precioDosPlanchas
+                );
+
+
+            const pares =
+                Math.floor(
+                    nuevaCantidad / 2
+                );
+
+
+            const impar =
+                nuevaCantidad % 2;
+
+
+            const nuevoSubtotal =
+                (
+                    pares *
+                    precioDosPlanchas
+                ) +
+                (
+                    impar *
+                    precioPlancha
+                );
+
+
+            productoExistente.cantidad =
+                nuevaCantidad;
+
+
+            productoExistente.subtotal =
+                nuevoSubtotal;
+
+
+            productoExistente.precio =
+                nuevoSubtotal /
+                nuevaCantidad;
+
+
+            productoExistente.unidad =
+                "plancha";
+        }
+
+
+        // ==========================================
+        // PRODUCTOS POR UNIDAD
+        // ==========================================
+
+        else if (
+            producto.tipoVenta !== "kg"
+        ) {
+
+            let cantidadExistenteEnUnidades =
+                0;
+
+
+            if (
+                productoExistente.unidad ===
+                "docena"
+            ) {
+
+                cantidadExistenteEnUnidades =
+                    Number(
+                        productoExistente.cantidad
+                    ) * 12;
+
+            } else if (
+                productoExistente.unidad ===
+                "media docena"
+            ) {
+
+                cantidadExistenteEnUnidades =
+                    Number(
+                        productoExistente.cantidad
+                    ) * 6;
+
+            } else {
+
+                cantidadExistenteEnUnidades =
+                    Number(
+                        productoExistente.cantidad
+                    );
+            }
+
+
+            let cantidadNuevaEnUnidades =
+                0;
+
+
+            if (
+                unidad === "docena"
+            ) {
+
+                cantidadNuevaEnUnidades =
+                    Number(cantidad) * 12;
+
+            } else if (
+                unidad === "media docena"
+            ) {
+
+                cantidadNuevaEnUnidades =
+                    Number(cantidad) * 6;
+
+            } else {
+
+                cantidadNuevaEnUnidades =
+                    Number(cantidad);
+            }
+
+
+            const totalUnidades =
+                cantidadExistenteEnUnidades +
+                cantidadNuevaEnUnidades;
+
+
+            // ==========================================
+            // VER SI ES RESTAURANTE
+            // ==========================================
+
+            const esRestaurante =
+                document.getElementById(
+                    "ventaRestaurante"
+                )?.checked || false;
+
+
+            const precioMayorista =
+                Number(
+                    producto.precioMayorista
+                );
+
+
+            const unidadMayorista =
+                String(
+                    producto.unidadMayorista || ""
+                )
+                    .trim()
+                    .toLowerCase();
+
+
+            // ==========================================
+            // MAYORISTA POR DOCENA
+            // ==========================================
+
+            if (
+                esRestaurante &&
+                Number.isFinite(
+                    precioMayorista
+                ) &&
+                precioMayorista > 0 &&
+                unidadMayorista === "docena"
+            ) {
+
+                const cantidadDocenas =
+                    totalUnidades / 12;
+
+
+                const subtotalMayorista =
+                    cantidadDocenas *
+                    precioMayorista;
+
+
+                productoExistente.cantidad =
+                    totalUnidades;
+
+
+                productoExistente.unidad =
+                    "unidad";
+
+
+                productoExistente.subtotal =
+                    subtotalMayorista;
+
+
+                productoExistente.precio =
+                    subtotalMayorista /
+                    totalUnidades;
+
+            }
+
+
+            // ==========================================
+            // MAYORISTA POR UNIDAD
+            // ==========================================
+
+            else if (
+                esRestaurante &&
+                Number.isFinite(
+                    precioMayorista
+                ) &&
+                precioMayorista > 0 &&
+                unidadMayorista === "unidad"
+            ) {
+
+                const subtotalMayorista =
+                    totalUnidades *
+                    precioMayorista;
+
+
+                productoExistente.cantidad =
+                    totalUnidades;
+
+
+                productoExistente.unidad =
+                    "unidad";
+
+
+                productoExistente.subtotal =
+                    subtotalMayorista;
+
+
+                productoExistente.precio =
+                    precioMayorista;
+
+            }
+
+
+            // ==========================================
+            // PRECIO MINORISTA NORMAL
+            // ==========================================
+else {
+
+    const precioUnidad =
+        Number(
+            producto.precioUnidad
+        ) || 0;
+
+
+    const precioMediaDocena =
+        Number(
+            producto.precioMediaDocena
+        ) || 0;
+
+
+    const precioDocena =
+        Number(
+            producto.precioDocena
+        ) || 0;
+
+
+    // ==========================================
+    // SI SOLO EXISTE PRECIO POR UNIDAD
+    // ==========================================
+
+    if (
+        precioUnidad > 0 &&
+        precioDocena <= 0 &&
+        precioMediaDocena <= 0
+    ) {
+
+        const nuevoSubtotal =
+            totalUnidades *
+            precioUnidad;
+
+
+        productoExistente.cantidad =
+            totalUnidades;
+
+
+        productoExistente.unidad =
+            "unidad";
 
 
         productoExistente.subtotal =
-            productoExistente.precio *
-            productoExistente.cantidad;
+            nuevoSubtotal;
+
+
+        productoExistente.precio =
+            precioUnidad;
+    }
+
+
+    // ==========================================
+    // SI EXISTEN PRECIOS ESPECIALES
+    // ==========================================
+
+    else {
+
+        let unidadesRestantes =
+            totalUnidades;
+
+
+        let subtotalCalculado =
+            0;
+
+
+        const docenas =
+            Math.floor(
+                unidadesRestantes / 12
+            );
+
+
+        // DOCENAS COMPLETAS
+
+        if (
+            docenas > 0
+        ) {
+
+            if (
+                precioDocena > 0
+            ) {
+
+                subtotalCalculado +=
+                    docenas *
+                    precioDocena;
+
+            } else {
+
+                subtotalCalculado +=
+                    docenas *
+                    12 *
+                    precioUnidad;
+            }
+
+
+            unidadesRestantes -=
+                docenas *
+                12;
+        }
+
+
+        // MEDIA DOCENA
+
+        if (
+            unidadesRestantes >= 6
+        ) {
+
+            if (
+                precioMediaDocena > 0
+            ) {
+
+                subtotalCalculado +=
+                    precioMediaDocena;
+
+            } else {
+
+                subtotalCalculado +=
+                    6 *
+                    precioUnidad;
+            }
+
+
+            unidadesRestantes -=
+                6;
+        }
+
+
+        // UNIDADES RESTANTES
+
+        subtotalCalculado +=
+            unidadesRestantes *
+            precioUnidad;
+
+
+        productoExistente.cantidad =
+            totalUnidades;
+
+
+        productoExistente.unidad =
+            "unidad";
+
+
+        productoExistente.subtotal =
+            subtotalCalculado;
+
+
+        productoExistente.precio =
+            subtotalCalculado /
+            totalUnidades;
+    }
+}
+        }
+
+
+        // ==========================================
+        // PRODUCTOS POR KG
+        // ==========================================
+
+        else {
+
+            const nuevaCantidad =
+                Number(
+                    productoExistente.cantidad
+                ) +
+                Number(cantidad);
+
+
+            const esRestaurante =
+                document.getElementById(
+                    "ventaRestaurante"
+                )?.checked || false;
+
+
+            const precioMayorista =
+                Number(
+                    producto.precioMayorista
+                );
+
+
+            const unidadMayorista =
+                String(
+                    producto.unidadMayorista || ""
+                )
+                    .trim()
+                    .toLowerCase();
+
+
+            // ==========================================
+            // MAYORISTA POR KG
+            // ==========================================
+
+            if (
+                esRestaurante &&
+                Number.isFinite(
+                    precioMayorista
+                ) &&
+                precioMayorista > 0 &&
+                unidadMayorista === "kg"
+            ) {
+
+                const nuevoSubtotal =
+                    nuevaCantidad *
+                    precioMayorista;
+
+
+                productoExistente.cantidad =
+                    nuevaCantidad;
+
+
+                productoExistente.subtotal =
+                    nuevoSubtotal;
+
+
+                productoExistente.precio =
+                    precioMayorista;
+
+
+                productoExistente.unidad =
+                    "kg";
+
+            }
+
+
+            // ==========================================
+            // PRECIO MINORISTA NORMAL
+            // ==========================================
+
+            else {
+
+                const precioKg =
+                    Number(
+                        producto.precioKg
+                    );
+
+
+                const precioMedioKg =
+                    Number(
+                        producto.precioMedioKg
+                    );
+
+
+                if (
+                    !Number.isFinite(precioKg) ||
+                    precioKg <= 0
+                ) {
+
+                    alert(
+                        "⚠️ Este producto no tiene cargado el precio por kilo."
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    !Number.isFinite(precioMedioKg) ||
+                    precioMedioKg <= 0
+                ) {
+
+                    alert(
+                        "⚠️ Este producto no tiene cargado el precio por medio kilo."
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    !Number.isInteger(
+                        nuevaCantidad * 2
+                    )
+                ) {
+
+                    alert(
+                        "⚠️ Para fideos y ñoquis, la cantidad debe ser en múltiplos de 0,5 kg."
+                    );
+
+                    return;
+                }
+
+
+                const kilosCompletos =
+                    Math.floor(
+                        nuevaCantidad
+                    );
+
+
+                const quedaMedioKilo =
+                    nuevaCantidad -
+                    kilosCompletos;
+
+
+                let nuevoSubtotal =
+                    kilosCompletos *
+                    precioKg;
+
+
+                if (
+                    Math.abs(
+                        quedaMedioKilo - 0.5
+                    ) < 0.0001
+                ) {
+
+                    nuevoSubtotal +=
+                        precioMedioKg;
+                }
+
+
+                productoExistente.cantidad =
+                    nuevaCantidad;
+
+
+                productoExistente.subtotal =
+                    nuevoSubtotal;
+
+
+                productoExistente.precio =
+                    nuevoSubtotal /
+                    nuevaCantidad;
+
+
+                productoExistente.unidad =
+                    "kg";
+            }
+        }
+
     }
 
 
@@ -1837,8 +3810,58 @@ function agregarVenta() {
 
     else {
 
-        const subtotal =
-            precio * cantidad;
+        // Si fue venta mayorista por docena,
+        // guardamos la cantidad real en unidades.
+
+        let cantidadFinal =
+            cantidad;
+
+
+        let unidadFinal =
+            unidad;
+
+
+        if (
+            ventaRestaurante &&
+            String(
+                producto.unidadMayorista || ""
+            )
+                .trim()
+                .toLowerCase() ===
+                "docena"
+        ) {
+
+            if (
+                unidad === "docena"
+            ) {
+
+                cantidadFinal =
+                    cantidad * 12;
+
+                unidadFinal =
+                    "unidad";
+
+            } else if (
+                unidad === "media docena"
+            ) {
+
+                cantidadFinal =
+                    cantidad * 6;
+
+                unidadFinal =
+                    "unidad";
+            }
+        }
+
+
+        if (
+            subtotal === undefined
+        ) {
+
+            subtotal =
+                precio *
+                cantidadFinal;
+        }
 
 
         ventaActual.push({
@@ -1853,10 +3876,10 @@ function agregarVenta() {
                 precio,
 
             cantidad:
-                cantidad,
+                cantidadFinal,
 
             unidad:
-                unidad,
+                unidadFinal,
 
             subtotal:
                 subtotal
@@ -1870,16 +3893,20 @@ function agregarVenta() {
     document.getElementById("codigo").value =
         "";
 
+
     document.getElementById("cantidad").value =
         "1";
 
+
     document.getElementById("resultado").innerHTML =
         "";
+
 
     document.getElementById(
         "cantidadProducto"
     ).style.display =
         "none";
+
 
     document.getElementById("codigo").focus();
 }
@@ -1902,8 +3929,11 @@ function mostrarVenta() {
     ventaActual
         .map(
             (item, indice) => ({
-                item: item,
-                indice: indice
+                item:
+                    item,
+
+                indice:
+                    indice
             })
         )
         .reverse()
@@ -1913,8 +3943,24 @@ function mostrarVenta() {
                 const item =
                     dato.item;
 
+
                 const indice =
                     dato.indice;
+
+
+                let mostrarPrecio =
+                    true;
+
+
+           if (
+    item.unidad === "unidad" ||
+    item.unidad === "kg" ||
+    item.unidad === "plancha"
+) {
+
+    mostrarPrecio =
+        false;
+}
 
 
                 html += `
@@ -1937,10 +3983,16 @@ function mostrarVenta() {
                             ${item.cantidad}
                             ${item.unidad}
 
-                            <br>
+                            ${
+                                mostrarPrecio
+                                    ? `
+                                        <br>
 
-                            Precio:
-                            $${Number(item.precio).toLocaleString("es-AR")}
+                                        Precio:
+                                        $${Number(item.precio).toLocaleString("es-AR")}
+                                      `
+                                    : ""
+                            }
 
                             <br>
 
@@ -1965,7 +4017,7 @@ function mostrarVenta() {
 
 
                 totalVenta +=
-                    item.subtotal;
+                    Number(item.subtotal) || 0;
             }
         );
 
@@ -2115,7 +4167,8 @@ function actualizarResumenPago() {
 
     const saldo =
         Math.max(
-            total - montoPagado,
+            total -
+            montoPagado,
             0
         );
 
@@ -2196,10 +4249,6 @@ function actualizarModoVenta() {
         );
 
 
-    // ==========================================
-    // BLOQUE DE PAGO
-    // ==========================================
-
     const bloquePago =
         document.getElementById(
             "bloquePago"
@@ -2227,10 +4276,6 @@ function actualizarModoVenta() {
     }
 
 
-    // ==========================================
-    // VENTA A RESTAURANTE
-    // ==========================================
-
     if (
         checkbox.checked
     ) {
@@ -2238,9 +4283,6 @@ function actualizarModoVenta() {
         datosRestaurante.style.display =
             "block";
 
-
-        // Mover el bloque de pago
-        // debajo del resumen del restaurante
 
         if (
             bloquePago &&
@@ -2252,10 +4294,16 @@ function actualizarModoVenta() {
             );
         }
 
+
         if (montoPagado) {
-            montoPagado.value = "";
-            montoPagado.placeholder = "Ingrese el monto";
+
+            montoPagado.value =
+                "";
+
+            montoPagado.placeholder =
+                "Ingrese el monto";
         }
+
 
         actualizarResumenPago();
 
@@ -2264,9 +4312,6 @@ function actualizarModoVenta() {
         datosRestaurante.style.display =
             "none";
 
-
-        // Volver a colocar el bloque
-        // debajo del detalle de la venta
 
         if (
             bloquePago &&
@@ -2287,12 +4332,14 @@ function actualizarModoVenta() {
 
 
         if (montoPagado) {
-            montoPagado.value = "";
-            montoPagado.placeholder = "Ingrese el monto";
+
+            montoPagado.value =
+                "";
+
+            montoPagado.placeholder =
+                "Ingrese el monto";
         }
-
     }
-
 }
 
 
@@ -2322,10 +4369,6 @@ document.addEventListener(
 
 async function finalizarVenta() {
 
-    // ==========================================
-    // SEGURIDAD PRINCIPAL
-    // ==========================================
-
     if (!preciosCargados) {
 
         alert(
@@ -2354,10 +4397,6 @@ async function finalizarVenta() {
     }
 
 
-    // ==========================================
-    // OBTENER DATOS DE LA VENTA
-    // ==========================================
-
     const medioPago =
         document
             .getElementById("medioPago")
@@ -2377,10 +4416,6 @@ async function finalizarVenta() {
     let montoPagado =
         totalVenta;
 
-
-    // ==========================================
-    // VENTA A RESTAURANTE
-    // ==========================================
 
     if (
         ventaRestaurante
@@ -2454,13 +4489,8 @@ async function finalizarVenta() {
 
             return;
         }
-
     }
 
-
-    // ==========================================
-    // VALIDAR PAGO
-    // ==========================================
 
     if (
         isNaN(montoPagado)
@@ -2497,14 +4527,11 @@ async function finalizarVenta() {
 
     const saldoPendiente =
         Math.max(
-            totalVenta - montoPagado,
+            totalVenta -
+            montoPagado,
             0
         );
 
-
-    // ==========================================
-    // ESTADO DEL PAGO
-    // ==========================================
 
     let estadoPago =
         "Pendiente";
@@ -2525,10 +4552,6 @@ async function finalizarVenta() {
             "Pago parcial";
     }
 
-
-    // ==========================================
-    // FECHA
-    // ==========================================
 
     const ahora =
         new Date();
@@ -2551,10 +4574,6 @@ async function finalizarVenta() {
             ahora.getDate()
         ).padStart(2, "0");
 
-
-    // ==========================================
-    // CREAR VENTA
-    // ==========================================
 
     const nuevaVenta = {
 
@@ -2587,7 +4606,6 @@ async function finalizarVenta() {
 
         estadoPago:
             estadoPago
-
     };
 
 
@@ -2597,19 +4615,11 @@ async function finalizarVenta() {
     );
 
 
-    // ==========================================
-    // AVISAR QUE SE ESTÁ REGISTRANDO
-    // ==========================================
-
     document.getElementById("mensaje").innerHTML =
         "⏳ Registrando venta en Google Sheets...";
 
 
     try {
-
-        // ==========================================
-        // ENVIAR VENTA A GOOGLE SHEETS
-        // ==========================================
 
         const respuesta =
             await fetch(
@@ -2638,10 +4648,6 @@ async function finalizarVenta() {
             );
 
 
-        // ==========================================
-        // VERIFICAR CONEXIÓN
-        // ==========================================
-
         if (
             !respuesta.ok
         ) {
@@ -2652,17 +4658,9 @@ async function finalizarVenta() {
         }
 
 
-        // ==========================================
-        // LEER RESPUESTA
-        // ==========================================
-
         const datos =
             await respuesta.json();
 
-
-        // ==========================================
-        // VERIFICAR CONFIRMACIÓN
-        // ==========================================
 
         if (
             !datos.ok
@@ -2678,10 +4676,6 @@ async function finalizarVenta() {
         await cargarVentasDesdeGoogle();
 
 
-        // ==========================================
-        // GUARDAR LOCALMENTE
-        // ==========================================
-
         localStorage.setItem(
             "ventasDelDia",
             JSON.stringify(
@@ -2689,40 +4683,6 @@ async function finalizarVenta() {
             )
         );
 
-
-        // ==========================================
-        // ACTUALIZAR CUENTAS CORRIENTES LOCALES
-        // ==========================================
-
-        cuentasCorrientes.push({
-
-            numeroVenta:
-                nuevaVenta.numeroVenta,
-
-            cliente:
-                cliente,
-
-            fecha:
-                fechaMostrar,
-
-            total:
-                totalVenta,
-
-            montoPagado:
-                montoPagado,
-
-            saldoPendiente:
-                saldoPendiente,
-
-            estadoPago:
-                estadoPago
-
-        });
-
-
-        // ==========================================
-        // MENSAJE DE CONFIRMACIÓN
-        // ==========================================
 
         let mensajePago =
             "";
@@ -2777,10 +4737,6 @@ async function finalizarVenta() {
             "✅ Venta registrada correctamente en Google Sheets.";
 
 
-        // ==========================================
-        // LIMPIAR VENTA
-        // ==========================================
-
         ventaActual =
             [];
 
@@ -2815,10 +4771,6 @@ async function finalizarVenta() {
             "1";
 
 
-        // ==========================================
-        // RESTABLECER DATOS DE VENTA
-        // ==========================================
-
         const checkboxRestaurante =
             document.getElementById(
                 "ventaRestaurante"
@@ -2839,10 +4791,6 @@ async function finalizarVenta() {
 
         document.getElementById("codigo").focus();
 
-
-        // ==========================================
-        // ACTUALIZAR HISTORIAL
-        // ==========================================
 
         mostrarVentasDelDia();
 
@@ -2879,116 +4827,131 @@ async function finalizarVenta() {
 // HISTORIAL DE VENTAS
 // ==========================================
 
-function mostrarVentasDelDia(
-    fechaSeleccionada = null
-) {
+function mostrarVentasDelDia(fechaSeleccionada = null) {
 
-    let html =
-        "";
+    let html = "";
+    let total = 0;
+    let cantidadVentas = 0;
 
+    const ventasMostradas = ventasDelDia
 
-    let total =
-        0;
+        .map((venta, indice) => ({
+            venta: venta,
+            indiceOriginal: indice
+        }))
 
+        // Ignorar registros vacíos o inválidos
+        .filter(item => {
 
-    let cantidadVentas =
-        0;
+            const venta = item.venta;
 
+            return (
+                venta &&
+                Array.isArray(venta.productos) &&
+                venta.productos.length > 0 &&
+                Number(venta.total) > 0 &&
+                venta.cliente !== "Fecha"
+            );
+        })
 
-    ventasDelDia
-
-        .map(
-            (venta, indice) => ({
-
-                venta:
-                    venta,
-
-                numeroVenta:
-                    indice + 1
-
-            })
+        // Filtrar por fecha
+        .filter(item =>
+            fechaSeleccionada === null ||
+            item.venta.fechaFiltro === fechaSeleccionada
         )
 
-        .filter(
-            item =>
-                fechaSeleccionada === null ||
-                item.venta.fechaFiltro ===
-                fechaSeleccionada
-        )
-
-        .reverse()
-
-        .forEach(
-            item => {
-
-                const venta =
-                    item.venta;
-
-
-                const numeroVenta =
-                    item.numeroVenta;
-
-
-                html += `
-
-                    <div>
-
-                        <p>
-
-                            <strong>
-                                Venta ${numeroVenta}
-                            </strong>
-
-                            <br>
-
-                            Fecha:
-                            ${venta.fecha}
-
-                            <br>
-
-                            Total:
-                            $${Number(venta.total).toLocaleString("es-AR")}
-
-                            <br>
-
-                            Medio de pago:
-                            ${venta.medioPago}
-
-                        </p>
-
-
-                        <button
-                            onclick="verDetalleVenta(${numeroVenta - 1})"
-                        >
-                            Ver detalle
-                        </button>
-
-
-                        <div
-                            id="detalleVenta${numeroVenta - 1}"
-                            style="display: none;"
-                        ></div>
-
-
-                        <hr>
-
-                    </div>
-
-                `;
-
-
-                total +=
-                    Number(venta.total) || 0;
-
-
-                cantidadVentas++;
-            }
+        // Última venta primero
+        .sort((a, b) =>
+            Number(b.venta.numeroVenta || 0) -
+            Number(a.venta.numeroVenta || 0)
         );
 
 
-    if (
-        cantidadVentas === 0
-    ) {
+    const totalVentasDelDia =
+        ventasMostradas.length;
+
+
+    ventasMostradas.forEach((item, posicion) => {
+
+        const venta = item.venta;
+        const indiceOriginal = item.indiceOriginal;
+
+
+        /*
+         * Como mostramos la última venta primero,
+         * el número de venta del día se calcula
+         * desde el final.
+         *
+         * Ejemplo:
+         *
+         * última → Venta del día 3
+         * anterior → Venta del día 2
+         * primera → Venta del día 1
+         */
+
+        const numeroVentaDelDia =
+            totalVentasDelDia - posicion;
+
+
+        html += `
+
+            <div>
+
+                <p>
+
+                    <strong>
+                        Venta del día ${numeroVentaDelDia}
+                    </strong>
+
+                    <br>
+
+                    Fecha:
+                    ${venta.fecha}
+
+                    <br>
+
+                    Total:
+                    $${Number(
+                        venta.total
+                    ).toLocaleString("es-AR")}
+
+                    <br>
+
+                    Medio de pago:
+                    ${venta.medioPago}
+
+                </p>
+
+
+                <button
+                    onclick="verDetalleVenta(${indiceOriginal})"
+                >
+                    Detalle
+                </button>
+
+
+                <div
+                    id="detalleVenta${indiceOriginal}"
+                    style="display: none;"
+                ></div>
+
+
+                <hr>
+
+            </div>
+
+        `;
+
+
+        total +=
+            Number(venta.total) || 0;
+
+
+        cantidadVentas++;
+    });
+
+
+    if (cantidadVentas === 0) {
 
         html =
             "<p>❌ No hay ventas registradas para esta fecha.</p>";
@@ -2997,20 +4960,17 @@ function mostrarVentasDelDia(
 
     document.getElementById(
         "ventasDelDia"
-    ).innerHTML =
-        html;
+    ).innerHTML = html;
 
 
     // ==========================================
-    // MOSTRAR TOTAL CON FECHA
+    // FECHA
     // ==========================================
 
     let textoFecha = "";
 
 
-    if (
-        fechaSeleccionada
-    ) {
+    if (fechaSeleccionada) {
 
         const partesFecha =
             fechaSeleccionada.split("-");
@@ -3041,9 +5001,12 @@ function mostrarVentasDelDia(
     document.getElementById(
         "totalDia"
     ).innerHTML =
-        `Total vendido — ${textoFecha}: $${total.toLocaleString("es-AR")}`;
+        `TOTAL VENDIDO (${textoFecha}): $${total.toLocaleString("es-AR")}`;
 }
 
+// ==========================================
+// DETALLE DE UNA VENTA
+// ==========================================
 
 // ==========================================
 // DETALLE DE UNA VENTA
@@ -3051,12 +5014,9 @@ function mostrarVentasDelDia(
 
 function verDetalleVenta(indice) {
 
-    const venta =
-        ventasDelDia[indice];
-
+    const venta = ventasDelDia[indice];
 
     if (!venta) {
-
         return;
     }
 
@@ -3066,91 +5026,158 @@ function verDetalleVenta(indice) {
             `detalleVenta${indice}`
         );
 
-
     if (!contenedor) {
+        return;
+    }
+
+
+    const botonDetalle =
+        document.querySelector(
+            `button[onclick="verDetalleVenta(${indice})"]`
+        );
+
+
+    // ==========================================
+    // CERRAR DETALLE
+    // ==========================================
+
+    if (
+        contenedor.style.display === "block"
+    ) {
+
+        contenedor.style.display = "none";
+
+        if (botonDetalle) {
+            botonDetalle.innerText = "Ver detalle de la venta";
+        }
 
         return;
     }
 
 
-    if (
-        contenedor.style.display ===
-        "none"
-    ) {
+    // ==========================================
+    // DETERMINAR SI ES MAYORISTA
+    // ==========================================
 
-        let html = `
+    const esRestaurante =
+        String(
+            venta.cliente || ""
+        ).trim() !== "" &&
+        String(
+            venta.cliente || ""
+        ).trim().toLowerCase() !==
+            "consumidor final";
 
-            <div>
+
+    let html = `
+
+        <div>
+
+            <strong>
+                Detalle de la venta:
+            </strong>
+
+            <p style="margin-top:10px;">
 
                 <strong>
-                    Detalle de la venta:
+                    N.º de venta:
                 </strong>
 
-        `;
+                ${venta.numeroVenta || "Sin número"}
+
+            </p>
+
+    `;
 
 
-        venta.productos.forEach(
-            producto => {
+    // ==========================================
+    // CLIENTE SI ES MAYORISTA
+    // ==========================================
 
-                html += `
-
-                    <p>
-
-                        ${producto.cantidad}
-                        ${producto.unidad || ""}
-
-                        x
-
-                        ${producto.nombre}
-
-                        -
-
-                        ${producto.sabor}
-
-                        <br>
-
-                        Precio:
-                        $${Number(producto.precio).toLocaleString("es-AR")}
-
-                        <br>
-
-                        Subtotal:
-                        $${Number(producto.subtotal).toLocaleString("es-AR")}
-
-                    </p>
-
-                `;
-            }
-        );
-
+    if (esRestaurante) {
 
         html += `
 
+            <p>
+
                 <strong>
-                    Total:
-                    $${Number(venta.total).toLocaleString("es-AR")}
+                    Cliente:
                 </strong>
 
-            </div>
+                ${venta.cliente}
+
+            </p>
+
+        `;
+    }
+
+
+    // ==========================================
+    // PRODUCTOS
+    // ==========================================
+
+    venta.productos.forEach(producto => {
+
+        html += `
+
+            <p>
+
+                ${producto.cantidad}
+                ${producto.unidad || ""}
+
+                x
+
+                ${producto.nombre}
+
+                -
+
+                ${producto.sabor}
+
+                <br>
+
+                Subtotal:
+                $${Number(
+                    producto.subtotal
+                ).toLocaleString("es-AR")}
+
+            </p>
 
         `;
 
-
-        contenedor.innerHTML =
-            html;
+    });
 
 
-        contenedor.style.display =
-            "block";
+    // ==========================================
+    // TOTAL
+    // ==========================================
+
+    html += `
+
+            <strong>
+
+                Total:
+                $${Number(
+                    venta.total
+                ).toLocaleString("es-AR")}
+
+            </strong>
+
+        </div>
+
+    `;
 
 
-    } else {
+    contenedor.innerHTML = html;
 
-        contenedor.style.display =
-            "none";
+    contenedor.style.display = "block";
+
+
+    if (botonDetalle) {
+
+        botonDetalle.innerText =
+            "Ocultar detalle";
     }
 }
-
 
 // ==========================================
 // FILTRAR POR FECHA
@@ -3790,32 +5817,39 @@ async function iniciarAplicacion() {
         );
 
 
-        document.getElementById(
-            "mensaje"
-        ).innerHTML = `
+        const mensaje =
+            document.getElementById(
+                "mensaje"
+            );
 
-            <div style="
-                background:#f8d7da;
-                color:#721c24;
-                border:1px solid #f5c6cb;
-                padding:12px;
-                border-radius:10px;
-                font-weight:bold;
-            ">
 
-                🚨 PRECIOS NO DISPONIBLES
+        if (mensaje) {
 
-                <br><br>
+            mensaje.innerHTML = `
 
-                No se pudieron cargar los precios desde Google Sheets.
+                <div style="
+                    background:#f8d7da;
+                    color:#721c24;
+                    border:1px solid #f5c6cb;
+                    padding:12px;
+                    border-radius:10px;
+                    font-weight:bold;
+                ">
 
-                <br>
+                    🚨 PRECIOS NO DISPONIBLES
 
-                NO se pueden registrar ventas hasta actualizar los precios.
+                    <br><br>
 
-            </div>
+                    No se pudieron cargar los precios desde Google Sheets.
 
-        `;
+                    <br>
+
+                    NO se pueden registrar ventas hasta actualizar los precios.
+
+                </div>
+
+            `;
+        }
 
     } else {
 
