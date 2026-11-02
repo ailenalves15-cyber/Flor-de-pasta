@@ -2139,6 +2139,8 @@ async function registrarPagoCuenta(cliente) {
 // BUSCAR PRODUCTOS
 // ==========================================
 
+let codigoProductoActual = "";
+
 function buscarProducto() {
 
     if (!preciosCargados) {
@@ -2150,13 +2152,11 @@ function buscarProducto() {
     }
 
 
-    const codigo =
-        document.getElementById("codigo").value.trim();
+const codigo =
+    document.getElementById("codigo").value.trim().toUpperCase();
 
-
-    const producto =
-        productos[codigo];
-
+const producto =
+    productos[codigo];
 
     if (!producto) {
 
@@ -2165,6 +2165,10 @@ function buscarProducto() {
 
         return;
     }
+    
+codigoProductoActual = codigo;
+
+document.getElementById("codigo").value = "";
 
 
         // ==========================================
@@ -2619,6 +2623,18 @@ document
         }
     );
 
+    document
+    .getElementById("cantidad")
+    .addEventListener(
+        "keydown",
+        function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                agregarVenta();
+            }
+        }
+    );
+
 
 // ==========================================
 // CAMBIAR UNIDAD / DOCENA
@@ -2669,11 +2685,8 @@ function agregarVenta() {
     }
 
 
-    const codigo =
-        document
-            .getElementById("codigo")
-            .value
-            .trim();
+const codigo =
+    codigoProductoActual;
 
 
     const cantidadTexto =
@@ -2741,91 +2754,68 @@ function agregarVenta() {
     let subtotal;
 
 
-    // ==========================================
-    // PRODUCTOS POR KG
-    // ==========================================
+   // PRODUCTOS POR KG
+if (producto.tipoVenta === "kg") {
+
+    const precioKg =
+        Number(producto.precioKg);
+
+    const precioMedioKg =
+        Number(producto.precioMedioKg);
 
     if (
-        producto.tipoVenta === "kg"
+        cantidad < 1
     ) {
-
-        const precioKg =
-            Number(producto.precioKg);
-
-
-        const precioMedioKg =
-            Number(producto.precioMedioKg);
-
-
-        if (
-            !Number.isFinite(precioKg) ||
-            precioKg <= 0
-        ) {
-
-            alert(
-                "⚠️ Este producto no tiene cargado el precio por kilo."
-            );
-
-            return;
-        }
-
 
         if (
             !Number.isFinite(precioMedioKg) ||
             precioMedioKg <= 0
         ) {
-
             alert(
-                "⚠️ Este producto no tiene cargado el precio por medio kilo."
+                "⚠️ Este producto no tiene cargado el precio de medio kilo."
             );
-
             return;
         }
 
-
-        if (
-            !Number.isInteger(cantidad * 2)
-        ) {
-
-            alert(
-                "⚠️ Para fideos y ñoquis, la cantidad debe ser en múltiplos de 0,5 kg."
-            );
-
-            return;
-        }
-
-
-        const kilosCompletos =
-            Math.floor(cantidad);
-
-
-        const quedaMedioKilo =
-            cantidad - kilosCompletos;
-
+        // Para cantidades menores a 1 kg,
+        // se toma como referencia el precio de 1/2 kg.
+        //
+        // Ejemplo:
+        // 0,3 kg = precioMedioKg × (0,3 / 0,5)
 
         subtotal =
-            kilosCompletos * precioKg;
-
-
-        if (
-            Math.abs(
-                quedaMedioKilo - 0.5
-            ) < 0.0001
-        ) {
-
-            subtotal +=
-                precioMedioKg;
-        }
-
+            precioMedioKg *
+            (cantidad / 0.5);
 
         precio =
             subtotal / cantidad;
 
+    } else {
 
-        unidad =
-            "kg";
+        if (
+            !Number.isFinite(precioKg) ||
+            precioKg <= 0
+        ) {
+            alert(
+                "⚠️ Este producto no tiene cargado el precio por kilo."
+            );
+            return;
+        }
 
+        // Para 1 kg o más,
+        // se utiliza el precio por kilo.
+
+        subtotal =
+            cantidad *
+            precioKg;
+
+        precio =
+            precioKg;
     }
+
+    unidad =
+        "kg";
+}
 
 
     // ==========================================
@@ -2914,141 +2904,103 @@ function agregarVenta() {
     }
 
 
-    // ==========================================
-    // PRODUCTOS POR UNIDAD / DOCENA
-    // ==========================================
-
-            else {
-
-            const precioUnidad =
-                Number(producto.precioUnidad) || 0;
+// ==========================================
+// PRODUCTOS POR UNIDAD / DOCENA
+// ==========================================
 
 
-            const precioMediaDocena =
-                Number(producto.precioMediaDocena) || 0;
+else {
 
+    const precioUnidad =
+        Number(producto.precioUnidad) || 0;
 
-            const precioDocena =
-                Number(producto.precioDocena) || 0;
+    const precioMediaDocena =
+        Number(producto.precioMediaDocena) || 0;
 
+    const precioDocena =
+        Number(producto.precioDocena) || 0;
 
-            // ==========================================
-            // SI SOLO TIENE PRECIO POR UNIDAD
-            // ==========================================
+    // VENTA POR DOCENA
+    if (formaVenta === "docena") {
 
-            if (
-                precioUnidad > 0 &&
-                precioDocena <= 0 &&
-                precioMediaDocena <= 0
-            ) {
-
-                subtotal =
-                    cantidad *
-                    precioUnidad;
-
-
-                precio =
-                    precioUnidad;
-
-
-                unidad =
-                    "unidad";
-            }
-
-
-            // ==========================================
-            // SI TIENE PRECIO POR DOCENA / MEDIA DOCENA
-            // ==========================================
-
-            else {
-
-                let docenas =
-                    Math.floor(cantidad / 12);
-
-
-                let resto =
-                    cantidad % 12;
-
-
-                let subtotalCalculado =
-                    0;
-
-
-                // DOCENAS
-
-                if (
-                    docenas > 0
-                ) {
-
-                    if (
-                        precioDocena > 0
-                    ) {
-
-                        subtotalCalculado +=
-                            docenas *
-                            precioDocena;
-
-                    } else {
-
-                        subtotalCalculado +=
-                            docenas *
-                            12 *
-                            precioUnidad;
-                    }
-
-
-                    resto -=
-                        docenas *
-                        12;
-                }
-
-
-                // MEDIA DOCENA
-
-                if (
-                    resto >= 6
-                ) {
-
-                    if (
-                        precioMediaDocena > 0
-                    ) {
-
-                        subtotalCalculado +=
-                            precioMediaDocena;
-
-                    } else {
-
-                        subtotalCalculado +=
-                            6 *
-                            precioUnidad;
-                    }
-
-
-                    resto -=
-                        6;
-                }
-
-
-                // UNIDADES RESTANTES
-
-                subtotalCalculado +=
-                    resto *
-                    precioUnidad;
-
-
-                subtotal =
-                    subtotalCalculado;
-
-
-                precio =
-                    subtotal /
-                    cantidad;
-
-
-                unidad =
-                    "unidad";
-            }
+        if (precioDocena <= 0) {
+            alert(
+                "Este producto no tiene cargado el precio por docena."
+            );
+            return;
         }
+
+        subtotal =
+            cantidad * precioDocena;
+
+        precio =
+            precioDocena;
+
+        unidad =
+            "docena";
+    }
+
+    // VENTA POR UNIDAD
+    else {
+
+        let unidades = cantidad;
+        let subtotalCalculado = 0;
+
+        // DOCENAS COMPLETAS
+        const docenas =
+            Math.floor(unidades / 12);
+
+        if (docenas > 0) {
+
+            if (precioDocena > 0) {
+                subtotalCalculado +=
+                    docenas * precioDocena;
+            } else if (precioUnidad > 0) {
+                subtotalCalculado +=
+                    docenas * 12 * precioUnidad;
+            } else {
+                alert("Falta cargar el precio del producto.");
+                return;
+            }
+
+            unidades -= docenas * 12;
+        }
+
+        // MEDIA DOCENA
+        if (unidades >= 6) {
+
+            if (precioMediaDocena > 0) {
+                subtotalCalculado +=
+                    precioMediaDocena;
+            } else if (precioUnidad > 0) {
+                subtotalCalculado +=
+                    6 * precioUnidad;
+            } else {
+                alert("Falta cargar el precio del producto.");
+                return;
+            }
+
+            unidades -= 6;
+        }
+
+        // UNIDADES RESTANTES
+        if (unidades > 0) {
+
+            if (precioUnidad <= 0) {
+                alert("Falta cargar el precio por unidad.");
+                return;
+            }
+
+            subtotalCalculado +=
+                unidades * precioUnidad;
+        }
+
+        subtotal = subtotalCalculado;
+        precio = subtotal / cantidad;
+        unidad = "unidad";
+    }
+}
+
 
     // ==========================================
     // PRECIO MAYORISTA PARA RESTAURANTES
@@ -3636,10 +3588,12 @@ else {
         else {
 
             const nuevaCantidad =
-                Number(
-                    productoExistente.cantidad
-                ) +
-                Number(cantidad);
+    Math.round(
+        (
+            Number(productoExistente.cantidad) +
+            Number(cantidad)
+        ) * 1000
+    ) / 1000;
 
 
             const esRestaurante =
@@ -3705,99 +3659,84 @@ else {
             else {
 
                 const precioKg =
-                    Number(
-                        producto.precioKg
-                    );
+    Number(
+        producto.precioKg
+    );
 
 
-                const precioMedioKg =
-                    Number(
-                        producto.precioMedioKg
-                    );
+const precioMedioKg =
+    Number(
+        producto.precioMedioKg
+    );
 
 
-                if (
-                    !Number.isFinite(precioKg) ||
-                    precioKg <= 0
-                ) {
+if (
+    nuevaCantidad < 1
+) {
 
-                    alert(
-                        "⚠️ Este producto no tiene cargado el precio por kilo."
-                    );
+    if (
+        !Number.isFinite(precioMedioKg) ||
+        precioMedioKg <= 0
+    ) {
 
-                    return;
-                }
+        alert(
+            "⚠️ Este producto no tiene cargado el precio de medio kilo."
+        );
 
-
-                if (
-                    !Number.isFinite(precioMedioKg) ||
-                    precioMedioKg <= 0
-                ) {
-
-                    alert(
-                        "⚠️ Este producto no tiene cargado el precio por medio kilo."
-                    );
-
-                    return;
-                }
+        return;
+    }
 
 
-                if (
-                    !Number.isInteger(
-                        nuevaCantidad * 2
-                    )
-                ) {
+    // Menos de 1 kg:
+    // se calcula proporcionalmente usando
+    // el precio de medio kilo como referencia.
+    //
+    // Ejemplo:
+    // 0,3 kg = precioMedioKg × (0,3 / 0,5)
 
-                    alert(
-                        "⚠️ Para fideos y ñoquis, la cantidad debe ser en múltiplos de 0,5 kg."
-                    );
+    nuevoSubtotal =
+        precioMedioKg *
+        (nuevaCantidad / 0.5);
 
-                    return;
-                }
+} else {
 
+    if (
+        !Number.isFinite(precioKg) ||
+        precioKg <= 0
+    ) {
 
-                const kilosCompletos =
-                    Math.floor(
-                        nuevaCantidad
-                    );
+        alert(
+            "⚠️ Este producto no tiene cargado el precio por kilo."
+        );
 
-
-                const quedaMedioKilo =
-                    nuevaCantidad -
-                    kilosCompletos;
-
-
-                let nuevoSubtotal =
-                    kilosCompletos *
-                    precioKg;
+        return;
+    }
 
 
-                if (
-                    Math.abs(
-                        quedaMedioKilo - 0.5
-                    ) < 0.0001
-                ) {
+    // 1 kg o más:
+    // se utiliza el precio por kilo.
 
-                    nuevoSubtotal +=
-                        precioMedioKg;
-                }
+    nuevoSubtotal =
+        nuevaCantidad *
+        precioKg;
+}
 
 
-                productoExistente.cantidad =
-                    nuevaCantidad;
+productoExistente.cantidad =
+    nuevaCantidad;
 
 
-                productoExistente.subtotal =
-                    nuevoSubtotal;
+productoExistente.subtotal =
+    nuevoSubtotal;
 
 
-                productoExistente.precio =
-                    nuevoSubtotal /
-                    nuevaCantidad;
+productoExistente.precio =
+    nuevoSubtotal /
+    nuevaCantidad;
 
 
-                productoExistente.unidad =
-                    "kg";
+productoExistente.unidad =
+    "kg";
             }
         }
 
@@ -4026,8 +3965,41 @@ function mostrarVenta() {
         html;
 
 
+const medioPagoActual =
+    document.getElementById("medioPago").value;
+
+if (medioPagoActual === "Credito") {
+
+    const totalConRecargo =
+        totalVenta * 1.10;
+
+    document.getElementById("total").innerHTML =
+        `Total: $${totalConRecargo.toLocaleString("es-AR")} (incluye 10% de recargo por crédito)`;
+
+} else if (
+    medioPagoActual === "Combinado"
+) {
+
+    const credito =
+        Number(
+            document.getElementById(
+                "pagoCredito"
+            ).value
+        ) || 0;
+
+    const totalConRecargo =
+        totalVenta +
+        (credito * 0.10);
+
+    document.getElementById("total").innerHTML =
+        `Total: $${totalConRecargo.toLocaleString("es-AR")} (incluye 10% sobre crédito)`;
+
+} else {
+
     document.getElementById("total").innerHTML =
         `Total: $${totalVenta.toLocaleString("es-AR")}`;
+
+}
 
 
     actualizarResumenPago();
@@ -4357,10 +4329,52 @@ document.addEventListener(
         ) {
 
             actualizarResumenPago();
+
+        }
+
+        if (
+            event.target.id === "pagoEfectivo" ||
+            event.target.id === "pagoTransferencia" ||
+            event.target.id === "pagoDebito" ||
+            event.target.id === "pagoCredito"
+        ) {
+
+            mostrarVenta();
+
         }
 
     }
 );
+
+document
+    .getElementById("medioPago")
+    .addEventListener(
+        "change",
+        function() {
+
+            const pagoCombinado =
+                document.getElementById(
+                    "pagoCombinado"
+                );
+
+            if (
+                this.value === "Combinado"
+            ) {
+
+                pagoCombinado.style.display =
+                    "block";
+
+            } else {
+
+                pagoCombinado.style.display =
+                    "none";
+
+            }
+
+            mostrarVenta();
+
+        }
+    );
 
 
 // ==========================================
@@ -4402,6 +4416,34 @@ async function finalizarVenta() {
             .getElementById("medioPago")
             .value;
 
+let totalConRecargo =
+    totalVenta;
+
+if (
+    medioPago === "Credito"
+) {
+
+    totalConRecargo =
+        totalVenta * 1.10;
+
+}
+
+if (
+    medioPago === "Combinado"
+) {
+
+    const credito =
+        Number(
+            document.getElementById(
+                "pagoCredito"
+            ).value
+        ) || 0;
+
+    totalConRecargo =
+        totalVenta +
+        (credito * 0.10);
+
+}
 
     const ventaRestaurante =
         document
@@ -4414,7 +4456,51 @@ async function finalizarVenta() {
 
 
     let montoPagado =
-        totalVenta;
+        totalConRecargo;
+
+if (
+    medioPago === "Combinado"
+) {
+
+    const efectivo =
+        Number(
+            document.getElementById(
+                "pagoEfectivo"
+            ).value
+        ) || 0;
+
+    const transferencia =
+        Number(
+            document.getElementById(
+                "pagoTransferencia"
+            ).value
+        ) || 0;
+
+    const debito =
+        Number(
+            document.getElementById(
+                "pagoDebito"
+            ).value
+        ) || 0;
+
+    const credito =
+        Number(
+            document.getElementById(
+                "pagoCredito"
+            ).value
+        ) || 0;
+
+    const recargoCredito =
+        credito * 0.10;
+
+    montoPagado =
+        efectivo +
+        transferencia +
+        debito +
+        credito +
+        recargoCredito;
+
+}
 
 
     if (
@@ -4479,8 +4565,8 @@ async function finalizarVenta() {
         }
 
 
-        if (
-            montoPagado > totalVenta
+      if (
+        montoPagado > totalConRecargo
         ) {
 
             alert(
@@ -4514,7 +4600,7 @@ async function finalizarVenta() {
 
 
     if (
-        montoPagado > totalVenta
+    montoPagado > totalConRecargo
     ) {
 
         alert(
@@ -4526,11 +4612,11 @@ async function finalizarVenta() {
 
 
     const saldoPendiente =
-        Math.max(
-            totalVenta -
-            montoPagado,
-            0
-        );
+    Math.max(
+        totalConRecargo -
+        montoPagado,
+        0
+    );
 
 
     let estadoPago =
@@ -4590,7 +4676,7 @@ async function finalizarVenta() {
             [...ventaActual],
 
         total:
-            totalVenta,
+        totalConRecargo,
 
         medioPago:
             medioPago,
@@ -4743,6 +4829,46 @@ async function finalizarVenta() {
 
         totalVenta =
             0;
+
+        const medioPagoInput =
+    document.getElementById(
+        "medioPago"
+    );
+
+if (medioPagoInput) {
+
+    medioPagoInput.value =
+        "Efectivo";
+}
+
+
+const pagoCombinado =
+    document.getElementById(
+        "pagoCombinado"
+    );
+
+if (pagoCombinado) {
+
+    pagoCombinado.style.display =
+        "none";
+}
+
+
+document.getElementById(
+    "pagoEfectivo"
+).value = "0";
+
+document.getElementById(
+    "pagoTransferencia"
+).value = "0";
+
+document.getElementById(
+    "pagoDebito"
+).value = "0";
+
+document.getElementById(
+    "pagoCredito"
+).value = "0";
 
 
         document.getElementById("venta").innerHTML =
