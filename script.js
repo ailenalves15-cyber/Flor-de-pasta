@@ -1,5 +1,6 @@
+
 const URL_PRECIOS =
-    "https://script.google.com/macros/s/AKfycbyqFaMuv3Fs1pZyHw5i3o69Kt1Xv5-y5fnh52EX8LtJcnntNWZmWTJPbhh1syPduUam/exec";
+    "https://script.google.com/macros/s/AKfycbxno0cHRgVsKFxpxzrfXubNGTBpvB6DAJV1_3NhOH78oWZCaUxOWH4cpUecBBSJBNpW/exec";
 
 
 // ==========================================
@@ -919,8 +920,77 @@ async function cargarVentasDesdeGoogle() {
              * por cliente.
              */
 
-            cuentasCorrientes =
-                datos.cuentasCorrientes || [];
+            
+const cuentasRecibidas = Array.isArray(datos.cuentasCorrientes)
+    ? datos.cuentasCorrientes
+    : [];
+
+const nombreCuentaCompartida = "Cuenta compartida Bacan + Burgues";
+
+function normalizarNombreCuenta(nombre) {
+    return String(nombre || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ");
+}
+
+const nombresCompartidos = [
+    "bacan",
+    "burgues",
+    normalizarNombreCuenta(nombreCuentaCompartida)
+];
+
+const cuentaCompartida = {
+    cliente: nombreCuentaCompartida,
+    totalVentas: 0,
+    totalPagado: 0,
+    saldo: 0,
+    ventas: [],
+    restaurantes: []
+};
+
+const otrasCuentas = [];
+
+cuentasRecibidas.forEach(cuenta => {
+    const nombre = normalizarNombreCuenta(cuenta.cliente);
+
+    if (nombresCompartidos.includes(nombre)) {
+        cuentaCompartida.totalVentas += Number(cuenta.totalVentas) || 0;
+        cuentaCompartida.totalPagado += Number(cuenta.totalPagado) || 0;
+        cuentaCompartida.saldo += Number(cuenta.saldo) || 0;
+
+        if (Array.isArray(cuenta.ventas)) {
+            cuentaCompartida.ventas.push(...cuenta.ventas);
+        }
+
+        if (Array.isArray(cuenta.restaurantes)) {
+            cuenta.restaurantes.forEach(restaurante => {
+                if (!cuentaCompartida.restaurantes.includes(restaurante)) {
+                    cuentaCompartida.restaurantes.push(restaurante);
+                }
+            });
+        }
+
+        if (nombre === "bacan" && !cuentaCompartida.restaurantes.includes("Bacan")) {
+            cuentaCompartida.restaurantes.push("Bacan");
+        }
+
+        if (nombre === "burgues" && !cuentaCompartida.restaurantes.includes("Burgues")) {
+            cuentaCompartida.restaurantes.push("Burgues");
+        }
+    } else {
+        otrasCuentas.push(cuenta);
+    }
+});
+
+if (cuentaCompartida.restaurantes.length > 0 || cuentaCompartida.ventas.length > 0) {
+    cuentasCorrientes = [...otrasCuentas, cuentaCompartida];
+} else {
+    cuentasCorrientes = otrasCuentas;
+}
+
 
 
             /*
@@ -1608,6 +1678,19 @@ function verCuentaCorriente(cliente) {
                         ${fecha}
                     </strong>
 
+                    <p style="margin:6px 0; color:#666;">
+    Restaurante: <strong>${venta.cliente || clienteTexto}</strong>
+</p>
+
+${Array.isArray(venta.productos) && venta.productos.length ? `
+    <div style="margin:8px 0; padding:8px; background:#fafafa; border-radius:6px;">
+        <strong>Productos:</strong>
+        <ul style="margin:5px 0 0 18px; padding:0;">
+            ${venta.productos.map(p => `<li>${p.cantidad || 1} ${p.unidad || ""} ${p.nombre || ""} ${p.sabor ? "- " + p.sabor : ""}</li>`).join("")}
+        </ul>
+    </div>
+` : ""}
+
                     <p style="
                         margin:6px 0;
                     ">
@@ -1647,14 +1730,36 @@ function verCuentaCorriente(cliente) {
      * últimos 10 pagos.
      */
 
-    const pagos =
-        Array.isArray(cobros)
-            ? cobros
-                .filter(
-                    cobro =>
-                        String(cobro.cliente || "").trim() ===
-                        clienteTexto
-                )
+    
+const normalizarNombrePago = nombre =>
+    String(nombre || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ");
+
+const esCuentaCompartida =
+    normalizarNombrePago(clienteTexto) ===
+    normalizarNombrePago("Cuenta compartida Bacan + Burgues");
+
+const pagos =
+    Array.isArray(cobros)
+        ? cobros
+            .filter(cobro => {
+                const nombreCobro = normalizarNombrePago(cobro.cliente);
+
+                if (esCuentaCompartida) {
+                    return [
+                        "bacan",
+                        "burgues",
+                        normalizarNombrePago("Cuenta compartida Bacan + Burgues")
+                    ].includes(nombreCobro);
+                }
+
+                return nombreCobro === normalizarNombrePago(clienteTexto);
+            })
+
                 .sort(
                     (a, b) => {
 
@@ -1712,11 +1817,12 @@ function verCuentaCorriente(cliente) {
                 ">
 
                     ${fecha}
-                    —
-                    Pago:
-                    <strong>
-                        -$${monto.toLocaleString("es-AR")}
-                    </strong>
+—
+${pago.restaurante ? pago.restaurante + " — " : ""}
+Pago:
+<strong>
+    -$${monto.toLocaleString("es-AR")}
+</strong>
 
                 </p>
             `;
@@ -2222,6 +2328,7 @@ document.getElementById("codigo").value = "";
                     ⚠️ Este producto no tiene precio mayorista cargado.
                 </span>`;
         }
+        
 
     }
 
@@ -4195,125 +4302,79 @@ function actualizarResumenPago() {
 // ACTUALIZAR MODO DE VENTA
 // ==========================================
 
-function actualizarModoVenta() {
+function actualizarSeleccionRestaurante() {
+    const cliente = document.getElementById("cliente");
+    const bloque = document.getElementById("seleccionRestaurante");
+    const restaurante = document.getElementById("restauranteOrigen");
+    const ventaRestaurante = document.getElementById("ventaRestaurante");
 
-    const checkbox =
-        document.getElementById(
-            "ventaRestaurante"
-        );
+    if (!cliente || !bloque || !restaurante) return;
 
+    const esCompartida =
+        cliente.value.trim().toLowerCase() === "bacan/burgues";
 
-    const datosRestaurante =
-        document.getElementById(
-            "datosRestaurante"
-        );
+    const modoRestaurante = ventaRestaurante
+        ? ventaRestaurante.checked
+        : false;
 
+    bloque.style.display =
+        esCompartida && modoRestaurante ? "block" : "none";
 
-    const cliente =
-        document.getElementById(
-            "cliente"
-        );
-
-
-    const montoPagado =
-        document.getElementById(
-            "montoPagado"
-        );
-
-
-    const bloquePago =
-        document.getElementById(
-            "bloquePago"
-        );
-
-
-    const pagoParticular =
-        document.getElementById(
-            "pagoVentaParticular"
-        );
-
-
-    const pagoRestaurante =
-        document.getElementById(
-            "pagoRestaurante"
-        );
-
-
-    if (
-        !checkbox ||
-        !datosRestaurante
-    ) {
-
-        return;
+    if (!esCompartida || !modoRestaurante) {
+        restaurante.value = "";
     }
+}
 
+function actualizarModoVenta() {
+    const checkbox = document.getElementById("ventaRestaurante");
+    const datosRestaurante = document.getElementById("datosRestaurante");
+    const cliente = document.getElementById("cliente");
+    const montoPagado = document.getElementById("montoPagado");
+    const bloquePago = document.getElementById("bloquePago");
+    const pagoParticular = document.getElementById("pagoVentaParticular");
+    const pagoRestaurante = document.getElementById("pagoRestaurante");
 
-    if (
-        checkbox.checked
-    ) {
+    if (!checkbox || !datosRestaurante) return;
 
-        datosRestaurante.style.display =
-            "block";
+    if (checkbox.checked) {
+        datosRestaurante.style.display = "block";
 
-
-        if (
-            bloquePago &&
-            pagoRestaurante
-        ) {
-
-            pagoRestaurante.appendChild(
-                bloquePago
-            );
+        if (bloquePago && pagoRestaurante) {
+            pagoRestaurante.appendChild(bloquePago);
         }
-
 
         if (montoPagado) {
-
-            montoPagado.value =
-                "";
-
-            montoPagado.placeholder =
-                "Ingrese el monto";
+            montoPagado.value = "";
+            montoPagado.placeholder = "Ingrese el monto";
         }
-
 
         actualizarResumenPago();
 
     } else {
+        datosRestaurante.style.display = "none";
 
-        datosRestaurante.style.display =
-            "none";
-
-
-        if (
-            bloquePago &&
-            pagoParticular
-        ) {
-
-            pagoParticular.appendChild(
-                bloquePago
-            );
+        if (bloquePago && pagoParticular) {
+            pagoParticular.appendChild(bloquePago);
         }
-
 
         if (cliente) {
-
-            cliente.value =
-                "";
+            cliente.value = "";
         }
 
+        const restaurante = document.getElementById("restauranteOrigen");
+
+        if (restaurante) {
+            restaurante.value = "";
+        }
 
         if (montoPagado) {
-
-            montoPagado.value =
-                "";
-
-            montoPagado.placeholder =
-                "Ingrese el monto";
+            montoPagado.value = "";
+            montoPagado.placeholder = "Ingrese el monto";
         }
     }
-}
 
+    actualizarSeleccionRestaurante();
+}
 
 // ==========================================
 // ACTUALIZAR RESUMEN AL CAMBIAR EL PAGO
@@ -4381,6 +4442,219 @@ document
 // FINALIZAR VENTA
 // ==========================================
 
+// ==========================================
+// TICKET DE VENTA - IMPRESIÓN
+// ==========================================
+
+function abrirVentanaTicket() {
+    return window.open("", "_blank", "width=420,height=700");
+}
+
+function imprimirTicketVenta(ventana, venta) {
+    if (!ventana || ventana.closed) {
+        return false;
+    }
+
+    const escapar = (valor) => String(valor ?? "").replace(/[&<>"']/g, caracter => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+    }[caracter]));
+
+    const dinero = (valor) => "$" + (Number(valor) || 0).toLocaleString("es-AR", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 2
+    });
+
+    const productosHTML = (venta.productos || []).map(producto => {
+        const nombre = [producto.nombre, producto.sabor].filter(Boolean).join(" ");
+        const cantidad = Number(producto.cantidad) || 0;
+        const unidad = producto.unidad || "unidad";
+        const precio = Number(producto.precio) || 0;
+        const subtotal = Number(producto.subtotal) || precio * cantidad;
+
+        return `
+            <div class="producto">
+                <div class="nombre">${escapar(nombre)}</div>
+                <div class="detalle">
+                    <span>${escapar(cantidad)} ${escapar(unidad)} x ${dinero(precio)}</span>
+                    <strong>${dinero(subtotal)}</strong>
+                </div>
+            </div>
+        `;
+    }).join("");
+
+    const subtotalProductos = (venta.productos || []).reduce((acumulado, producto) => {
+        return acumulado + (Number(producto.subtotal) || 0);
+    }, 0);
+
+    const recargo = Math.max((Number(venta.total) || 0) - subtotalProductos, 0);
+
+    ventana.document.open();
+
+    ventana.document.write(`<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ticket ${escapar(venta.numeroVenta)}</title>
+
+<style>
+    @page {
+        size: 80mm auto;
+        margin: 4mm;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        width: 72mm;
+        margin: 0 auto;
+        padding: 0;
+        color: #000;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+    }
+
+    .encabezado {
+        text-align: center;
+        margin-bottom: 12px;
+    }
+
+    h1 {
+        font-size: 19px;
+        margin: 0 0 8px;
+    }
+
+    .dato {
+        margin: 3px 0;
+    }
+
+    .linea {
+        border-top: 1px dashed #000;
+        margin: 9px 0;
+    }
+
+    .producto {
+        margin: 8px 0;
+    }
+
+    .nombre {
+        font-weight: bold;
+        overflow-wrap: anywhere;
+    }
+
+    .detalle {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 3px;
+    }
+
+    .detalle span {
+        overflow-wrap: anywhere;
+    }
+
+    .detalle strong {
+        white-space: nowrap;
+    }
+
+    .totales {
+        margin-top: 8px;
+    }
+
+    .total {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    .pendiente {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 7px;
+    }
+
+    .pie {
+        text-align: center;
+        margin-top: 18px;
+        font-size: 11px;
+    }
+
+    @media screen {
+        body {
+            padding: 8px 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <h1>FLOR DE PASTA</h1>
+        <div class="dato">Ticket de venta</div>
+        <div class="dato">N° ${escapar(venta.numeroVenta)}</div>
+        <div class="dato">${escapar(venta.fecha)}</div>
+    </header>
+
+    <div class="linea"></div>
+
+    <main>
+        ${productosHTML}
+    </main>
+
+    <div class="linea"></div>
+
+    <section class="totales">
+
+        ${recargo > 0.009 ? `
+            <div class="detalle">
+                <span>Recargo</span>
+                <strong>${dinero(recargo)}</strong>
+            </div>
+        ` : ""}
+
+        <div class="total">
+            <span>TOTAL</span>
+            <span>${dinero(venta.total)}</span>
+        </div>
+
+        ${Number(venta.saldoPendiente) > 0.009 ? `
+            <div class="pendiente">
+                <span>Saldo pendiente</span>
+                <strong>${dinero(venta.saldoPendiente)}</strong>
+            </div>
+        ` : ""}
+
+    </section>
+
+    <footer class="pie">
+        Gracias por su compra
+    </footer>
+
+<script>
+    window.onload = function () {
+        window.focus();
+        window.print();
+    };
+<\/script>
+
+</body>
+</html>`);
+
+    ventana.document.close();
+
+    return true;
+}
+
 async function finalizarVenta() {
 
     if (!preciosCargados) {
@@ -4445,15 +4719,9 @@ if (
 
 }
 
-    const ventaRestaurante =
-        document
-            .getElementById("ventaRestaurante")
-            ?.checked || false;
-
-
-    let cliente =
-        "Consumidor final";
-
+    const ventaRestaurante = document.getElementById("ventaRestaurante")?.checked || false;
+let cliente = "Consumidor final";
+let restauranteOrigen = "";
 
     let montoPagado =
         totalConRecargo;
@@ -4528,7 +4796,18 @@ if (
             return;
         }
 
+        if (cliente.toLowerCase() === "bacan/burgues") {
+    const selectorOrigen = document.getElementById("restauranteOrigen");
 
+    restauranteOrigen = selectorOrigen
+        ? selectorOrigen.value.trim()
+        : "";
+
+    if (!restauranteOrigen) {
+        alert("Seleccioná si la venta corresponde a Bacan o Burgues.");
+        return;
+    }
+}
         const montoPagadoInput =
             document.getElementById(
                 "montoPagado"
@@ -4662,43 +4941,24 @@ if (
 
 
     const nuevaVenta = {
-
-        fecha:
-            fechaMostrar,
-
-        fechaFiltro:
-            fechaFiltro,
-
-        numeroVenta:
-            Date.now().toString(),
-
-        productos:
-            [...ventaActual],
-
-        total:
-        totalConRecargo,
-
-        medioPago:
-            medioPago,
-
-        cliente:
-            cliente,
-
-        montoPagado:
-            montoPagado,
-
-        saldoPendiente:
-            saldoPendiente,
-
-        estadoPago:
-            estadoPago
-    };
-
-
+    fecha: fechaMostrar,
+    fechaFiltro,
+    numeroVenta: Date.now().toString(),
+    productos: [...ventaActual],
+    total: totalConRecargo,
+    medioPago,
+    cliente,
+    restauranteOrigen,
+    montoPagado,
+    saldoPendiente,
+    estadoPago
+};
     console.log(
         "Venta a registrar:",
         nuevaVenta
     );
+
+    const ventanaTicket = abrirVentanaTicket();
 
 
     document.getElementById("mensaje").innerHTML =
@@ -4746,6 +5006,7 @@ if (
 
         const datos =
             await respuesta.json();
+            console.log("Respuesta de Google Sheets:", datos);
 
 
         if (
@@ -4768,6 +5029,12 @@ if (
                 ventasDelDia
             )
         );
+
+        const ticketImpreso = imprimirTicketVenta(ventanaTicket, nuevaVenta);
+
+if (!ticketImpreso && ventanaTicket && !ventanaTicket.closed) {
+    ventanaTicket.close();
+}
 
 
         let mensajePago =
@@ -6032,3 +6299,18 @@ window.addEventListener(
 
     }
 );
+
+// ==========================================
+// RESTAURANTE DE ORIGEN BACAN / BURGUES
+// ==========================================
+
+const selectorClienteCompartido = document.getElementById("cliente");
+
+if (selectorClienteCompartido) {
+    selectorClienteCompartido.addEventListener(
+        "change",
+        actualizarSeleccionRestaurante
+    );
+}
+
+actualizarSeleccionRestaurante();
