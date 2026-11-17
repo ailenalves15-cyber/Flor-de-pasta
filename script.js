@@ -3957,6 +3957,57 @@ productoExistente.unidad =
     document.getElementById("codigo").focus();
 }
 
+// ==========================================
+// CALCULAR DESCUENTO Y RECARGO
+// ==========================================
+
+function calcularTotalesVentaActual() {
+
+    const medioPago =
+        document.getElementById("medioPago").value;
+
+    const esVentaRestaurante =
+        document.getElementById("ventaRestaurante")?.checked || false;
+
+    let efectivo = 0;
+    let credito = 0;
+
+    if (medioPago === "Efectivo") {
+        efectivo = Number(totalVenta) || 0;
+    }
+
+    if (medioPago === "Credito") {
+        credito = Number(totalVenta) || 0;
+    }
+
+    if (medioPago === "Combinado") {
+
+        efectivo =
+            Number(document.getElementById("pagoEfectivo").value) || 0;
+
+        credito =
+            Number(document.getElementById("pagoCredito").value) || 0;
+    }
+
+    const descuento =
+        !esVentaRestaurante && efectivo >= 50000
+            ? efectivo * 0.10
+            : 0;
+
+    const recargo =
+        credito * 0.10;
+
+    const total =
+        totalVenta - descuento + recargo;
+
+    return {
+        efectivo,
+        credito,
+        descuento,
+        recargo,
+        total
+    };
+}
 
 // ==========================================
 // MOSTRAR VENTA ACTUAL
@@ -4072,42 +4123,57 @@ function mostrarVenta() {
         html;
 
 
-const medioPagoActual =
-    document.getElementById("medioPago").value;
+const calculoPago =
+    calcularTotalesVentaActual();
 
-if (medioPagoActual === "Credito") {
+const formatoDinero = (valor) =>
+    "$" + Number(valor).toLocaleString("es-AR");
 
-    const totalConRecargo =
-        totalVenta * 1.10;
+let detalleAjustes = "";
 
-    document.getElementById("total").innerHTML =
-        `Total: $${totalConRecargo.toLocaleString("es-AR")} (incluye 10% de recargo por crédito)`;
-
-} else if (
-    medioPagoActual === "Combinado"
-) {
-
-    const credito =
-        Number(
-            document.getElementById(
-                "pagoCredito"
-            ).value
-        ) || 0;
-
-    const totalConRecargo =
-        totalVenta +
-        (credito * 0.10);
-
-    document.getElementById("total").innerHTML =
-        `Total: $${totalConRecargo.toLocaleString("es-AR")} (incluye 10% sobre crédito)`;
-
-} else {
-
-    document.getElementById("total").innerHTML =
-        `Total: $${totalVenta.toLocaleString("es-AR")}`;
-
+if (calculoPago.descuento > 0) {
+    detalleAjustes += `
+        <div style="display:flex; justify-content:space-between; margin-top:8px;">
+            <span>Descuento en efectivo (10%)</span>
+            <strong style="color:green;">
+                -${formatoDinero(calculoPago.descuento)}
+            </strong>
+        </div>
+    `;
 }
 
+if (calculoPago.recargo > 0) {
+    detalleAjustes += `
+        <div style="display:flex; justify-content:space-between; margin-top:8px;">
+            <span>Recargo por crédito (10%)</span>
+            <strong style="color:#d9534f;">
+                +${formatoDinero(calculoPago.recargo)}
+            </strong>
+        </div>
+    `;
+}
+
+document.getElementById("total").style.backgroundColor = "transparent";
+
+document.getElementById("total").style.color = "#000";
+
+document.getElementById("total").innerHTML = `
+
+
+    <div style="font-size:18px; font-weight:bold;">
+        Total de la venta: ${formatoDinero(totalVenta)}
+    </div>
+
+    ${detalleAjustes}
+
+    ${calculoPago.descuento > 0 || calculoPago.recargo > 0 ? `
+        <hr>
+        <div style="font-size:20px; font-weight:bold;">
+            TOTAL A PAGAR: ${formatoDinero(calculoPago.total)}
+        </div>
+    ` : ""}
+
+`;
 
     actualizarResumenPago();
 }
@@ -4490,7 +4556,13 @@ function imprimirTicketVenta(ventana, venta) {
         return acumulado + (Number(producto.subtotal) || 0);
     }, 0);
 
-    const recargo = Math.max((Number(venta.total) || 0) - subtotalProductos, 0);
+    const descuento =
+    Number(venta.descuento) || 0;
+
+const recargo =
+    venta.recargo !== undefined && venta.recargo !== null
+        ? Number(venta.recargo) || 0
+        : Math.max((Number(venta.total) || 0) - subtotalProductos, 0);
 
     ventana.document.open();
 
@@ -4615,7 +4687,14 @@ function imprimirTicketVenta(ventana, venta) {
 
     <section class="totales">
 
-        ${recargo > 0.009 ? `
+    ${descuento > 0.009 ? `
+        <div class="detalle">
+            <span>Descuento efectivo (10%)</span>
+            <strong>-${dinero(descuento)}</strong>
+        </div>
+    ` : ""}
+
+    ${recargo > 0.009 ? `
             <div class="detalle">
                 <span>Recargo</span>
                 <strong>${dinero(recargo)}</strong>
@@ -4685,91 +4764,39 @@ async function finalizarVenta() {
     }
 
 
-    const medioPago =
-        document
-            .getElementById("medioPago")
-            .value;
+const medioPago =
+    document.getElementById("medioPago").value;
 
-let totalConRecargo =
-    totalVenta;
+const ventaRestaurante =
+    document.getElementById("ventaRestaurante")?.checked || false;
 
-if (
-    medioPago === "Credito"
-) {
-
-    totalConRecargo =
-        totalVenta * 1.10;
-
-}
-
-if (
-    medioPago === "Combinado"
-) {
-
-    const credito =
-        Number(
-            document.getElementById(
-                "pagoCredito"
-            ).value
-        ) || 0;
-
-    totalConRecargo =
-        totalVenta +
-        (credito * 0.10);
-
-}
-
-    const ventaRestaurante = document.getElementById("ventaRestaurante")?.checked || false;
 let cliente = "Consumidor final";
 let restauranteOrigen = "";
 
-    let montoPagado =
-        totalConRecargo;
+const calculoPago =
+    calcularTotalesVentaActual();
 
-if (
-    medioPago === "Combinado"
-) {
+const totalConRecargo =
+    calculoPago.total;
 
-    const efectivo =
-        Number(
-            document.getElementById(
-                "pagoEfectivo"
-            ).value
-        ) || 0;
+let montoPagado =
+    totalConRecargo;
+
+if (medioPago === "Combinado") {
 
     const transferencia =
-        Number(
-            document.getElementById(
-                "pagoTransferencia"
-            ).value
-        ) || 0;
+        Number(document.getElementById("pagoTransferencia").value) || 0;
 
     const debito =
-        Number(
-            document.getElementById(
-                "pagoDebito"
-            ).value
-        ) || 0;
-
-    const credito =
-        Number(
-            document.getElementById(
-                "pagoCredito"
-            ).value
-        ) || 0;
-
-    const recargoCredito =
-        credito * 0.10;
+        Number(document.getElementById("pagoDebito").value) || 0;
 
     montoPagado =
-        efectivo +
+        (calculoPago.efectivo - calculoPago.descuento) +
         transferencia +
         debito +
-        credito +
-        recargoCredito;
-
+        calculoPago.credito +
+        calculoPago.recargo;
 }
-
 
     if (
         ventaRestaurante
@@ -4940,12 +4967,14 @@ if (
         ).padStart(2, "0");
 
 
-    const nuevaVenta = {
+const nuevaVenta = {
     fecha: fechaMostrar,
     fechaFiltro,
     numeroVenta: Date.now().toString(),
     productos: [...ventaActual],
     total: totalConRecargo,
+    descuento: calculoPago.descuento,
+    recargo: calculoPago.recargo,
     medioPago,
     cliente,
     restauranteOrigen,
@@ -5078,7 +5107,7 @@ if (!ticketImpreso && ventanaTicket && !ventanaTicket.closed) {
             "\n" +
 
             "Total: $" +
-            totalVenta +
+            totalConRecargo +
             "\n\n" +
 
             mensajePago
